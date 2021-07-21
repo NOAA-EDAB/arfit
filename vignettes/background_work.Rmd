@@ -1,0 +1,124 @@
+---
+title: "Detecting a trend in the presence of autocorrelation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Background
+
+The model we are interested in is 
+
+$$y_t = \alpha + \beta t + u_t$$
+where $t$ refers to time and $u_t$ is either
+
+1. $u_t = \phi u_{t-1} + e_t$  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; an AR(1) process
+1. $u_t = \phi_1 u_{t-1} + \phi_2 u_{t-2}$   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    an AR(2) process
+
+with $e_t \sim N(0,\sigma^2)$
+
+---
+
+### Likelihood for AR(1) errors
+
+
+$$L(\underline{\theta};\underline{y})=\prod_{t=2}^n p(Y_t = y_t │ Y_{t-1}=y_{t-1}) × p(Y_1=y_1)$$
+
+where $\underline{\theta} = (\beta,\phi,\sigma^2)$, $p(Y_t = y_t │ Y_{t-1}=y_{t-1})$ is the conditional distribution of $y_t$ given $y_{t-1}$ and $p(Y_1=y_1)$ is the distribution of the first point.
+
+This is the Exact likelihood for an AR(1) process. The conditional likelihood multiplied by the marginal likelihood of the first point.
+
+---
+
+
+#### Density of $p(Y_1=y_1)$
+
+
+
+$p(Y_1=y_1)$ is normally distributed with mean = $\beta$ and variance = $\frac{\sigma^2}{1-\phi^2}$ and has density:
+
+$$p(Y_1=y_1) = \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \alpha-\beta }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
+
+---
+
+
+#### Density of conditional distribution
+
+The conditional distribution of $p(Y_t = y_t │ Y_{t-1}=y_{t-1})$ is also normally distributed but we get to it in a round about way:
+
+
+Recall $y_t = \alpha + \beta t + u_t$ then $\phi y_{t-1} = \phi \alpha + \phi \beta (t-1) + \phi u_{t-1}$ 
+
+So
+
+
+$$y_t - \phi y_{t-1} = \alpha + \beta t + u_t - \phi \alpha - \phi\beta(t-1) -\phi u_{t-1}$$
+$$y_t   = \phi y_{t-1} + \alpha(1-\phi) + \beta (t - \phi t-\phi) + e_t$$
+Rearrange to obtain 
+
+$$y_t   - \phi y_{t-1} - \alpha(1-\phi) - \beta (t - \phi t-\phi) = e_t$$
+which has a normal distribution with mean = 0 and variance = $\sigma^2$ 
+
+This results in 
+
+$$p(Y_t = y_t │ Y_{t-1}=y_{t-1}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \alpha(1-\phi) - \beta (t - \phi t-\phi)  }{\sigma}\right)^2\right)$$
+
+The likelihood is therefore: 
+
+$$L(\underline{\theta};\underline{y}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \alpha(1-\phi) - \beta (t - \phi t-\phi)  }{\sigma}\right)^2\right) \times \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \alpha -\beta }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
+
+Taking the logs and simplifying results in:
+
+$$ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-\alpha -\beta)^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-\alpha(1-\phi)-\beta(t-\phi t - \phi))^2 \right)$$
+
+
+---
+
+
+### Likelihood for AR(2) errors
+
+$$L(\underline{\theta};\underline{y})=\prod_{t=2}^n p(Y_t=y_t│Y_{t-1}=y_{t-1},Y_{t-2}=y_{t-2}) \times p(Y_2=y_2 | Y_1=y_1) \times p(Y_1=y_1)$$
+
+Following the same reasoning we can obtain the densities of each of the three components of the likelihood. The exact likelihood is the product of the conditional likelihood, the conditional distribution of $y_2 | y_1$ and the marginal distribution of $y_1$
+
+---
+
+#### Density of $p(Y_1=y_1)$
+
+$p(Y_1=y_1)$ is a normal distribution with mean = $(\alpha - \beta)$ and variance = $\frac{\sigma^2}{1-\phi_1^2 - \phi_2^2}$
+
+---
+
+#### Density of $p(Y_2=y_2│Y_1=y_1)$
+
+$p(Y_2=y_2│Y_1=y_1)$ ? need to work this out
+
+
+---
+
+#### Density of conditional likelihood
+
+Recall $y_t = \alpha + \beta t + u_t$ then $\phi_1 y_{t-1} = \phi_1 \alpha + \phi_1 \beta (t-1) + \phi_1 u_{t-1}$ and  $\phi_2 y_{t-2} = \phi_2 \alpha + \phi_2 \beta (t-2) + \phi_2 u_{t-2}$
+
+So
+
+$$y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} = \alpha + \beta t + u_t - \phi_1 \alpha - \phi_1\beta(t-1) -\phi_1 u_{t-1} - \phi_2 \alpha - \phi_2\beta(t-2) -\phi_2 u_{t-2}$$
+which simplifies to 
+
+$$y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \alpha (1-\phi_1-\phi_2) - \beta (t - \phi_1(t-1)- \phi_2(t-2))  = e_t$$
+which results in 
+
+$$p(Y_t = y_t │ Y_{t-1}=y_{t-1},Y_{t-2}=y_{t-2}) = \prod_{t=3}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \alpha (1-\phi_1-\phi_2) - \beta (t - \phi_1(t-1)- \phi_2(t-2))  }{\sigma}\right)^2\right)$$
+
+
+
+
+
+## Notes
+
+Autocovariance function for an AR(p) 
+
+
+
