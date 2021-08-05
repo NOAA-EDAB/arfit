@@ -3,13 +3,14 @@ title: "A test for detecting trend in the presence of autocorrelation"
 author: "A. Beet, S. Hardison, C. Perretti, G. DePiper"
 biblio-style: apalike
 output:
-  bookdown::html_document2:
-    number_sections: no
   bookdown::pdf_book:
     number_sections: false
+    toc: false
     latex_engine: xelatex
     extra_dependencies: 
       amsmath: null
+  bookdown::html_document2:
+    number_sections: no
 bibliography: bibliography/artrend.bib
 link-citations: yes
 ---
@@ -21,7 +22,7 @@ library(magrittr)
 
 ### Abstract
 
-A test is introduced based on the likelihood ratio statistic combined with a parametric bootstrap to test for a linear trend in the presence of autocorrelation in the form of an AR(1) process. Small samples of size, n = 10, 20, 50 are of particular interest. Nominal levels are preserved for all levels of autocorrelation, trend and time series length. The power of the test behaves as expected with power declining as sample size decreases and autocorrelation increases.
+A test is introduced based on the likelihood ratio statistic combined with a parametric bootstrap to test for a linear trend in the presence of autocorrelation in the form of an AR(1) process. Small samples of size, n = 10, 25, 50 are of particular interest. Nominal levels are preserved for all levels of autocorrelation, trend and time series length. The power of the test behaves as expected with power declining as sample size decreases and autocorrelation increases.
 
 
 Keywords: likelihood, likelihood ratio test, parametric bootstrap, autocorrelation, Hypothesis test
@@ -84,9 +85,9 @@ The significance of the observed value of the LR statistic, Λ can be assessed t
 
 ### Simulation study
 
-To assess the validity of the test we present some results from a larger simulation study. We used values of the trend, $\beta$ = 0, 0.12, 0.25, 0.5, the autoregressive parameter, $\phi$ = 0, 0.25, 0.5, 0.75, 0.95, the standard deviation of Gaussian process, $\sigma$ = 0.25, 0.5, 0.75 with time series of length n = 10, 25, 50, 100. We simulated 200 data sets for all combinations of the parameters above and 499 bootstrap samples. Nominal significance levels, testing at the 5% level, along with results using distributional theory are shown in Table \@ref(tab:table1). To ensure that the error time series is stationary, $\epsilon_1$ is drawn from  $N\left(0,\frac{\sigma^2}{(1-\phi^2)}\right)$.
+To assess the validity of the test we present some results from a larger simulation study. We used values of the trend, $\beta$ = 0, 0.12, 0.25, 0.5, the autoregressive parameter, $\phi$ = 0, 0.25, 0.5, 0.75, 0.95, the standard deviation of Gaussian process, $\sigma$ = 0.25, 0.5, 0.75 with time series of length n = 10, 25, 50. We simulated 200 data sets for all combinations of the parameters above and 499 bootstrap samples. Nominal significance levels, testing at the 5% level, along with results using distributional theory are shown in Table \@ref(tab:table1). To ensure that the error time series is stationary, $\epsilon_1$ is drawn from  $N\left(0,\frac{\sigma^2}{(1-\phi^2)}\right)$.
 
-When $H_0$ is true ($\beta = 0$), for the test to be valid, all entries in Table \@ref(tab:table1) should be close to 0.05 (±2 se, se=0.0154) when testing at the 5% significance level.  As can be seen from the results in Table \@ref(tab:table1), the significance levels from distributional theory are too liberal for small values of n. As $\phi \to 1$ the significance levels are too liberal for all values of n. However if n was large “enough”, the nominal levels would tend towards the true significance levels regardless of the level of $\phi$. In practice time series of the lengths required for this convergence are rarely observed. The bootstrap test presented does not suffer from this problem. The nominal levels are respectable for all sample sizes and all levels of autocorrelation, with the exception of very highly correlated data and small n (n = 10,  $\phi$ = 0.95). At this point the nominal levels are slightly high (~ 3 x standard error)
+When $H_0$ is true ($\beta = 0$), for the test to be valid, all entries in Table \@ref(tab:table1) should be close to 0.05 (±2 se, se=0.0154) when testing at the 5% significance level.  As can be seen from the results in Table \@ref(tab:table1), the significance levels from distributional theory are too liberal for small values of n. As $\phi \to 1$ the significance levels are too liberal for all values of n. However if n was large “enough”, the nominal levels would tend towards the true significance levels regardless of the level of $\phi$. In practice time series of the lengths required for this convergence are rarely observed. The bootstrap test presented does not suffer from this problem. The nominal levels are respectable for all sample sizes and all levels of autocorrelation, with the exception of very highly correlated data and small n (n = 10,  $\phi$ = 0.95). At this point the nominal levels are within 3 standard errors
 
 The power of the test is assessed when $H_1$ is true. Tables \@ref(tab:table2), \@ref(tab:table3), and \@ref(tab:table4) show the results. As one would expect, the test loses power as the number of observations are reduced. Power is also lost as the magnitude of the trend relative to the variance of the Gaussian errors decreases along with an increase in level of autocorrelation. Despite this the test still has acceptable power to detect trend in the presence of autocorrelation.
 
@@ -105,28 +106,21 @@ knitr::include_graphics("figures/Figure1.png")
 
 Ignoring autocorrelation in the error process can drastically inflate type I errors. In fact even if we account for autocorrelation in the model and assess significance using standard distributional theory, type I errors are inflated (@woodward_improved_1997). As  @bence_analysis_1995 points out, this is well known but often ignored and methods relying on correcting confidence intervals typically under correct. The reason being that the estimate of autocorrelation is biased. In the AR(1) case, it is well known (@woodward_improved_1997) that the maximum likelihood estimate of the autoregressive parameter exhibits a bias toward 0 and away from the non-stationary region.
 
-We have shown that by using a parametric bootstrap procedure to assess significance we can remedy the inflated type I error. While the estimate of autocorrelation is still biased, the test presented performs well. One might naturally ask how well the test performs if the autocorrelation is misspecified, for example if the underlying error structure is of a form other than that of an AR(1) process. To assess this we performed a simulation study using an autoregressive process of order 2. Preliminary simulation results suggest that the test is somewhat robust to such an alternative. Several stationary AR(2) processes were simulated in the absence of a trend. In most cases the test rejects the null at the nominal significance level (Table \@ref(tab:table5)). The test begins to reject the null at levels slightly larger (10%) than the nominal level as $\phi_2$ increases and the process tends towards non-stationarity.
-
-
-### References
-
-
-<div id="refs"></div>
-
+We have shown that by using a parametric bootstrap procedure to assess significance we can remedy the inflated type I error. While the estimate of autocorrelation is still biased, the test presented performs well. One might naturally ask how well the test performs if the autocorrelation is misspecified, for example if the underlying error structure is of a form other than that of an AR(1) process. To assess this we performed a simulation study using an autoregressive process of order 2. Preliminary simulation results suggest that the test is somewhat robust to such an alternative. Several stationary AR(2) processes were simulated in the absence of a trend. In most cases the test rejects the null at the nominal significance level (Table \@ref(tab:table5)). The test begins to reject the null at levels slightly larger (10%) than the nominal level as $\phi_2$ increases and the process tends towards non-stationarity. 
 
 
 ### Tables
 
 ```{r table1, eval = T, echo = F}
 
-df <- read.csv(here::here("output/table1.csv"),header = FALSE)
+df <- read.csv(here::here("output/table1.csv"),header = FALSE,skip=2)
 
 df %>%
-  kableExtra::kbl(.,col.names=c("$\\phi$",rep(c(" ","AR"),(ncol(df)-1)/2)),caption="Nominal levels under $H_0: \\beta = 0$. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50, 100 and $\\sigma$ = 0.25, 0.5. The significance level from asymptotic result (AR) is also shown.") %>%
+  kableExtra::kbl(.,col.names=c("$\\phi$",rep(c(" ","AR"),(ncol(df)-1)/2)),caption="Nominal levels under $H_0: \\beta = 0$. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.25, 0.5. The significance level from asymptotic result (AR) is also shown.",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  kableExtra::add_header_above(c(" "=1 ,"n = 10"=2,"25"=2,"50"=2,"100"=2,"10"=2,"25"=2,"50"=2,"100"=2)) %>%
-  kableExtra::add_header_above(c(" "=1 ,"$\\sigma$ = 0.25"= 8,"$\\sigma$ = 0.5"= 8)) %>%
-  kableExtra::column_spec(1,border_right = T)
+  kableExtra::column_spec(1,border_right = T) %>%
+  kableExtra::add_header_above(c(" "=1 ,"n = 10"=2,"25"=2,"50"=2,"10"=2,"25"=2,"50"=2)) %>%
+  kableExtra::add_header_above(c(" "=1 ,"$\\\\sigma$ = 0.25"= 6,"$\\\\sigma$ = 0.5"=6),escape=F)
 
 
 ```
@@ -137,29 +131,29 @@ df <- read.csv(here::here("output/table2.csv"),header = FALSE)
 df2a <- df[,1:10]
 
 df2a %>%
-  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2a)-1))),caption="Power of the test under $H_1: \\beta$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.25") %>%
+  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2a)-1))),caption="Power of the test under $H_1: \\beta$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.25",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  kableExtra::add_header_above(c(" "= 1, "$\\beta$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1)) %>%
+  kableExtra::add_header_above(c(" "= 1, "$\\\\beta$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1),escape=F) %>%
   kableExtra::add_header_above(c(" "=1 ,"n = 10"=3,"25"=3,"50"=3)) %>%
   kableExtra::column_spec(1,border_right = T)
 
 
 ```
+
 ```{r table3, eval = T, echo = F}
 
 df <- read.csv(here::here("output/table2.csv"),header = FALSE)
 df2b <- df[,c(1,11:19)]
 
 df2b %>%
-  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2b)-1))),caption="Power of the test under $H_1: \\beta$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.50") %>%
+  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2b)-1))),caption="Power of the test under $H_1: \\beta$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.50",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  kableExtra::add_header_above(c(" "= 1, "$\\beta$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1)) %>%
+  kableExtra::add_header_above(c(" "= 1, "$\\\\beta$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1),escape=F) %>%
   kableExtra::add_header_above(c(" "=1 ,"n = 10"=3,"25"=3,"50"=3)) %>%
   kableExtra::column_spec(1,border_right = T)
 
 
 ```
-
 
 ```{r table4, eval = T, echo = F}
 
@@ -167,17 +161,14 @@ df <- read.csv(here::here("output/table2.csv"),header = FALSE)
 df2c <- df[,c(1,20:28)]
 
 df2c %>%
-  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2c)-1))),caption="Power of the test under $H_1: \\beta$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.75") %>%
+  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2c)-1))),caption="Power of the test under $H_1: \\beta$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.75",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  kableExtra::add_header_above(c(" "= 1, "$\\beta$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1)) %>%
+  kableExtra::add_header_above(c(" "= 1, "$\\\\beta$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1),escape=F) %>%
   kableExtra::add_header_above(c(" "=1 ,"n = 10"=3,"25"=3,"50"=3)) %>%
   kableExtra::column_spec(1,border_right = T)
 
 
 ```
-
-
-
 
 ```{r table5, eval = T, echo = F}
 
@@ -185,12 +176,16 @@ df <- read.csv(here::here("output","table3.csv"),header=F)
 df[is.na(df)] <- ""
 
 df %>%
-  kableExtra::kbl(.,col.names=c(paste("$\\phi_1$"), rep(" ",(ncol(df)-1))),caption="Nominal levels under $H_0: \\beta = 0$ with AR(2) errors. Autoregressive parameter, $\\phi_1$ = 0.1, 0.3, 0.5, 0.7 and $\\phi_2$ = 0.1, 0.2, 0.5, 0.7. Time series length n = 10, 25, 50, 100 and $\\sigma$ = 0.25.") %>%
+  kableExtra::kbl(.,col.names=c(paste("$\\phi_1$"), rep(" ",(ncol(df)-1))),caption="Nominal levels under $H_0: \\beta = 0$ with AR(2) errors. Autoregressive parameter, $\\phi_1$ = 0.1, 0.3, 0.5, 0.7 and $\\phi_2$ = 0.1, 0.2, 0.5, 0.7. Time series length n = 10, 25 and $\\sigma$ = 0.25.",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  kableExtra::add_header_above(c(" "= 1, "$\\phi_2$ = .1"=1, ".2"=1, ".5"=1, ".7"=1, ".1"=1,".2"=1, ".5"=1, ".7"=1, ".1"=1,".2"=1, ".5"=1, ".7"=1, ".1"=1,".2"=1, ".5"=1, ".7"=1)) %>%
-  kableExtra::add_header_above(c(" "=1 ,"n = 10"=4,"25"=4,"50"=4,"100"=4)) %>%
+  kableExtra::add_header_above(c(" "= 1, "$\\\\phi_2$ = .1"=1, ".2"=1, ".5"=1, ".7"=1, ".1"=1,".2"=1, ".5"=1, ".7"=1),escape=F) %>%
+  kableExtra::add_header_above(c(" "=1 ,"n = 10"=4,"25"=4)) %>%
   kableExtra::column_spec(1,border_right = T)
   #
 
 ```
+
+
+
+### References
 
