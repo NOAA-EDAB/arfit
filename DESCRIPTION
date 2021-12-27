@@ -1,0 +1,13 @@
+Package: arfit
+Title: Fits full AR2 model
+Version: 0.0.0.9000
+Authors@R: 
+    person("Andy", "Beet", , "andrew.beet@noaa.gov", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-8270-7090"))
+Description: Allows fitting of Autoregressive model of order 2.
+License: file LICENSE
+URL: https://github.com/andybeet/arfit
+BugReports: https://github.com/andybeet/arfit/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
