@@ -1,6 +1,6 @@
 #' Simulate data from an linear process with AR1 error
 #'
-#' model=   y_t = b*t + z_t
+#' model=   y_t = a + b*t + z_t
 #' where z_t = rho* z_t-1 + e_t   (e_t ~ N(0,sigma^2))
 #'
 #'@param alpha Numeric scalar. Intercept
