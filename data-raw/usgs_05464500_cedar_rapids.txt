@@ -26,14 +26,14 @@
 #
 # Sites in this file include:
 # USGS 05464500 Cedar River at Cedar Rapids, IA
-# 
-# Explanation of Parameter Code and ts_id used in the Statistics Data 
+#
+# Explanation of Parameter Code and ts_id used in the Statistics Data
 # parameter_cd	Parameter Name					ts_id	Location Name
-# 00060		Discharge, cubic feet per second		42953	
+# 00060		Discharge, cubic feet per second		42953
 #
 #
+#5s	15s	5s	3n	4s	12n
 agency_cd	site_no	parameter_cd	ts_id	year_nu	mean_va
-5s	15s	5s	3n	4s	12n
 USGS	05464500	00060	42953	1903	5571
 USGS	05464500	00060	42953	1904	2527
 USGS	05464500	00060	42953	1905	3127
