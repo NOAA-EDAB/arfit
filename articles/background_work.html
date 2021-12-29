@@ -92,12 +92,12 @@
     
     
 <p>The model we are interested in is</p>
-<p><span class="math display">\[y_t = \alpha + \beta t + u_t\]</span> where <span class="math inline">\(t\)</span> refers to time and <span class="math inline">\(u_t\)</span> is either</p>
+<p><span class="math display">\[y_t = \beta_0 + \beta_1 t + u_t\]</span> where <span class="math inline">\(t\)</span> refers to time and <span class="math inline">\(u_t\)</span> is either</p>
 <ol style="list-style-type: decimal">
 <li>
 <span class="math inline">\(u_t = \phi u_{t-1} + e_t\)</span>                    an AR(1) process</li>
 <li>
-<span class="math inline">\(u_t = \phi_1 u_{t-1} + \phi_2 u_{t-2}\)</span>         an AR(2) process</li>
+<span class="math inline">\(u_t = \phi_1 u_{t-1} + \phi_2 u_{t-2} + e_t\)</span>         an AR(2) process</li>
 </ol>
 <p>with <span class="math inline">\(e_t \sim N(0,\sigma^2)\)</span></p>
 <hr>
@@ -105,30 +105,38 @@
 <h3 id="likelihood-for-ar1-errors">Likelihood for AR(1) errors<a class="anchor" aria-label="anchor" href="#likelihood-for-ar1-errors"></a>
 </h3>
 <p><span class="math display">\[L(\underline{\theta};\underline{y})=\prod_{t=2}^n p(Y_t = y_t │ Y_{t-1}=y_{t-1}) × p(Y_1=y_1)\]</span></p>
-<p>where <span class="math inline">\(\underline{\theta} = (\beta,\phi,\sigma^2)\)</span>, <span class="math inline">\(p(Y_t = y_t │ Y_{t-1}=y_{t-1})\)</span> is the conditional distribution of <span class="math inline">\(y_t\)</span> given <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(p(Y_1=y_1)\)</span> is the distribution of the first point.</p>
+<p>where <span class="math inline">\(\underline{\theta} = (\beta_0,\beta_1,\phi,\sigma^2)\)</span>, <span class="math inline">\(p(Y_t = y_t │ Y_{t-1}=y_{t-1})\)</span> is the conditional distribution of <span class="math inline">\(y_t\)</span> given <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(p(Y_1=y_1)\)</span> is the distribution of the first point.</p>
 <p>This is the Exact likelihood for an AR(1) process. The conditional likelihood multiplied by the marginal likelihood of the first point.</p>
 <hr>
 <div class="section level4">
 <h4 id="density-of-py_1y_1">Density of <span class="math inline">\(p(Y_1=y_1)\)</span><a class="anchor" aria-label="anchor" href="#density-of-py_1y_1"></a>
 </h4>
-<p><span class="math inline">\(p(Y_1=y_1)\)</span> is normally distributed with mean = <span class="math inline">\(\beta\)</span> and variance = <span class="math inline">\(\frac{\sigma^2}{1-\phi^2}\)</span> and has density:</p>
-<p><span class="math display">\[p(Y_1=y_1) = \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \alpha-\beta }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)\]</span></p>
+<p><span class="math inline">\(p(Y_1=y_1)\)</span> is normally distributed with mean = <span class="math inline">\(\beta_0 + \beta_1\)</span> and variance = <span class="math inline">\(\frac{\sigma^2}{1-\phi^2}\)</span> and has density:</p>
+<p><span class="math display">\[p(Y_1=y_1) = \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0-\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)\]</span></p>
 <hr>
 </div>
 <div class="section level4">
 <h4 id="density-of-conditional-distribution">Density of conditional distribution<a class="anchor" aria-label="anchor" href="#density-of-conditional-distribution"></a>
 </h4>
 <p>The conditional distribution of <span class="math inline">\(p(Y_t = y_t │ Y_{t-1}=y_{t-1})\)</span> is also normally distributed but we get to it in a round about way:</p>
-<p>Recall <span class="math inline">\(y_t = \alpha + \beta t + u_t\)</span> then <span class="math inline">\(\phi y_{t-1} = \phi \alpha + \phi \beta (t-1) + \phi u_{t-1}\)</span></p>
+<p>Recall <span class="math inline">\(y_t = \beta_0 + \beta_1 t + u_t\)</span> then <span class="math inline">\(\phi y_{t-1} = \phi \beta_0 + \phi \beta_1 (t-1) + \phi u_{t-1}\)</span></p>
 <p>So</p>
-<p><span class="math display">\[y_t - \phi y_{t-1} = \alpha + \beta t + u_t - \phi \alpha - \phi\beta(t-1) -\phi u_{t-1}\]</span> <span class="math display">\[y_t   = \phi y_{t-1} + \alpha(1-\phi) + \beta (t - \phi t-\phi) + e_t\]</span> Rearrange to obtain</p>
-<p><span class="math display">\[y_t   - \phi y_{t-1} - \alpha(1-\phi) - \beta (t - \phi t-\phi) = e_t\]</span> which has a normal distribution with mean = 0 and variance = <span class="math inline">\(\sigma^2\)</span></p>
+<p><span class="math display">\[y_t - \phi y_{t-1} = \beta_0 + \beta_1 t + u_t - \phi \beta_0 - \phi\beta_1(t-1) -\phi u_{t-1}\]</span></p>
+<p><span class="math display">\[y_t   = \phi y_{t-1} + \beta_0(1-\phi) + \beta_1 (t - \phi t+\phi) + e_t\]</span></p>
+<p>Rearrange to obtain</p>
+<p><span class="math display">\[y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi) = e_t\]</span> which has a normal distribution with mean = 0 and variance = <span class="math inline">\(\sigma^2\)</span></p>
 <p>This results in</p>
-<p><span class="math display">\[p(Y_t = y_t │ Y_{t-1}=y_{t-1}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \alpha(1-\phi) - \beta (t - \phi t-\phi)  }{\sigma}\right)^2\right)\]</span></p>
+<p><span class="math display">\[p(Y_t = y_t │ Y_{t-1}=y_{t-1}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi)  }{\sigma}\right)^2\right)\]</span></p>
 <p>The likelihood is therefore:</p>
-<p><span class="math display">\[L(\underline{\theta};\underline{y}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \alpha(1-\phi) - \beta (t - \phi t-\phi)  }{\sigma}\right)^2\right) \times \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \alpha -\beta }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)\]</span></p>
+<p><span class="math display">\[L(\underline{\theta};\underline{y}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi)  }{\sigma}\right)^2\right) \times \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0 -\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)\]</span></p>
 <p>Taking the logs and simplifying results in:</p>
-<p><span class="math display">\[ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-\alpha -\beta)^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-\alpha(1-\phi)-\beta(t-\phi t - \phi))^2 \right)\]</span></p>
+<p><span class="math display">\[ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-\beta_0 -\beta_1)^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-\beta_0(1-\phi)-\beta_1(t-\phi t + \phi))^2 \right)\]</span></p>
+<p>Using the notation of <span class="citation">@Beach</span> let,</p>
+<p><span class="math inline">\(X_t = [1 \qquad\text{t}]\)</span> the row vector at time t from the design matrix and thus</p>
+<p><span class="math inline">\(X_{t-1} = [1 \qquad\text{t-1}]\)</span></p>
+<p><span class="math inline">\(\underline{\beta} = [\beta_0,\beta_1]'\)</span> is a column vector</p>
+<p>we can simplify the log likelihood to</p>
+<p><span class="math display">\[ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-X_1\underline{\beta})^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-X_t\underline{\beta} +\phi X_{t-1}\underline{\beta})^2 \right)\]</span></p>
 <hr>
 </div>
 </div>
@@ -141,7 +149,7 @@
 <div class="section level4">
 <h4 id="density-of-py_1y_1-1">Density of <span class="math inline">\(p(Y_1=y_1)\)</span><a class="anchor" aria-label="anchor" href="#density-of-py_1y_1-1"></a>
 </h4>
-<p><span class="math inline">\(p(Y_1=y_1)\)</span> is a normal distribution with mean = <span class="math inline">\((\alpha - \beta)\)</span> and variance = <span class="math inline">\(\frac{\sigma^2}{1-\phi_1^2 - \phi_2^2}\)</span></p>
+<p><span class="math inline">\(p(Y_1=y_1)\)</span> is a normal distribution with mean = <span class="math inline">\((\beta_0 - \beta_1)\)</span> and variance = <span class="math inline">\(\frac{\sigma^2}{1-\phi_1^2 - \phi_2^2}\)</span></p>
 <hr>
 </div>
 <div class="section level4">
@@ -153,11 +161,11 @@
 <div class="section level4">
 <h4 id="density-of-conditional-likelihood">Density of conditional likelihood<a class="anchor" aria-label="anchor" href="#density-of-conditional-likelihood"></a>
 </h4>
-<p>Recall <span class="math inline">\(y_t = \alpha + \beta t + u_t\)</span> then <span class="math inline">\(\phi_1 y_{t-1} = \phi_1 \alpha + \phi_1 \beta (t-1) + \phi_1 u_{t-1}\)</span> and <span class="math inline">\(\phi_2 y_{t-2} = \phi_2 \alpha + \phi_2 \beta (t-2) + \phi_2 u_{t-2}\)</span></p>
+<p>Recall <span class="math inline">\(y_t = \beta_0 + \beta_1 t + u_t\)</span> then <span class="math inline">\(\phi_1 y_{t-1} = \phi_1 \beta_0 + \phi_1 \beta_1 (t-1) + \phi_1 u_{t-1}\)</span> and <span class="math inline">\(\phi_2 y_{t-2} = \phi_2 \beta_0 + \phi_2 \beta_1 (t-2) + \phi_2 u_{t-2}\)</span></p>
 <p>So</p>
-<p><span class="math display">\[y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} = \alpha + \beta t + u_t - \phi_1 \alpha - \phi_1\beta(t-1) -\phi_1 u_{t-1} - \phi_2 \alpha - \phi_2\beta(t-2) -\phi_2 u_{t-2}\]</span> which simplifies to</p>
-<p><span class="math display">\[y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \alpha (1-\phi_1-\phi_2) - \beta (t - \phi_1(t-1)- \phi_2(t-2))  = e_t\]</span> which results in</p>
-<p><span class="math display">\[p(Y_t = y_t │ Y_{t-1}=y_{t-1},Y_{t-2}=y_{t-2}) = \prod_{t=3}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \alpha (1-\phi_1-\phi_2) - \beta (t - \phi_1(t-1)- \phi_2(t-2))  }{\sigma}\right)^2\right)\]</span></p>
+<p><span class="math display">\[y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} = \beta_0 + \beta_1 t + u_t - \phi_1 \beta_0 - \phi_1\beta_1(t-1) -\phi_1 u_{t-1} - \phi_2 \beta_0 - \phi_2\beta_1(t-2) -\phi_2 u_{t-2}\]</span> which simplifies to</p>
+<p><span class="math display">\[y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \beta_0 (1-\phi_1-\phi_2) - \beta_1 (t - \phi_1(t-1)- \phi_2(t-2))  = e_t\]</span> which results in</p>
+<p><span class="math display">\[p(Y_t = y_t │ Y_{t-1}=y_{t-1},Y_{t-2}=y_{t-2}) = \prod_{t=3}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \beta_0 (1-\phi_1-\phi_2) - \beta_1 (t - \phi_1(t-1)- \phi_2(t-2))  }{\sigma}\right)^2\right)\]</span></p>
 </div>
 </div>
 <div class="section level2">
