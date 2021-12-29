@@ -57,4 +57,7 @@ For the Cedar Rapids example, 999 bootstrap samples are performed.
 fits <- example_cedar_rapids(nBootSims = 999)
 ```
 
+```{r fig,echo=F,eval=T}
+knitr::include_graphics("figures/Figure1.png")
+```
 

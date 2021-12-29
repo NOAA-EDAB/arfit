@@ -1,6 +1,6 @@
 ---
 title: "A test for detecting trend in the presence of autocorrelation"
-author: "A. Beet, S. Hardison, C. Perretti, G. DePiper"
+author: "A. Beet & S. Hardison"
 biblio-style: apalike
 output:
   bookdown::html_document2:

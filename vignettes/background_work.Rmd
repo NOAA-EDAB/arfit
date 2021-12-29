@@ -1,5 +1,5 @@
 ---
-title: "Detecting a trend in the presence of autocorrelation"
+title: "Background"
 output: html_document
 ---
 
@@ -7,7 +7,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Background
 
 The model we are interested in is 
 
