@@ -4,7 +4,7 @@
 \alias{example_cedar_rapids}
 \title{Run test on example data set}
 \usage{
-example_cedar_rapids(dataSet = arfit::cedar_rapids, nBootSims = 1000)
+example_cedar_rapids(dataSet = arfit::cedar_rapids, nBootSims = 999)
 }
 \arguments{
 \item{dataSet}{Data frame. Two columns (year, riverflow)}

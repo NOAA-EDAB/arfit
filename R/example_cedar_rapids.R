@@ -8,7 +8,7 @@
 #'
 #'@export
 
-example_cedar_rapids <- function(dataSet=arfit::cedar_rapids,nBootSims=1000) {
+example_cedar_rapids <- function(dataSet=arfit::cedar_rapids,nBootSims=999) {
 
   ind <- (dataSet$year<=1992) # Hamed et al only used 1992 data
 
@@ -21,15 +21,15 @@ example_cedar_rapids <- function(dataSet=arfit::cedar_rapids,nBootSims=1000) {
   alt <- fit_ar1(data,nT,hypothesis="alt")
 
   # preallocate likelihood ratio statistic vector
-  LRstat <- vector(mode="numeric",length=nBootSims)
+  LRstat <- vector(mode="numeric",length=nBootSims+1)
   # LR stat for data
   LRstat[1] <- -2*(null$likelihood-alt$likelihood)
   print(paste0("LR stat = ",LRstat[1]))
   # pvalue using chi square approximation
-  #pValChi2[isim] <- 1-pchisq(LRstat[1],1) # uses distributional theory
+  pValChi2 <- 1-pchisq(LRstat[1],1) # uses distributional theory
 
   # Perform bootstrapping
-  for (iboot in 2:nBootSims) {
+  for (iboot in 2:(nBootSims+1)) {
     # simulate under Null
     bootdata <- simulate_ar1(alpha=null$betaEst,beta=0,null$sigmaEst,null$rhoEst,nT)
     # fit under null and alt
@@ -40,7 +40,7 @@ example_cedar_rapids <- function(dataSet=arfit::cedar_rapids,nBootSims=1000) {
   } # end bootstrap
 
   # now we can calculate the p-value based on the bootstrapping
-  pVal_boot <- sum(LRstat >= LRstat[1])/nBootSims
+  pVal_boot <- sum(LRstat >= LRstat[1])/(nBootSims+1)
   print(paste0("pval_boot = ",pVal_boot))
 
   # plot fits under the null and alternative
@@ -51,5 +51,5 @@ example_cedar_rapids <- function(dataSet=arfit::cedar_rapids,nBootSims=1000) {
   lines(dataSet$year,rep(null$betaEst,nT),col="black",lty=2,lwd=2)
   lines(dataSet$year,alt$betaEst[1]+alt$betaEst[2]*c(1:nT),col="black",lty=3,lwd=2)
   #dev.off()
-  return(list(null=null, alt=alt))
+  return(list(null=null, alt=alt,pValChi2=pValChi2))
 }
