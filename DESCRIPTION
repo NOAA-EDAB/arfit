@@ -18,3 +18,5 @@ Suggests:
     rmarkdown,
     knitr
 VignetteBuilder: knitr
+Imports: 
+    bookdown
