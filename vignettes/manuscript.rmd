@@ -34,11 +34,11 @@ Authors: North East Fisheries Science Center (NOAA), Woods Hole, MA 02543
 The specific model addressed here is of the form,
 
 \begin{equation}
-  Y_t = \alpha + \beta t + \epsilon_t  
+  Y_t = \beta_0 + \beta_1 t + \epsilon_t  
   (\#eq:one)
 \end{equation}
 
-where $\epsilon_t = \phi\epsilon_{t-1} + Z_t$ is a stationary first order autoregressive process with $Z_t \sim N(0,\sigma^2)$. Interest centers on testing the null hypothesis, $H_0:\beta = 0$ against the alternative, $H_1:\beta \neq 0$
+where $\epsilon_t = \phi\epsilon_{t-1} + Z_t$ is a stationary first order autoregressive process with $Z_t \sim N(0,\sigma^2)$. Interest centers on testing the null hypothesis, $H_0:\beta_1 = 0$ against the alternative, $H_1:\beta_1 \neq 0$
 
 Testing for a trend in time series data has been addressed by many authors from a wide range of disciplines including economics, statistics, hydrology, ecology, fisheries, and epidemiology; [@cochrane_application_1949; @prais_trend_1954; @beach_maximum_1978; @park_estimating_1980; @brillinger_trend_1994; @bence_analysis_1995; @woodward_improved_1997; @zhang_temperature_2000; @yue_influence_2002; @wang_linear_2015 ;@hardison_simulation_2019]. These approaches have typically taken one of three paths; non parametric methods such as the Mann Kendall test and its pre-whitening variants @hamed_modified_1998;  @zhang_temperature_2000; @yue_applicability_2002;  @wang_linear_2015); parametric methods involving data transformation such as @cochrane_application_1949, @prais_trend_1954, @woodward_improved_1997); parametric methods such as generalized least squares and maximum likelihood estimation (@beach_maximum_1978;  @davison_economic_1999, @pinheiro_mixed_2000). 
 
@@ -54,11 +54,11 @@ We define the likelihood function as,
 \mathrm{L}\left( \underline{\theta}; \underline{y} \right )= \prod^n_{t=2} p\left(Y_t = y_t | Y_{t-1}=y_{t-1}\right)  p\left(Y_1=y_1 \right) (\#eq:two)
 \end{equation}
 
-where $\underline{\theta} = (\beta, \phi\, \sigma^2)$ and $p\left(Y_t = y_t | Y_{t-1}=y_{t-1}\right)$ is the conditional distribution of $y_t$ given $y_{t-1}$ and $p\left(Y_1=y_1 \right)$ is the distribution of the first point. For the model \@ref(eq:one) the log likelihood is given by
+where $\underline{\theta} = (\beta_0,\beta_1, \phi\, \sigma^2)$ and $p\left(Y_t = y_t | Y_{t-1}=y_{t-1}\right)$ is the conditional distribution of $y_t$ given $y_{t-1}$ and $p\left(Y_1=y_1 \right)$ is the distribution of the first point. For the model \@ref(eq:one) the log likelihood is given by
 
 \begin{align}
 logL\left( \underline{\theta}; \underline{y} \right ) = & -\frac{n}{2}log2\pi - nlog\sigma^2 + \frac{1}{2}log(1-\phi^2) \notag \\
-& -\frac{1}{2\sigma^2}\left( (1-\phi^2)(y_1-\beta)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-t\beta + \phi(t-1)\beta)^2 \right) (\#eq:three)
+& -\frac{1}{2\sigma^2}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) -t\beta_1 + \phi(t-1)\beta_1)^2 \right) (\#eq:three)
 \end{align}
 
 
@@ -66,37 +66,42 @@ Differentiating $logL\left( \underline{\theta}; \underline{y} \right )$ with res
 
 
 \begin{equation}
-\hat\sigma^2 = \frac{1}{n}\left( (1-\phi^2)(y_1-\beta)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-t\beta + \phi(t-1)\beta)^2 \right) (\#eq:four)
+\hat\sigma^2 = \frac{1}{n}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) - t\beta_1 + \phi(t-1)\beta_1)^2 \right) (\#eq:four)
 \end{equation}
 
-Substituting $\hat\sigma^2$ into \@ref(eq:two) yields the log likelihood function as a function of $\beta$ and $\phi$
+Substituting $\hat\sigma^2$ into \@ref(eq:two) yields the log likelihood function as a function of $\underline{\beta}=(\beta_0,\beta_1)$ and $\phi$
 
 
 \begin{align}
-logL\left( \beta, \phi; \underline{y} \right ) = &constant + \frac{1}{2}log(1-\phi^2) \notag \\
-&-\frac{n}{2}log\left( (1-\phi^2)(y_1-\beta)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-t\beta + \phi(t-1)\beta)^2 \right) (\#eq:five)
+logL\left( \underline{\beta}, \phi; \underline{y} \right ) = &const. + \frac{1}{2}log(1-\phi^2) \notag \\
+&-\frac{n}{2}log\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2)-t\beta_1 + \phi(t-1)\beta_1)^2 \right) \\ 
+
+&= const. + \frac{1}{2}log(1-\phi^2) \notag \\
+&-\frac{n}{2}log\left( (1-\phi^2)(y_1-X_1\underline{\beta})^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-X_t\underline{\beta} + \phi X_{t-1}\underline{\beta})^2 \right) (\#eq:five)
 \end{align}
 
-The maximum likelihood estimates for $\beta$ and $\phi$ are the values for which \@ref(eq:five) is maximized. This is akin to a Generalized Least Squares problem with an unknown covariance matrix, but with a known covariance structure. Maximization is achieved numerically and there are several ways to achieve this (@beach_maximum_1978;  @pinheiro_mixed_2000).
 
-It is natural to test $H_0:\beta=0$ against $H_1: \beta \neq 0$, using the likelihood ratio (LR) statistic (@silvey_statistical_1980). The LR statistic, $\Delta$, is defined as minus twice the difference of the maximized value of the log-likelihood under $H_0$ and the maximized value of the log-likelihood under $H_1$. To form $\Delta$, it is necessary to fit the model \@ref(eq:one) by maximum likelihood \@ref(eq:five) under both $H_0$ and $H_1$.
+
+The maximum likelihood estimates for $\underline{\beta}$ and $\phi$ are the values for which \@ref(eq:five) is maximized. This is akin to a Generalized Least Squares problem with an unknown covariance matrix, but with a known covariance structure. Maximization is achieved numerically and there are several ways to achieve this (@beach_maximum_1978;  @pinheiro_mixed_2000).
+
+It is natural to test $H_0:\beta_1=0$ against $H_1: \beta_1 \neq 0$, using the likelihood ratio (LR) statistic (@silvey_statistical_1980). The LR statistic, $\Delta$, is defined as minus twice the difference of the maximized value of the log-likelihood under $H_0$ and the maximized value of the log-likelihood under $H_1$. To form $\Delta$, it is necessary to fit the model \@ref(eq:one) by maximum likelihood \@ref(eq:five) under both $H_0$ and $H_1$.
 
 The significance of the observed value of the LR statistic, $\Delta$ can be assessed through the following procedure. Simulate a new data set from the model fitted under the null. Fit the null and the alternative models to the simulated data and find the value of and evaluate $\Delta$. Repeat this simulation procedure a large number of times and estimate the significance level (P-value) by the proportion of simulated data sets for which the value of $\Delta$ is larger than that of the observed data. This is an example of a parametric bootstrap test (@efron_introduction_1993).
 
 ### Simulation study
 
-To assess the validity of the test we present some results from a larger simulation study. We used values of the trend, $\beta$ = 0, 0.12, 0.25, 0.5, the autoregressive parameter, $\phi$ = 0, 0.25, 0.5, 0.75, 0.95, the standard deviation of Gaussian process, $\sigma$ = 0.25, 0.5, 0.75 with time series of length n = 10, 25, 50. We simulated 200 data sets for all combinations of the parameters above and 499 bootstrap samples. Nominal significance levels, testing at the 5% level, along with results using distributional theory are shown in Table \@ref(tab:table1). To ensure that the error time series is stationary, $\epsilon_1$ is drawn from  $N\left(0,\frac{\sigma^2}{(1-\phi^2)}\right)$.
+To assess the validity of the test we present some results from a larger simulation study. We used values of the trend, $\beta_1$ = 0, 0.12, 0.25, 0.5, the autoregressive parameter, $\phi$ = 0, 0.25, 0.5, 0.75, 0.95, the standard deviation of Gaussian process, $\sigma$ = 0.25, 0.5, 0.75 with time series of length n = 10, 25, 50. We simulated 200 data sets for all combinations of the parameters above and 499 bootstrap samples. Nominal significance levels, testing at the 5% level, along with results using distributional theory are shown in Table \@ref(tab:table1). To ensure that the error time series is stationary, $\epsilon_1$ is drawn from  $N\left(0,\frac{\sigma^2}{(1-\phi^2)}\right)$.
 
-When $H_0$ is true ($\beta = 0$), for the test to be valid, all entries in Table \@ref(tab:table1) should be close to 0.05 (±2 se, se=0.0154) when testing at the 5% significance level.  As can be seen from the results in Table \@ref(tab:table1), the significance levels from distributional theory are too liberal for small values of n. As $\phi \to 1$ the significance levels are too liberal for all values of n. However if n was large “enough”, the nominal levels would tend towards the true significance levels regardless of the level of $\phi$. In practice time series of the lengths required for this convergence are rarely observed. The bootstrap test presented does not suffer from this problem. The nominal levels are respectable for all sample sizes and all levels of autocorrelation, with the exception of very highly correlated data and small n (n = 10,  $\phi$ = 0.95). At this point the nominal levels are within 3 standard errors
+When $H_0$ is true ($\beta_1 = 0$), for the test to be valid, all entries in Table \@ref(tab:table1) should be close to 0.05 (±2 se, se=0.0154) when testing at the 5% significance level.  As can be seen from the results in Table \@ref(tab:table1), the significance levels from distributional theory are too liberal for small values of n. As $\phi \to 1$ the significance levels are too liberal for all values of n. However if n was large “enough”, the nominal levels would tend towards the true significance levels regardless of the level of $\phi$. In practice time series of the lengths required for this convergence are rarely observed. The bootstrap test presented does not suffer from this problem. The nominal levels are respectable for all sample sizes and all levels of autocorrelation, with the exception of very highly correlated data and small n (n = 10,  $\phi$ = 0.95). At this point the nominal levels are within 3 standard errors
 
 The power of the test is assessed when $H_1$ is true. Tables \@ref(tab:table2), \@ref(tab:table3), and \@ref(tab:table4) show the results. As one would expect, the test loses power as the number of observations are reduced. Power is also lost as the magnitude of the trend relative to the variance of the Gaussian errors decreases along with an increase in level of autocorrelation. Despite this the test still has acceptable power to detect trend in the presence of autocorrelation.
 
 
 ### Application to Hydrological Data
 
-As an illustration, the test outlined above was applied to an annual riverflow discharge time series (Figure \@ref(fig:figure1)) from Cedar Rapids, IA (USGS station #05464500). The data is available from https://waterdata.usgs.gov. @hamed_modified_1998 used the same data set to apply their modified Mann-Kendall test for trend for which they conclude that there is insufficient evidence to reject the null hypothesis. We find a result to the contrary. The value of the LR statistic $\Delta$ is 4.427. Of 1000 bootstrap samples simulated from the model fitted under the null 46 had values in excess of $\Delta$ for an estimated significance level of .046 with standard error around 0.007. The Model fits under the null and alternative are shown in Figure \@ref(fig:figure1). Parameter estimates under the null are $\hat\alpha$ = 3560, $\hat\phi$ = .37, $\hat\sigma$ = 1670. Under the alternative $\hat\alpha$ = 2602, $\hat\beta$ = 20.88, $\hat\phi$ = .30, $\hat\sigma$ = 1630.
+As an illustration, the test outlined above was applied to an annual riverflow discharge time series (Figure \@ref(fig:figure1)) from Cedar Rapids, IA (USGS station #05464500). The data is available from https://waterdata.usgs.gov. @hamed_modified_1998 used the same data set to apply their modified Mann-Kendall test for trend for which they conclude that there is insufficient evidence to reject the null hypothesis. We find a result to the contrary. The value of the LR statistic $\Delta$ is 4.427. Of 1000 bootstrap samples simulated from the model fitted under the null 46 had values in excess of $\Delta$ for an estimated significance level of .046 with standard error around 0.007. The Model fits under the null and alternative are shown in Figure \@ref(fig:figure1). Parameter estimates under the null are $\hat\beta_0$ = 3560, $\hat\phi$ = .37, $\hat\sigma$ = 1670. Under the alternative $\hat\beta_0$ = 2602, $\hat\beta_1$ = 20.88, $\hat\phi$ = .30, $\hat\sigma$ = 1630.
 
-```{r figure1, eval = TRUE, echo =FALSE, out.width='70%', fig.align='center',fig.cap='Annual river flow discharge from Cedar Rapids, IA (USGS station \\#05464500). Dashed line shows model fit under $H_0$:$\\beta = 0$, dotted line shows model fit under $H_1$: $\\beta$ $\\neq 0$'}
+```{r figure1, eval = TRUE, echo =FALSE, out.width='70%', fig.align='center',fig.cap='Annual river flow discharge from Cedar Rapids, IA (USGS station \\#05464500). Dashed line shows model fit under $H_0$:$\\beta_1 = 0$, dotted line shows model fit under $H_1$: $\\beta_1$ $\\neq 0$'}
 
 knitr::include_graphics("figures/Figure1.png")
 ```
@@ -121,7 +126,7 @@ We have shown that by using a parametric bootstrap procedure to assess significa
 df <- read.csv("tables/table1.csv",header = FALSE,skip=2)
 
 df %>%
-  kableExtra::kbl(.,col.names=c("$\\phi$",rep(c(" ","AR"),(ncol(df)-1)/2)),caption="Nominal levels under $H_0: \\beta = 0$. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.25, 0.5. The significance level from asymptotic result (AR) is also shown.",escape=F) %>%
+  kableExtra::kbl(.,col.names=c("$\\phi$",rep(c(" ","AR"),(ncol(df)-1)/2)),caption="Nominal levels under $H_0: \\beta_1 = 0$. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.25, 0.5. The significance level from asymptotic result (AR) is also shown.",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
   kableExtra::column_spec(1,border_right = T) %>%
   kableExtra::add_header_above(c(" "=1 ,"n = 10"=2,"25"=2,"50"=2,"10"=2,"25"=2,"50"=2)) %>%
@@ -136,9 +141,9 @@ df <- read.csv("tables/table2.csv",header = FALSE)
 df2a <- df[,1:10]
 
 df2a %>%
-  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2a)-1))),caption="Power of the test under $H_1: \\beta$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.25",escape=F) %>%
+  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2a)-1))),caption="Power of the test under $H_1: \\beta_1$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.25",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  kableExtra::add_header_above(c(" "= 1, "$\\\\beta$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1),escape=F) %>%
+  kableExtra::add_header_above(c(" "= 1, "$\\\\beta_1$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1),escape=F) %>%
   kableExtra::add_header_above(c(" "=1 ,"n = 10"=3,"25"=3,"50"=3)) %>%
   kableExtra::column_spec(1,border_right = T)
 
@@ -151,9 +156,9 @@ df <- read.csv("tables/table2.csv",header = FALSE)
 df2b <- df[,c(1,11:19)]
 
 df2b %>%
-  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2b)-1))),caption="Power of the test under $H_1: \\beta$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.50",escape=F) %>%
+  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2b)-1))),caption="Power of the test under $H_1: \\beta_1$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.50",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  kableExtra::add_header_above(c(" "= 1, "$\\\\beta$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1),escape=F) %>%
+  kableExtra::add_header_above(c(" "= 1, "$\\\\beta_1$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1),escape=F) %>%
   kableExtra::add_header_above(c(" "=1 ,"n = 10"=3,"25"=3,"50"=3)) %>%
   kableExtra::column_spec(1,border_right = T)
 ```
@@ -164,9 +169,9 @@ df <- read.csv("tables/table2.csv",header = FALSE)
 df2c <- df[,c(1,20:28)]
 
 df2c %>%
-  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2c)-1))),caption="Power of the test under $H_1: \\beta$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.75",escape=F) %>%
+  kableExtra::kbl(.,col.names=c(paste("$\\phi$"), rep(" ",(ncol(df2c)-1))),caption="Power of the test under $H_1: \\beta_1$ = 0.12, 0.25, 0.5. Autoregressive parameter, $\\phi$ = 0, 0.25, 0.5, 0.75, 0.95. Time series length n = 10, 25, 50 and $\\sigma$ = 0.75",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
-  kableExtra::add_header_above(c(" "= 1, "$\\\\beta$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1),escape=F) %>%
+  kableExtra::add_header_above(c(" "= 1, "$\\\\beta_1$ = .12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1, ".12"=1, ".25"=1, ".50"=1),escape=F) %>%
   kableExtra::add_header_above(c(" "=1 ,"n = 10"=3,"25"=3,"50"=3)) %>%
   kableExtra::column_spec(1,border_right = T)
 ```
@@ -178,7 +183,7 @@ df <- read.csv("tables/table3.csv",header=F)
 df[is.na(df)] <- ""
 
 df %>%
-  kableExtra::kbl(.,col.names=c(paste("$\\phi_1$"), rep(" ",(ncol(df)-1))),caption="Nominal levels under $H_0: \\beta = 0$ with AR(2) errors. Autoregressive parameter, $\\phi_1$ = 0.1, 0.3, 0.5, 0.7 and $\\phi_2$ = 0.1, 0.2, 0.5, 0.7. Time series length n = 10, 25 and $\\sigma$ = 0.25.",escape=F) %>%
+  kableExtra::kbl(.,col.names=c(paste("$\\phi_1$"), rep(" ",(ncol(df)-1))),caption="Nominal levels under $H_0: \\beta_1 = 0$ with AR(2) errors. Autoregressive parameter, $\\phi_1$ = 0.1, 0.3, 0.5, 0.7 and $\\phi_2$ = 0.1, 0.2, 0.5, 0.7. Time series length n = 10, 25 and $\\sigma$ = 0.25.",escape=F) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
   kableExtra::add_header_above(c(" "= 1, "$\\\\phi_2$ = .1"=1, ".2"=1, ".5"=1, ".7"=1, ".1"=1,".2"=1, ".5"=1, ".7"=1),escape=F) %>%
   kableExtra::add_header_above(c(" "=1 ,"n = 10"=4,"25"=4)) %>%

@@ -10,11 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The model we are interested in is 
 
-$$y_t = \alpha + \beta t + u_t$$
+$$y_t = \beta_0 + \beta_1 t + u_t$$
 where $t$ refers to time and $u_t$ is either
 
 1. $u_t = \phi u_{t-1} + e_t$  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; an AR(1) process
-1. $u_t = \phi_1 u_{t-1} + \phi_2 u_{t-2}$   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    an AR(2) process
+1. $u_t = \phi_1 u_{t-1} + \phi_2 u_{t-2} + e_t$   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    an AR(2) process
 
 with $e_t \sim N(0,\sigma^2)$
 
@@ -25,7 +25,7 @@ with $e_t \sim N(0,\sigma^2)$
 
 $$L(\underline{\theta};\underline{y})=\prod_{t=2}^n p(Y_t = y_t │ Y_{t-1}=y_{t-1}) × p(Y_1=y_1)$$
 
-where $\underline{\theta} = (\beta,\phi,\sigma^2)$, $p(Y_t = y_t │ Y_{t-1}=y_{t-1})$ is the conditional distribution of $y_t$ given $y_{t-1}$ and $p(Y_1=y_1)$ is the distribution of the first point.
+where $\underline{\theta} = (\beta_0,\beta_1,\phi,\sigma^2)$, $p(Y_t = y_t │ Y_{t-1}=y_{t-1})$ is the conditional distribution of $y_t$ given $y_{t-1}$ and $p(Y_1=y_1)$ is the distribution of the first point.
 
 This is the Exact likelihood for an AR(1) process. The conditional likelihood multiplied by the marginal likelihood of the first point.
 
@@ -36,9 +36,9 @@ This is the Exact likelihood for an AR(1) process. The conditional likelihood mu
 
 
 
-$p(Y_1=y_1)$ is normally distributed with mean = $\beta$ and variance = $\frac{\sigma^2}{1-\phi^2}$ and has density:
+$p(Y_1=y_1)$ is normally distributed with mean = $\beta_0 + \beta_1$ and variance = $\frac{\sigma^2}{1-\phi^2}$ and has density:
 
-$$p(Y_1=y_1) = \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \alpha-\beta }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
+$$p(Y_1=y_1) = \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0-\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
 
 ---
 
@@ -48,30 +48,43 @@ $$p(Y_1=y_1) = \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\lef
 The conditional distribution of $p(Y_t = y_t │ Y_{t-1}=y_{t-1})$ is also normally distributed but we get to it in a round about way:
 
 
-Recall $y_t = \alpha + \beta t + u_t$ then $\phi y_{t-1} = \phi \alpha + \phi \beta (t-1) + \phi u_{t-1}$ 
+Recall $y_t = \beta_0 + \beta_1 t + u_t$ then $\phi y_{t-1} = \phi \beta_0 + \phi \beta_1 (t-1) + \phi u_{t-1}$ 
 
 So
 
 
-$$y_t - \phi y_{t-1} = \alpha + \beta t + u_t - \phi \alpha - \phi\beta(t-1) -\phi u_{t-1}$$
-$$y_t   = \phi y_{t-1} + \alpha(1-\phi) + \beta (t - \phi t-\phi) + e_t$$
+$$y_t - \phi y_{t-1} = \beta_0 + \beta_1 t + u_t - \phi \beta_0 - \phi\beta_1(t-1) -\phi u_{t-1}$$
+
+$$y_t   = \phi y_{t-1} + \beta_0(1-\phi) + \beta_1 (t - \phi t+\phi) + e_t$$
+
 Rearrange to obtain 
 
-$$y_t   - \phi y_{t-1} - \alpha(1-\phi) - \beta (t - \phi t-\phi) = e_t$$
+$$y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi) = e_t$$
 which has a normal distribution with mean = 0 and variance = $\sigma^2$ 
 
 This results in 
 
-$$p(Y_t = y_t │ Y_{t-1}=y_{t-1}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \alpha(1-\phi) - \beta (t - \phi t-\phi)  }{\sigma}\right)^2\right)$$
+$$p(Y_t = y_t │ Y_{t-1}=y_{t-1}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi)  }{\sigma}\right)^2\right)$$
 
 The likelihood is therefore: 
 
-$$L(\underline{\theta};\underline{y}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \alpha(1-\phi) - \beta (t - \phi t-\phi)  }{\sigma}\right)^2\right) \times \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \alpha -\beta }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
+$$L(\underline{\theta};\underline{y}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi)  }{\sigma}\right)^2\right) \times \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0 -\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
 
 Taking the logs and simplifying results in:
 
-$$ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-\alpha -\beta)^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-\alpha(1-\phi)-\beta(t-\phi t - \phi))^2 \right)$$
+$$ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-\beta_0 -\beta_1)^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-\beta_0(1-\phi)-\beta_1(t-\phi t + \phi))^2 \right)$$
 
+Using the notation of @Beach let, 
+
+$X_t = [1  \qquad\text{t}]$ the row vector at time t from the design matrix and thus 
+
+$X_{t-1} = [1 \qquad\text{t-1}]$ 
+
+$\underline{\beta} = [\beta_0,\beta_1]'$ is a column vector
+
+we can simplify the log likelihood to
+
+$$ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-X_1\underline{\beta})^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-X_t\underline{\beta} +\phi X_{t-1}\underline{\beta})^2 \right)$$
 
 ---
 
@@ -86,7 +99,7 @@ Following the same reasoning we can obtain the densities of each of the three co
 
 #### Density of $p(Y_1=y_1)$
 
-$p(Y_1=y_1)$ is a normal distribution with mean = $(\alpha - \beta)$ and variance = $\frac{\sigma^2}{1-\phi_1^2 - \phi_2^2}$
+$p(Y_1=y_1)$ is a normal distribution with mean = $(\beta_0 - \beta_1)$ and variance = $\frac{\sigma^2}{1-\phi_1^2 - \phi_2^2}$
 
 ---
 
@@ -99,17 +112,17 @@ $p(Y_2=y_2│Y_1=y_1)$ ? need to work this out
 
 #### Density of conditional likelihood
 
-Recall $y_t = \alpha + \beta t + u_t$ then $\phi_1 y_{t-1} = \phi_1 \alpha + \phi_1 \beta (t-1) + \phi_1 u_{t-1}$ and  $\phi_2 y_{t-2} = \phi_2 \alpha + \phi_2 \beta (t-2) + \phi_2 u_{t-2}$
+Recall $y_t = \beta_0 + \beta_1 t + u_t$ then $\phi_1 y_{t-1} = \phi_1 \beta_0 + \phi_1 \beta_1 (t-1) + \phi_1 u_{t-1}$ and  $\phi_2 y_{t-2} = \phi_2 \beta_0 + \phi_2 \beta_1 (t-2) + \phi_2 u_{t-2}$
 
 So
 
-$$y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} = \alpha + \beta t + u_t - \phi_1 \alpha - \phi_1\beta(t-1) -\phi_1 u_{t-1} - \phi_2 \alpha - \phi_2\beta(t-2) -\phi_2 u_{t-2}$$
+$$y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} = \beta_0 + \beta_1 t + u_t - \phi_1 \beta_0 - \phi_1\beta_1(t-1) -\phi_1 u_{t-1} - \phi_2 \beta_0 - \phi_2\beta_1(t-2) -\phi_2 u_{t-2}$$
 which simplifies to 
 
-$$y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \alpha (1-\phi_1-\phi_2) - \beta (t - \phi_1(t-1)- \phi_2(t-2))  = e_t$$
+$$y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \beta_0 (1-\phi_1-\phi_2) - \beta_1 (t - \phi_1(t-1)- \phi_2(t-2))  = e_t$$
 which results in 
 
-$$p(Y_t = y_t │ Y_{t-1}=y_{t-1},Y_{t-2}=y_{t-2}) = \prod_{t=3}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \alpha (1-\phi_1-\phi_2) - \beta (t - \phi_1(t-1)- \phi_2(t-2))  }{\sigma}\right)^2\right)$$
+$$p(Y_t = y_t │ Y_{t-1}=y_{t-1},Y_{t-2}=y_{t-2}) = \prod_{t=3}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t - \phi_1 y_{t-1} - \phi_2 y_{t-2} - \beta_0 (1-\phi_1-\phi_2) - \beta_1 (t - \phi_1(t-1)- \phi_2(t-2))  }{\sigma}\right)^2\right)$$
 
 
 
