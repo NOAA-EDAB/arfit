@@ -17,7 +17,8 @@ LazyData: true
 Suggests: 
     rmarkdown,
     knitr,
-    here
+    here,
+    kableExtra
 VignetteBuilder: knitr
 Imports: 
     bookdown
