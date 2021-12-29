@@ -16,7 +16,8 @@ Depends:
 LazyData: true
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    here
 VignetteBuilder: knitr
 Imports: 
     bookdown
