@@ -16,7 +16,7 @@
 
 likelihood_ar1 <- function(beta,rho,dataf,hypothesis="null") {
 
-  ho <- tolower(ho)
+  hypothesis <- tolower(hypothesis)
 
   x <- dataf$x
   y <- dataf$y
