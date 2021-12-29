@@ -12,7 +12,7 @@
 #'
 #' @export
 
-simulate_ar <- function(alpha,beta=0,sigma,rho,nT){
+simulate_ar1 <- function(alpha,beta=0,sigma,rho,n){
   #
   #
   xt <- c(1:n)
