@@ -17,17 +17,9 @@ fit_ar1 <- function(data,nT,hypothesis) {
   maxLike <- -Inf
 
   for (rho in rhoVec) {
-    Q <- matrix(0,nT,nT)
-    # Prais & Winsten transformation
-    diag(Q) <- 1
-    Q[1,1] <- sqrt(1-rho^2)
-    index <- row(Q)-col(Q)
-    Q[index==1] <- -rho
 
-    X <- Q%*%xt
-    Y <- Q%*%yt
-    # mle of beta given rho
-    betaEst <- solve(t(X)%*%X)%*% t(X)%*%Y
+    # MLE for beta conditional on rho
+    betaEst <- est_beta_given_rho(xt,yt,rho,hypothesis)
     #evaluate the likelihood
     like <- likelihood_ar1(betaEst,rho,data,hypothesis)
    # likeKeep[ik] <- like
@@ -43,7 +35,7 @@ fit_ar1 <- function(data,nT,hypothesis) {
     }
 
   }
-  #plot(rhoVec,likeKeep)
+
   return(list(betaEst=maxBeta,rhoEst=maxRho,sigmaEst=maxSigma,varBeta=varBeta,likelihood=maxLike))
 }
 
