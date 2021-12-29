@@ -1,8 +1,8 @@
 # arfit
 
   <!-- badges: start -->
-  [![gh-pages](https://github.com/andybeet/trendAR/workflows/gh-pages/badge.svg)](https://github.com/andybeet/trendAR/actions)
-    [![gitleaks](https://github.com/andybeet/trendAR/workflows/gitleaks/badge.svg)](https://github.com/andybeet/trendAR/actions)
+  [![gh-pages](https://github.com/andybeet/arfit/workflows/gh-pages/badge.svg)](https://github.com/andybeet/arfit/actions)
+    [![gitleaks](https://github.com/andybeet/arfit/workflows/gitleaks/badge.svg)](https://github.com/andybeet/arfit/actions)
   <!-- badges: end -->
 
 ## Contact
