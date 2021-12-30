@@ -4,11 +4,9 @@
 \alias{likelihood_ar1}
 \title{Evaluate the likelihood of linear model with errors from an AR order 1 process}
 \usage{
-likelihood_ar1(beta, rho, dataf, hypothesis = "null")
+likelihood_ar1(rho, dataf, hypothesis = "null")
 }
 \arguments{
-\item{beta}{Numeric vector. (px1). Defining alpha and beta.}
-
 \item{rho}{Numeric scalar. Autoregressive parameter}
 
 \item{dataf}{Data frame. (nx2). Defining xt and yt values}
