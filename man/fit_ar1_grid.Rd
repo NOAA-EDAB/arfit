@@ -4,7 +4,7 @@
 \alias{fit_ar1_grid}
 \title{Fit linear model with AR(1) error by GLS}
 \usage{
-fit_ar1_grid(data, hypothesis, rhoVec = NULL)
+fit_ar1_grid(data, rhoVec = NULL, hypothesis)
 }
 \description{
 Fit linear model with AR(1) error by GLS

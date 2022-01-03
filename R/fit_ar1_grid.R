@@ -5,7 +5,7 @@
 #'
 #' @export
 
-fit_ar1_grid <- function(data,hypothesis,rhoVec=NULL) {
+fit_ar1_grid <- function(data,rhoVec=NULL,hypothesis) {
 
   nT <- nrow(data)
 

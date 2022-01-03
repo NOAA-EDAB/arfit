@@ -17,9 +17,10 @@ example_cedar_rapids <- function(dataSet=arfit::cedar_rapids,nBootSims=999) {
   data <- data.frame(x=c(1:nT),y=dataSet$riverflow)
 
   # fit under the null and alternative
-  null <- fit_ar1(data,nT,hypothesis ="null")
-  alt <- fit_ar1(data,nT,hypothesis="alt")
-
+  null <- fit_ar1_grid(data,hypothesis ="null")
+  alt <- fit_ar1_grid(data,hypothesis="alt")
+  # null <- fit_ar1_opt(data,rho=0.5,hypothesis ="null")
+  # alt <- fit_ar1_opt(data,null$rhoEst,hypothesis="alt")
   # preallocate likelihood ratio statistic vector
   LRstat <- vector(mode="numeric",length=nBootSims+1)
   # LR stat for data
@@ -33,8 +34,10 @@ example_cedar_rapids <- function(dataSet=arfit::cedar_rapids,nBootSims=999) {
     # simulate under Null
     bootdata <- simulate_ar1(alpha=null$betaEst,beta=0,null$sigmaEst,null$rhoEst,nT)
     # fit under null and alt
-    nullBoot <- fit_ar1(bootdata,nT,hypothesis="null")
-    altBoot <- fit_ar1(bootdata,nT,hypothesis="alt")
+    nullBoot <- fit_ar1_grid(bootdata,hypothesis="null")
+    altBoot <- fit_ar1_grid(bootdata,hypothesis="alt")
+    # nullBoot <- fit_ar1_opt(bootdata,null$rhoEst,hypothesis="null")
+    # altBoot <- fit_ar1_opt(bootdata,null$rhoEst,hypothesis="alt")
     # statisicic
     LRstat[iboot] <- -2*(nullBoot$likelihood-altBoot$likelihood)
   } # end bootstrap
