@@ -2,6 +2,8 @@
 #'
 #' model=   y_t = a + b*t + z_t
 #' where z_t = rho* z_t-1 + e_t   (e_t ~ N(0,sigma^2))
+#' Uses unconditional mean and variance to simulate first data point
+#
 #'
 #'@param alpha Numeric scalar. Intercept
 #'@param beta Numeric scalar. Slope
@@ -18,7 +20,11 @@ simulate_ar1 <- function(alpha,beta=0,sigma,rho,n){
   xt <- c(1:n)
   # simulate AR - error process
   zt <- vector(mode = "numeric",length=n)
-  zt[1] <- rnorm(1,mean=0,sd=sqrt((sigma^2)/(1-rho^2)))
+  # unconditional mean of process
+  meanAR1 = alpha/(1-rho)
+  # unconditional variance of the process
+  varAR1 = (sigma^2)/(1-rho^2)
+  zt[1] <- rnorm(1,mean=meanAR1,sd=sqrt(varAR1))
   for (it in 2:n) {
     zt[it] <- rho*zt[it-1]+rnorm(1,0,sigma)
   }

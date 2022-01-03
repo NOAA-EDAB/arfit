@@ -20,4 +20,5 @@ simulate_ar1(alpha, beta = 0, sigma, rho, n)
 \description{
 model=   y_t = a + b\emph{t + z_t
 where z_t = rho} z_t-1 + e_t   (e_t ~ N(0,sigma^2))
+Uses unconditional mean and variance to simulate first data point
 }

@@ -2,10 +2,23 @@
 % Please edit documentation in R/simulate_ar2.R
 \name{simulate_ar2}
 \alias{simulate_ar2}
-\title{simulare AR2}
+\title{Simulate data from an linear process with AR2 error}
 \usage{
 simulate_ar2(alpha, beta = 0, sigma, rhos, nT)
 }
+\arguments{
+\item{alpha}{Numeric scalar. Intercept}
+
+\item{beta}{Numeric Scalar. Slope}
+
+\item{sigma}{Numeric scalar. Variance of error process}
+
+\item{rhos}{Numeric vector (1x2). AR2 parameters}
+
+\item{nT}{Numeric scalar. Length of time series}
+}
 \description{
-simulare AR2
+#' model=   y_t = a + b.t + z_t
+where z_t = rho1. z_t-1 + rho2. z_t-2 + e_t   (e_t ~ N(0,sigma^2))
+Uses unconditional mean and variance to simulate first two data points
 }
