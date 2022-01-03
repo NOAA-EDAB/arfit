@@ -38,7 +38,7 @@ This is the Exact likelihood for an AR(1) process. The conditional likelihood mu
 
 $p(Y_1=y_1)$ is normally distributed with mean = $\beta_0 + \beta_1$ and variance = $\frac{\sigma^2}{1-\phi^2}$ and has density:
 
-$$p(Y_1=y_1) = \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0-\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
+$$p(Y_1=y_1) = \frac{1}{\sqrt{2\pi}\sqrt{\sigma^2/(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0-\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
 
 ---
 
@@ -68,11 +68,11 @@ $$p(Y_t = y_t │ Y_{t-1}=y_{t-1}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}e
 
 The likelihood is therefore: 
 
-$$L(\underline{\theta};\underline{y}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi)  }{\sigma}\right)^2\right) \times \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0 -\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
+$$L(\underline{\theta};\underline{y}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi)  }{\sigma}\right)^2\right) \times \frac{1}{\sqrt{2\pi}\sqrt{\sigma^2/(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0 -\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
 
 Taking the logs and simplifying results in:
 
-$$ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-\beta_0 -\beta_1)^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-\beta_0(1-\phi)-\beta_1(t-\phi t + \phi))^2 \right)$$
+$$ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1+\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-\beta_0 -\beta_1)^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-\beta_0(1-\phi)-\beta_1(t-\phi t + \phi))^2 \right)$$
 
 Using the notation of @Beach let, 
 
@@ -84,7 +84,7 @@ $\underline{\beta} = [\beta_0,\beta_1]'$ is a column vector
 
 we can simplify the log likelihood to
 
-$$ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-X_1\underline{\beta})^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-X_t\underline{\beta} +\phi X_{t-1}\underline{\beta})^2 \right)$$
+$$ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1+\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-X_1\underline{\beta})^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-X_t\underline{\beta} +\phi X_{t-1}\underline{\beta})^2 \right)$$
 
 ---
 
