@@ -4,16 +4,20 @@
 \alias{likelihood_ar2}
 \title{Evaluates the likelihood of AR2}
 \usage{
-likelihood_ar2(data, beta, rho1, rho2)
+likelihood_ar2(data, rho1, rho2, hypothesis = "null")
 }
 \arguments{
 \item{data}{dd}
 
-\item{beta}{Numeric vector. intercept and slope term}
-
 \item{rho1}{1st order Autoregressive parameter}
 
 \item{rho2}{2nd order Autoregressive parameter}
+
+\item{hypothesis}{Character string. "null" or "alt" determines whether to evaluate
+under the null or alternative hypothesis. "null" fixes linear component, beta = 0.}
+}
+\value{
+-ve Log likelihood
 }
 \description{
 Uses full likelihood as explained in Beach and MacKinnon
