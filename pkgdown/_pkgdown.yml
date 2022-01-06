@@ -9,8 +9,10 @@ reference:
 - title: "Simulation study"
   desc: "Functions used in simulation study"
 - contents:
-  - simulation_study_grid
-  - simulation_study_opt
+  - simulation_study_grid_ar1
+  - simulation_study_grid_ar2
+  - simulation_study_opt_ar2
+  - simulation_study_opt_ar2
 - title: "Likelihood Functions"
   desc: "AR1 and AR2 likelihoods"
 - contents:
@@ -22,7 +24,9 @@ reference:
   - fit_ar1_grid
   - fit_ar2_grid
   - fit_ar1_opt
+  - fit_ar2_opt
   - est_beta_given_rho
+  - est_beta_given_rho2
   - isStationary_ar2
 - title: "Examples"
   desc: "Examples of utilizing the test"
