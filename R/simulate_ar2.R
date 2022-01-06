@@ -42,7 +42,7 @@ simulate_ar2 <- function(alpha,beta=0,sigma,rhos,nT){
   }
 
   # simulate y
-  yt <- alpha + xt*as.vector(beta) + zt
+  yt <- as.vector(alpha) + xt*as.vector(beta) + zt
   data <- data.frame(x=xt,y=yt)
   return(data)
 }
