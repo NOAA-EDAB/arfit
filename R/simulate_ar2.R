@@ -27,9 +27,10 @@ simulate_ar2 <- function(alpha,beta=0,sigma,rhos,nT){
     stop(paste0("AR2 process NOT stationary. rho1 = ",rho1," and rho2 = ",rho2))
   }
 
-
   # simulate AR - error process
   zt <- vector(mode = "numeric",length=nT)
+  yt <- vector(mode = "numeric",length=nT)
+
   # unconditional mean of process
   meanAR2 <-  alpha/(1-rho1 -rho2)
   # unconditional variance of the process
@@ -41,7 +42,7 @@ simulate_ar2 <- function(alpha,beta=0,sigma,rhos,nT){
   }
 
   # simulate y
-  yt <- alpha + xt*beta + zt
+  yt <- alpha + xt*as.vector(beta) + zt
   data <- data.frame(x=xt,y=yt)
   return(data)
 }
