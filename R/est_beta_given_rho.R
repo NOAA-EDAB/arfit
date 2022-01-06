@@ -2,10 +2,14 @@
 #'
 #' Uses Prais and Winsten transformation which utilizes first observation
 #'
+#'@param xt Numeric vector. Time series of time points (1, ..., n)
+#'@param yt Numeric vector. Time series of observations (length = n)
+#'@param rho Numeric scalar. AR1 parameter
 #'
+#'@export
 
 
-est_beta_given_rho <- function(xt,yt,rho,hypothesis) {
+est_beta_given_rho <- function(xt,yt,rho) {
 
   nT <- nrow(xt)
 
