@@ -39,7 +39,7 @@ likelihood_ar1 <- function(rho,dataf,hypothesis="null") {
   ytm1 <- as.vector(y[1:(nT-1)])
 
   # MLE for beta conditional on rho
-  beta <- est_beta_given_rho(rbind(x1,xt),c(y1,yt),rho,hypothesis)
+  beta <- est_beta_given_rho(rbind(x1,xt),c(y1,yt),rho)
 
   #likelihood
   part1 <- .5*log(1-rho^2)

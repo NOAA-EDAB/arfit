@@ -23,7 +23,7 @@ fit_ar1_opt <- function(data,rho,hypothesis) {
   maxLike <- -outList$value
 
   # MLE for beta conditional on rho
-  maxBeta <- est_beta_given_rho(xt,yt,maxRho,hypothesis)
+  maxBeta <- est_beta_given_rho(xt,yt,maxRho)
 
   # calculate MLE for sigma
   ut <- yt- xt%*%maxBeta

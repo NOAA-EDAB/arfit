@@ -4,7 +4,14 @@
 \alias{est_beta_given_rho}
 \title{Estimate beta conditional on known AR1 parameter}
 \usage{
-est_beta_given_rho(xt, yt, rho, hypothesis)
+est_beta_given_rho(xt, yt, rho)
+}
+\arguments{
+\item{xt}{Numeric vector. Time series of time points (1, ..., n)}
+
+\item{yt}{Numeric vector. Time series of observations (length = n)}
+
+\item{rho}{Numeric scalar. AR1 parameter}
 }
 \description{
 Uses Prais and Winsten transformation which utilizes first observation
