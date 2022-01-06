@@ -2,6 +2,11 @@
 #'
 #' Uses Prais and Winsten transformation which utilizes first observation
 #'
+#'@param xt Numeric vector. Time series of time points (1, ..., n)
+#'@param yt Numeric vector. Time series of observations (length = n)
+#'@param rho1 Numeric scalar. AR1 parameter
+#'@param rho2 Numeric scalar. AR2 parameter
+#'
 #'@export
 
 

@@ -6,6 +6,15 @@
 \usage{
 est_beta_given_rho2(xt, yt, rho1, rho2 = 0)
 }
+\arguments{
+\item{xt}{Numeric vector. Time series of time points (1, ..., n)}
+
+\item{yt}{Numeric vector. Time series of observations (length = n)}
+
+\item{rho1}{Numeric scalar. AR1 parameter}
+
+\item{rho2}{Numeric scalar. AR2 parameter}
+}
 \description{
 Uses Prais and Winsten transformation which utilizes first observation
 }
