@@ -4,8 +4,7 @@
 #' The first two data points are used in the likelihood
 #'
 #'@param data dd
-#'@param rho1 1st order Autoregressive parameter
-#'@param rho2 2nd order Autoregressive parameter
+#'@param rhos Numeric vector (1x2). 1st and 2nd order Autoregressive parameters
 #'@param hypothesis Character string. "null" or "alt" determines whether to evaluate
 #'under the null or alternative hypothesis. "null" fixes linear component, beta = 0.
 #'
@@ -13,7 +12,16 @@
 #'
 #'@export
 
-likelihood_ar2 <- function(data,rho1,rho2,hypothesis="null") {
+likelihood_ar2 <- function(rhos,data,hypothesis="null") {
+
+  rho1 <- rhos[1]
+  rho2 <- rhos[2]
+  #print(rhos)
+
+  pass <- isStationary_ar2(rhos)
+  if (!pass) {
+    return(1e10)
+  }
 
   hypothesis <- tolower(hypothesis)
   nT <- nrow(data)
@@ -29,17 +37,17 @@ likelihood_ar2 <- function(data,rho1,rho2,hypothesis="null") {
   }
 
   # MLE for beta conditional on rhos
-  beta <- est_beta_given_rho(xt,yt,rho1,rho2,hypothesis)
+  beta <- est_beta_given_rho2(xt,yt,rho1,rho2)
 
-  # first two residuals
-  A1 <- yt[1] - beta[1] - xt[1]*beta[2]
-  A2 <- yt[2] - beta[1] - xt[2]*beta[2]
   # all residuals
-  At <- yt - beta[1] - xt*beta[2]
+  At <- yt - xt%*%beta
+  # first two residuals
+  A1 <- At[1]
+  A2 <- At[2]
   res <- At[3:nT]- rho1*At[2:(nT-1)] - rho2*At[1:(nT-2)]
 
   # Evaluate the Sum Squares of the Residuals
-  SSR1 <- (1-rho1^2)*A1^2
+  SSR1 <- (1-rho2^2)*A1^2
   SSR2 <- -2*rho1*(1+rho2)*A1*A2
   SSR3 <- (1-rho2^2)*A2^2
   SSR4 <- sum(res^2)

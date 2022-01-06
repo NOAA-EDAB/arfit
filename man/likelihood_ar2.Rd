@@ -4,14 +4,12 @@
 \alias{likelihood_ar2}
 \title{Evaluates the likelihood of AR2}
 \usage{
-likelihood_ar2(data, rho1, rho2, hypothesis = "null")
+likelihood_ar2(rhos, data, hypothesis = "null")
 }
 \arguments{
+\item{rhos}{Numeric vector (1x2). 1st and 2nd order Autoregressive parameters}
+
 \item{data}{dd}
-
-\item{rho1}{1st order Autoregressive parameter}
-
-\item{rho2}{2nd order Autoregressive parameter}
 
 \item{hypothesis}{Character string. "null" or "alt" determines whether to evaluate
 under the null or alternative hypothesis. "null" fixes linear component, beta = 0.}
