@@ -4,7 +4,7 @@ output: html_document
 bibliography: bibliography/artrend.bib
 link-citations: yes
 ---
----
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -21,7 +21,6 @@ where $t$ refers to time and $u_t$ is either
 
 with $e_t \sim N(0,\sigma^2)$
 
----
 
 
 ### Likelihood for AR(p) errors
@@ -210,9 +209,9 @@ and
 \end{align}
 
 \begin{align}
-= & (y_1 - \mu_1)^2(1-\phi_1^2)-2(y_1 - \mu_1)(y_2 - \mu_2)(\phi_1 + \phi_1\phi_2)+(y_2 - \mu_2)^2(1-\phi_2^2)\\
-= & (y_1 - \mu_1)^2(1-\phi_1^2)-2(y_1 - \mu_1)(y_2 - \mu_2)\phi_1(1 + \phi_2)+(y_2 - \mu_2)^2(1-\phi_2^2) \\
-= & (y_1 - X_1\underline{\beta})^2(1-\phi_1^2)-2(y_1-X_1\underline{\beta})(y_2-X_2\underline{\beta})\phi_1(1 + \phi_2)+(y_2 -X_2\underline{\beta})^2(1-\phi_2^2)
+= & (y_1 - \mu_1)^2(1-\phi_2^2)-2(y_1 - \mu_1)(y_2 - \mu_2)(\phi_1 + \phi_1\phi_2)+(y_2 - \mu_2)^2(1-\phi_2^2)\\
+= & (y_1 - \mu_1)^2(1-\phi_2^2)-2(y_1 - \mu_1)(y_2 - \mu_2)\phi_1(1 + \phi_2)+(y_2 - \mu_2)^2(1-\phi_2^2) \\
+= & (y_1 - X_1\underline{\beta})^2(1-\phi_2^2)-2(y_1-X_1\underline{\beta})(y_2-X_2\underline{\beta})\phi_1(1 + \phi_2)+(y_2 -X_2\underline{\beta})^2(1-\phi_2^2)
 \end{align}
 
 The likelihood now has the form of that found in @beach_full_1978
@@ -220,7 +219,7 @@ The likelihood now has the form of that found in @beach_full_1978
 \begin{align}
 logL\left( \underline{\beta}, \underline{\phi}; \underline{y} \right) &= const. +log(1+\phi_2) + \frac{1}{2}log(1-\phi_1-\phi_2)+\frac{1}{2}log(1+\phi_1-\phi_2)
 \\
-&-\frac{n}{2}log\left[ (y_1 - X_1\underline{\beta})^2(1-\phi_1^2)-2(y_1-X_1\underline{\beta})(y_2-X_2\underline{\beta})\phi_1(1 + \phi_2)+(y_2 -X_2\underline{\beta})^2(1-\phi_2^2) \\
+&-\frac{n}{2}log\left[ (y_1 - X_1\underline{\beta})^2(1-\phi_2^2)-2(y_1-X_1\underline{\beta})(y_2-X_2\underline{\beta})\phi_1(1 + \phi_2)+(y_2 -X_2\underline{\beta})^2(1-\phi_2^2) \\
 + \sum^n_{t=3} (y_t - X_t\underline{\beta} - \phi_1 (y_{t-1} -X_{t-1}\underline{\beta}) - \phi_2 (y_{t-2} -X_{t-2}\underline{\beta}))^2\right]\\
 \end{align}
 
@@ -270,9 +269,6 @@ This is the Exact likelihood for an AR(1) process. The conditional likelihood mu
 $p(Y_1=y_1)$ is normally distributed with mean = $X_1\underline{\beta}$ which equates to $\beta_0 + \beta_1$ with a variance = $\frac{\sigma^2}{1-\phi^2}$ and has density:
 
 $$p(Y_1=y_1) = \frac{1}{\sqrt{2\pi}\sqrt{\sigma^2/(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0-\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)$$
-
----
-
 
 #### Density of $p(Y_t = y_t │ Y_{t-1}=y_{t-1})$
 
