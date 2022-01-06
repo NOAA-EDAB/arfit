@@ -1,0 +1,36 @@
+url: https://andybeet.github.io/arfit/
+
+reference:
+- title: "Data simulation"
+  desc: "simulate from AR1 and AR2 models"
+- contents:
+  - simulate_ar1
+  - simulate_ar2
+- title: "Simulation study"
+  desc: "Functions used in simulation study"
+- contents:
+  - simulation_study_grid
+  - simulation_study_opt
+- title: "Likelihood Functions"
+  desc: "AR1 and AR2 likelihoods"
+- contents:
+  - likelihood_ar1
+  - likelihood_ar2
+- title: "Estimation Functions"
+  desc: "Functions used in estimation"
+- contents:
+  - fit_ar1_grid
+  - fit_ar2_grid
+  - fit_ar1_opt
+  - est_beta_given_rho
+  - isStationary_ar2
+- title: "Examples"
+  desc: "Examples of utilizing the test"
+- contents:
+  - example_cedar_rapids
+- title: "Package Info"
+  desc: ""
+- contents:
+  - arfit
+
+
