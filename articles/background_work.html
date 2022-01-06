@@ -55,9 +55,6 @@
 <li>
       <a href="../articles/background_work.html">Background</a>
     </li>
-    <li>
-      <a href="../articles/manuscript.html">A test for detecting trend in the presence of autocorrelation</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -100,23 +97,193 @@
 <span class="math inline">\(u_t = \phi_1 u_{t-1} + \phi_2 u_{t-2} + e_t\)</span>         an AR(2) process</li>
 </ol>
 <p>with <span class="math inline">\(e_t \sim N(0,\sigma^2)\)</span></p>
-<hr>
+<div class="section level3">
+<h3 id="likelihood-for-arp-errors">Likelihood for AR(p) errors<a class="anchor" aria-label="anchor" href="#likelihood-for-arp-errors"></a>
+</h3>
+<p>From <span class="citation">Hamilton (<a href="#ref-hamilton_time_1994" role="doc-biblioref">1994</a>)</span></p>
+<p><span class="math display">\[\begin{align}
+logL\left( \underline{\beta}, \underline{\phi},\sigma; \underline{y} \right ) &amp;= -\frac{n}{2}log(2\pi) -\frac{n}{2}log(\sigma^2) +\frac{1}{2}log \left|V_p^{-1} \right|
+\\
+&amp;-\frac{1 }{2 \sigma^2} (\underline{y_p}-\underline{\mu_p})^T V_p^{-1}(\underline{y_p}-\underline{\mu_p}) \\
+
+&amp;- \frac{1}{2\sigma^2}\sum^n_{t=p+1} (y_t - c - \phi_1y_{t-1} - ... - \phi_p y_{t-p})^2 \\
+
+\end{align}\]</span></p>
+<p>where</p>
+<p><span class="math inline">\(\left|V_p^{-1} \right|\)</span> is determinant of inverted matrix <span class="math inline">\(V_p\)</span>,</p>
+<p><span class="math inline">\(\sigma^2V_p\)</span> = variance-covariance matrix of order p,</p>
+<p><span class="math inline">\(\underline{\mu_p} = X_p\underline{\beta}\)</span>, and</p>
+<p><span class="math inline">\(X_p\)</span> is the <span class="math inline">\(p_{th}\)</span> row of the design matrix corresponding to time t = p</p>
+<p><span class="math inline">\(c\)</span> = function of fitted terms <span class="math inline">\(X_t\underline{\beta}\)</span></p>
+</div>
 <div class="section level3">
 <h3 id="likelihood-for-ar1-errors">Likelihood for AR(1) errors<a class="anchor" aria-label="anchor" href="#likelihood-for-ar1-errors"></a>
 </h3>
+<p>Setting p = 1,</p>
+<p><span class="math inline">\(\sigma^2V_1 = \frac{\sigma^2}{1-\phi_1^2}\)</span> = variance of the process, y,</p>
+<p><span class="math inline">\(\left|V_1^{-1}\right| = 1-\phi_1^2\)</span></p>
+<p><span class="math inline">\(\mu_1 = X_1\underline{\beta} = \beta_0 + \beta_1\)</span></p>
+<p><span class="math inline">\(c = X_t\underline{\beta} - \phi_1 X_{t-1}\underline{\beta}\)</span></p>
+<p><span class="math inline">\(y_1\)</span> is the first observation</p>
+<p>The log likelihood,</p>
+<p><span class="math display">\[\begin{align}
+
+logL\left( \underline{\beta}, \phi_1, \sigma; \underline{y} \right ) &amp;= -\frac{n}{2}log(2\pi) -\frac{n}{2}log(\sigma^2) +\frac{1}{2}log(1-\phi_1^2) 
+\\
+&amp;-\frac{1 }{2 \sigma^2} ({y_1}-X_1\underline{\beta})^2 (1-\phi_1^2) \\
+&amp;- \frac{1}{2\sigma^2}\sum^n_{t=2} (y_t - X_t\underline{\beta} - \phi_1 (y_{t-1} -X_{t-1}\underline{\beta}))^2 \\
+
+\end{align}\]</span></p>
+<p>Differentiating <span class="math inline">\(logL\left( \underline{\beta}, \phi_1, \sigma; \underline{y} \right )\)</span> with respect to <span class="math inline">\(\sigma\)</span> and equating to zero yields the maximum likelihood estimator,</p>
+<p><span class="math display">\[\begin{align}
+\hat{\sigma}^2 = \frac{1}{n}\left[ (y_1-X_1\underline{\beta})^2(1-\phi_1^2) + \sum^n_{t=2} (y_t - X_t\underline{\beta} - \phi_1 (y_{t-1} -X_{t-1}\underline{\beta}))^2 \right]
+
+\end{align}\]</span></p>
+<p>Substituting <span class="math inline">\(\hat{\sigma}^2\)</span> back into the log likelihood yields (<span class="citation">Beach and MacKinnon (<a href="#ref-beach_maximum_1978" role="doc-biblioref">1978</a><a href="#ref-beach_maximum_1978" role="doc-biblioref">a</a>)</span>)</p>
+<p><span class="math display">\[\begin{align}
+logL\left( \underline{\beta}, \phi_1; \underline{y} \right ) &amp;= const. +\frac{1}{2}log(1-\phi^2) 
+\\
+&amp;-\frac{n}{2}log\left( (y_1-X_1\underline{\beta})^2(1-\phi_1^2) + \sum^n_{t=2} (y_t - X_t\underline{\beta} - \phi_1 (y_{t-1} -X_{t-1}\underline{\beta}))^2 \right) \\
+\end{align}\]</span></p>
+<p>Two additional terms exist in the likelihood that do not appear in the conditional likelihood used in GLS procedures. The term <span class="math inline">\((y_1-X_1\underline{\beta})^2(1-\phi_1^2)\)</span> ensures that the initial value has an effect on the estimates and <span class="math inline">\(\frac{1}{2}log(1-\phi^2)\)</span> constrains the stationary condition to hold.</p>
+<div class="section level4">
+<h4 id="maximization-of-the-likelihood">Maximization of the likelihood<a class="anchor" aria-label="anchor" href="#maximization-of-the-likelihood"></a>
+</h4>
+<p>Maximization of the likelihood requires iterative or numerical procedures.</p>
+<p>The estimate of <span class="math inline">\(\underline{\beta}\)</span> which maximizes the log-likelihood conditional on <span class="math inline">\(\phi\)</span> is</p>
+<p><span class="math display">\[\begin{align}
+\underline{\hat{\beta}} = (X^{*T}X^*)^{-1}X^{*T}y^*
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(X^*=QX\)</span> and <span class="math inline">\(y^* = Qy\)</span> where <span class="math inline">\(Q\)</span> is the Prais and Winsten transformation</p>
+<p><span class="math display">\[ 
+\begin{matrix} Q =
+\end{matrix}
+\begin{bmatrix}
+(1-\phi_1^2)^{1/2} &amp; 0 &amp; ... \\
+-\phi_1 &amp; 1 &amp; 0 &amp; ... \\
+&amp; &amp; ... &amp; 0 &amp; -\phi_1 &amp; 1\\
+\end{bmatrix}
+\]</span> So a procedure which searches for <span class="math inline">\(\phi_1\)</span> is all that is required to find maximum likelihood estimates of <span class="math inline">\(\underline\beta\)</span>, <span class="math inline">\(\sigma\)</span>, and <span class="math inline">\(\phi_1\)</span></p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="likelihood-for-ar2-errors">Likelihood for AR(2) errors<a class="anchor" aria-label="anchor" href="#likelihood-for-ar2-errors"></a>
+</h3>
+<p>Following the same method as for AR(1) errors.</p>
+<p>Set p = 2,</p>
+<p>\begin{matrix} V_2^{-1} = \end{matrix} \begin{bmatrix} (1-_2^2) &amp; -(_1 + _1_2) \ -(_1 + _1_2) &amp; (1-_2^2) \ \end{bmatrix}</p>
+<p><span class="math inline">\(\left|V_2^{-1}\right| = (1+\phi_2^2)\left[(1-\phi_2)^2 -\phi_1^2 \right]\)</span></p>
+<p><span class="math inline">\(\underline{\mu_2} = (\mu_1, \mu_2) = (X_1\underline{\beta},X_2\underline{\beta})\)</span> is the vector of means for t = 1,2 and <span class="math inline">\(\underline{y_2} = (y_1,y_2)\)</span> is the corresponding vector of observations</p>
+<p><span class="math display">\[
+\begin{bmatrix} 
+\mu_1 \\
+\mu_2 \\
+\end{bmatrix} =
+\begin{bmatrix} 
+1 &amp; 1 \\
+1 &amp; 2 \\
+\end{bmatrix}
+\begin{bmatrix} 
+\beta_0 \\
+\beta_1 \\
+\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(c = X_t\underline{\beta} - \phi_1 X_{t-1}\underline{\beta}- \phi_2 X_{t-2}\underline{\beta}\)</span></p>
+<p>The log likelihood,</p>
+<p><span class="math display">\[\begin{align}
+
+logL\left( \underline{\beta}, \underline{\phi}, \sigma; \underline{y} \right ) &amp;= -\frac{n}{2}log(2\pi) -\frac{n}{2}log(\sigma^2) +\frac{1}{2}log((1+\phi_2^2)\left[(1-\phi_2)^2 -\phi_1^2 \right]) 
+\\
+&amp;-\frac{1 }{2 \sigma^2} (\underline{y_2}-\underline{\mu_2})^T V_2^{-1}(\underline{y_2}-\underline{\mu_2}) \\
+&amp;- \frac{1}{2\sigma^2}\sum^n_{t=3} (y_t - X_t\underline{\beta} - \phi_1 (y_{t-1} -X_{t-1}\underline{\beta}) - \phi_2 (y_{t-2} -X_{t-2}\underline{\beta}))^2 \\
+
+\end{align}\]</span></p>
+<p>Differentiating <span class="math inline">\(logL\left( \underline{\beta}, \underline{\phi}, \sigma; \underline{y} \right )\)</span> with respect to <span class="math inline">\(\sigma\)</span> and equating to zero yields the maximum likelihood estimator,</p>
+<p><span class="math display">\[\begin{align}
+\hat{\sigma}^2 = \frac{1}{n}\left[ (\underline{y_2}-\underline{\mu_2})^T V_2^{-1}(\underline{y_2}-\underline{\mu_2}) + \sum^n_{t=3} (y_t - X_t\underline{\beta} - \phi_1 (y_{t-1} -X_{t-1}\underline{\beta}) - \phi_2 (y_{t-2} -X_{t-2}\underline{\beta}))^2\right]
+
+\end{align}\]</span></p>
+<p>Substituting <span class="math inline">\(\hat{\sigma}^2\)</span> back into the log likelihood yields</p>
+<p><span class="math display">\[\begin{align}
+logL\left( \underline{\beta}, \underline{\phi}; \underline{y} \right) &amp;= const. +\frac{1}{2}log\left((1+\phi_2^2)\left[(1-\phi_2)^2 -\phi_1^2 \right]\right) 
+\\
+&amp;-\frac{n}{2}log\left[ (\underline{y_2}-\underline{\mu_2})^T V_2^{-1}(\underline{y_2}-\underline{\mu_2}) + \sum^n_{t=3} (y_t - X_t\underline{\beta} - \phi_1 (y_{t-1} -X_{t-1}\underline{\beta}) - \phi_2 (y_{t-2} -X_{t-2}\underline{\beta}))^2\right]\\
+\end{align}\]</span></p>
+<p>Simplifying further,</p>
+<p><span class="math display">\[\begin{align}
+\frac{1}{2}log\left((1+\phi_2^2)\left[(1-\phi_2)^2 -\phi_1^2 \right]\right) = log(1+\phi_2) + \frac{1}{2}log(1-\phi_1-\phi_2)+\frac{1}{2}log(1+\phi_1-\phi_2)
+\end{align}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\begin{align}
+(\underline{y_2}-\underline{\mu_2})^T V_2^{-1}(\underline{y_2}-\underline{\mu_2}) = &amp;
+\begin{bmatrix}
+(y_1 - \mu_1) &amp; (y_2 -\mu_2) \\
+\end{bmatrix} 
+
+\begin{bmatrix}
+(1-\phi_2^2) &amp; -(\phi_1 + \phi_1\phi_2) \\
+-(\phi_1 + \phi_1\phi_2) &amp; (1-\phi_2^2)  \\
+\end{bmatrix}
+
+\begin{bmatrix}
+(y_1 - \mu_1) \\
+(y_2 - \mu_2) \\
+\end{bmatrix}
+\end{align}\]</span></p>
+<p><span class="math display">\[\begin{align}
+= &amp; (y_1 - \mu_1)^2(1-\phi_2^2)-2(y_1 - \mu_1)(y_2 - \mu_2)(\phi_1 + \phi_1\phi_2)+(y_2 - \mu_2)^2(1-\phi_2^2)\\
+= &amp; (y_1 - \mu_1)^2(1-\phi_2^2)-2(y_1 - \mu_1)(y_2 - \mu_2)\phi_1(1 + \phi_2)+(y_2 - \mu_2)^2(1-\phi_2^2) \\
+= &amp; (y_1 - X_1\underline{\beta})^2(1-\phi_2^2)-2(y_1-X_1\underline{\beta})(y_2-X_2\underline{\beta})\phi_1(1 + \phi_2)+(y_2 -X_2\underline{\beta})^2(1-\phi_2^2)
+\end{align}\]</span></p>
+<p>The likelihood now has the form of that found in <span class="citation">Beach and MacKinnon (<a href="#ref-beach_full_1978" role="doc-biblioref">1978</a><a href="#ref-beach_full_1978" role="doc-biblioref">b</a>)</span></p>
+<p><span class="math display">\[\begin{align}
+logL\left( \underline{\beta}, \underline{\phi}; \underline{y} \right) &amp;= const. +log(1+\phi_2) + \frac{1}{2}log(1-\phi_1-\phi_2)+\frac{1}{2}log(1+\phi_1-\phi_2)
+\\
+&amp;-\frac{n}{2}log\left[ (y_1 - X_1\underline{\beta})^2(1-\phi_2^2)-2(y_1-X_1\underline{\beta})(y_2-X_2\underline{\beta})\phi_1(1 + \phi_2)+(y_2 -X_2\underline{\beta})^2(1-\phi_2^2) \\
++ \sum^n_{t=3} (y_t - X_t\underline{\beta} - \phi_1 (y_{t-1} -X_{t-1}\underline{\beta}) - \phi_2 (y_{t-2} -X_{t-2}\underline{\beta}))^2\right]\\
+\end{align}\]</span></p>
+<div class="section level4">
+<h4 id="maximization-of-the-likelihood-1">Maximization of the likelihood<a class="anchor" aria-label="anchor" href="#maximization-of-the-likelihood-1"></a>
+</h4>
+<p>As in the case for AR(1) model maximizing the likelihood requires numerical methods.</p>
+<p>The estimate of <span class="math inline">\(\underline{\beta}\)</span> which maximizes the log-likelihood conditional on <span class="math inline">\(\phi\)</span> (<span class="citation">Beach and MacKinnon (<a href="#ref-beach_full_1978" role="doc-biblioref">1978</a><a href="#ref-beach_full_1978" role="doc-biblioref">b</a>)</span>) is</p>
+<p><span class="math display">\[\begin{align}
+\underline{\hat{\beta}} = (X^{*T}X^*)^{-1}X^{*T}y^*
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(X^*=QX\)</span> and <span class="math inline">\(y^* = Qy\)</span> where <span class="math inline">\(Q\)</span> is the Prais and Winsten transformation</p>
+<p><span class="math display">\[ 
+\begin{matrix} Q =
+\end{matrix}
+\begin{bmatrix}
+\left[(1-\phi_2^2)-\phi_1^2(1+\phi_2)/(1-\phi_2)\right]^{1/2} &amp; 0 &amp; ... \\
+\left[\phi_1^2(1+\phi_2)/(1-\phi_2)\right]^{1/2} &amp; (1-\phi_2^2)^{1/2} &amp; 0 &amp; ... \\
+-\phi_2 &amp; -\phi_1 &amp; 1 &amp; 0 &amp; ...\\
+0 &amp; -\phi_2 &amp; -\phi_1 &amp; 1 &amp; 0 &amp; ...\\
+... \\
+0 &amp; ... &amp;0  &amp; -\phi_2 &amp; -\phi_1 &amp; 1\\
+\end{bmatrix}
+\]</span></p>
+<p>So a procedure which searches for <span class="math inline">\(\phi_1\)</span> &amp; <span class="math inline">\(\phi_2\)</span> is all that is required to find maximum likelihood estimates of <span class="math inline">\(\underline\beta\)</span>, <span class="math inline">\(\sigma\)</span>, and <span class="math inline">\(\underline{\phi}\)</span></p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="likelihood-from-first-principles">Likelihood from first principles<a class="anchor" aria-label="anchor" href="#likelihood-from-first-principles"></a>
+</h3>
+<div class="section level4">
+<h4 id="ar1">AR(1)<a class="anchor" aria-label="anchor" href="#ar1"></a>
+</h4>
 <p><span class="math display">\[L(\underline{\theta};\underline{y})=\prod_{t=2}^n p(Y_t = y_t │ Y_{t-1}=y_{t-1}) × p(Y_1=y_1)\]</span></p>
 <p>where <span class="math inline">\(\underline{\theta} = (\beta_0,\beta_1,\phi,\sigma^2)\)</span>, <span class="math inline">\(p(Y_t = y_t │ Y_{t-1}=y_{t-1})\)</span> is the conditional distribution of <span class="math inline">\(y_t\)</span> given <span class="math inline">\(y_{t-1}\)</span> and <span class="math inline">\(p(Y_1=y_1)\)</span> is the distribution of the first point.</p>
 <p>This is the Exact likelihood for an AR(1) process. The conditional likelihood multiplied by the marginal likelihood of the first point.</p>
-<hr>
+</div>
 <div class="section level4">
 <h4 id="density-of-py_1y_1">Density of <span class="math inline">\(p(Y_1=y_1)\)</span><a class="anchor" aria-label="anchor" href="#density-of-py_1y_1"></a>
 </h4>
-<p><span class="math inline">\(p(Y_1=y_1)\)</span> is normally distributed with mean = <span class="math inline">\(\beta_0 + \beta_1\)</span> and variance = <span class="math inline">\(\frac{\sigma^2}{1-\phi^2}\)</span> and has density:</p>
-<p><span class="math display">\[p(Y_1=y_1) = \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0-\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)\]</span></p>
-<hr>
+<p><span class="math inline">\(p(Y_1=y_1)\)</span> is normally distributed with mean = <span class="math inline">\(X_1\underline{\beta}\)</span> which equates to <span class="math inline">\(\beta_0 + \beta_1\)</span> with a variance = <span class="math inline">\(\frac{\sigma^2}{1-\phi^2}\)</span> and has density:</p>
+<p><span class="math display">\[p(Y_1=y_1) = \frac{1}{\sqrt{2\pi}\sqrt{\sigma^2/(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0-\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)\]</span></p>
 </div>
 <div class="section level4">
-<h4 id="density-of-conditional-distribution">Density of conditional distribution<a class="anchor" aria-label="anchor" href="#density-of-conditional-distribution"></a>
+<h4 id="density-of-py_t-y_t-y_t-1y_t-1">Density of <span class="math inline">\(p(Y_t = y_t │ Y_{t-1}=y_{t-1})\)</span><a class="anchor" aria-label="anchor" href="#density-of-py_t-y_t-y_t-1y_t-1"></a>
 </h4>
 <p>The conditional distribution of <span class="math inline">\(p(Y_t = y_t │ Y_{t-1}=y_{t-1})\)</span> is also normally distributed but we get to it in a round about way:</p>
 <p>Recall <span class="math inline">\(y_t = \beta_0 + \beta_1 t + u_t\)</span> then <span class="math inline">\(\phi y_{t-1} = \phi \beta_0 + \phi \beta_1 (t-1) + \phi u_{t-1}\)</span></p>
@@ -127,39 +294,50 @@
 <p><span class="math display">\[y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi) = e_t\]</span> which has a normal distribution with mean = 0 and variance = <span class="math inline">\(\sigma^2\)</span></p>
 <p>This results in</p>
 <p><span class="math display">\[p(Y_t = y_t │ Y_{t-1}=y_{t-1}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi)  }{\sigma}\right)^2\right)\]</span></p>
+</div>
+<div class="section level4">
+<h4 id="exact-likelihood-for-ar1">Exact likelihood for AR1<a class="anchor" aria-label="anchor" href="#exact-likelihood-for-ar1"></a>
+</h4>
 <p>The likelihood is therefore:</p>
-<p><span class="math display">\[L(\underline{\theta};\underline{y}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi)  }{\sigma}\right)^2\right) \times \frac{1}{\sigma \sqrt{2\pi(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0 -\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)\]</span></p>
+<p><span class="math display">\[L(\underline{\theta};\underline{y}) = \prod_{t=2}^n \frac{1}{\sigma \sqrt{2\pi}}exp \left( -\frac{1}{2}\left( \frac{ y_t   - \phi y_{t-1} - \beta_0(1-\phi) - \beta_1 (t - \phi t+\phi)  }{\sigma}\right)^2\right) \times \frac{1}{\sqrt{2\pi}\sqrt{\sigma^2/(1-\phi^2)}}exp \left( -\frac{1}{2}\left( \frac{ y_1 - \beta_0 -\beta_1 }{\sigma/\sqrt(1-\phi^2)}\right)^2\right)\]</span></p>
 <p>Taking the logs and simplifying results in:</p>
-<p><span class="math display">\[ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-\beta_0 -\beta_1)^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-\beta_0(1-\phi)-\beta_1(t-\phi t + \phi))^2 \right)\]</span></p>
-<p>Using the notation of <span class="citation">@Beach</span> let,</p>
-<p><span class="math inline">\(X_t = [1 \qquad\text{t}]\)</span> the row vector at time t from the design matrix and thus</p>
-<p><span class="math inline">\(X_{t-1} = [1 \qquad\text{t-1}]\)</span></p>
-<p><span class="math inline">\(\underline{\beta} = [\beta_0,\beta_1]'\)</span> is a column vector</p>
-<p>we can simplify the log likelihood to</p>
-<p><span class="math display">\[ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-X_1\underline{\beta})^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-X_t\underline{\beta} +\phi X_{t-1}\underline{\beta})^2 \right)\]</span></p>
-<hr>
+<p><span class="math display">\[ logL(\underline{\theta};\underline{y}) = -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) -\frac{1}{2\sigma^2} \left( (y_1-\beta_0 -\beta_1)^2(1-\phi^2) + \Sigma_{t=2}^n (y_t-\phi y_{t-1}-\beta_0(1-\phi)-\beta_1(t-\phi t + \phi))^2 \right)\]</span> Note that</p>
+<p><span class="math display">\[\begin{align}
+
+&amp;\beta_0(1-\phi) + \beta_1 (t - \phi t+\phi) \\
+&amp;= \beta_0 -\beta_0\phi + \beta_1t - \beta_1\phi t + \beta_1\phi \\
+&amp;= \beta_0 + \beta_1t - \phi (\beta_0 +  \beta_1(t -1)) \\
+&amp;= X_t\underline{\beta} - \phi X_{t-1}\underline{\beta}
+
+\end{align}\]</span></p>
+<p>Using the notation of <span class="citation">Beach and MacKinnon (<a href="#ref-beach_maximum_1978" role="doc-biblioref">1978</a><a href="#ref-beach_maximum_1978" role="doc-biblioref">a</a>)</span> we can simplify the log likelihood, <span class="math display">\[\begin{align}
+ logL(\underline{\theta};\underline{y}) &amp;= -nlog\sigma -\frac{n}{2}log(2\pi)-\frac{1}{2}log(1-\phi^2) \\ &amp;-\frac{1}{2\sigma^2} \left( (y_1-X_1\underline{\beta})^2(1-\phi^2) + \Sigma_{t=2}^n (y_t- X_t\underline{\beta} - \phi( y_{t-1}- X_{t-1}\underline{\beta})^2 \right)\\
+\end{align}\]</span></p>
+<p>and substituting <span class="math inline">\(\hat\sigma^2\)</span> we get</p>
+<p><span class="math display">\[\begin{align}
+logL\left( \underline{\beta}, \phi; \underline{y} \right ) &amp;= const. +\frac{1}{2}log(1-\phi^2) 
+\\
+&amp;-\frac{n}{2}log\left( (y_1-X_1\underline{\beta})^2(1-\phi^2) + \sum^n_{t=2} (y_t - X_t\underline{\beta} - \phi (y_{t-1} -X_{t-1}\underline{\beta}))^2 \right) \\
+\end{align}\]</span></p>
 </div>
-</div>
-<div class="section level3">
-<h3 id="likelihood-for-ar2-errors">Likelihood for AR(2) errors<a class="anchor" aria-label="anchor" href="#likelihood-for-ar2-errors"></a>
-</h3>
+<div class="section level4">
+<h4 id="ar2">AR(2)<a class="anchor" aria-label="anchor" href="#ar2"></a>
+</h4>
 <p><span class="math display">\[L(\underline{\theta};\underline{y})=\prod_{t=2}^n p(Y_t=y_t│Y_{t-1}=y_{t-1},Y_{t-2}=y_{t-2}) \times p(Y_2=y_2 | Y_1=y_1) \times p(Y_1=y_1)\]</span></p>
-<p>Following the same reasoning we can obtain the densities of each of the three components of the likelihood. The exact likelihood is the product of the conditional likelihood, the conditional distribution of <span class="math inline">\(y_2 | y_1\)</span> and the marginal distribution of <span class="math inline">\(y_1\)</span></p>
-<hr>
+<p>Following the same reasoning we can obtain the densities of each of the three components of the likelihood. The exact likelihood is the product of the conditional likelihood, the conditional distribution of <span class="math inline">\(y_2 | y_1\)</span> and the marginal distribution of <span class="math inline">\(y_1\)</span>.</p>
+</div>
 <div class="section level4">
 <h4 id="density-of-py_1y_1-1">Density of <span class="math inline">\(p(Y_1=y_1)\)</span><a class="anchor" aria-label="anchor" href="#density-of-py_1y_1-1"></a>
 </h4>
-<p><span class="math inline">\(p(Y_1=y_1)\)</span> is a normal distribution with mean = <span class="math inline">\((\beta_0 - \beta_1)\)</span> and variance = <span class="math inline">\(\frac{\sigma^2}{1-\phi_1^2 - \phi_2^2}\)</span></p>
-<hr>
+<p><span class="math inline">\(p(Y_1=y_1)\)</span> is normally distributed with mean = <span class="math inline">\(X_1\underline{\beta}\)</span> which equates to <span class="math inline">\(\beta_0 + \beta_1\)</span> with a variance = <span class="math inline">\(\frac{\sigma^2}{1-\phi_1^2 - \phi_2^2}\)</span></p>
 </div>
 <div class="section level4">
 <h4 id="density-of-py_2y_2y_1y_1">Density of <span class="math inline">\(p(Y_2=y_2│Y_1=y_1)\)</span><a class="anchor" aria-label="anchor" href="#density-of-py_2y_2y_1y_1"></a>
 </h4>
-<p><span class="math inline">\(p(Y_2=y_2│Y_1=y_1)\)</span> ? need to work this out</p>
-<hr>
+<p><span class="math inline">\(p(Y_2=y_2│Y_1=y_1)\)</span> is more complicated. Need to work this out</p>
 </div>
 <div class="section level4">
-<h4 id="density-of-conditional-likelihood">Density of conditional likelihood<a class="anchor" aria-label="anchor" href="#density-of-conditional-likelihood"></a>
+<h4 id="density-of-py_t-y_t-y_t-1y_t-1y_t-2y_t-2">Density of <span class="math inline">\(p(Y_t = y_t │ Y_{t-1}=y_{t-1},Y_{t-2}=y_{t-2})\)</span><a class="anchor" aria-label="anchor" href="#density-of-py_t-y_t-y_t-1y_t-1y_t-2y_t-2"></a>
 </h4>
 <p>Recall <span class="math inline">\(y_t = \beta_0 + \beta_1 t + u_t\)</span> then <span class="math inline">\(\phi_1 y_{t-1} = \phi_1 \beta_0 + \phi_1 \beta_1 (t-1) + \phi_1 u_{t-1}\)</span> and <span class="math inline">\(\phi_2 y_{t-2} = \phi_2 \beta_0 + \phi_2 \beta_1 (t-2) + \phi_2 u_{t-2}\)</span></p>
 <p>So</p>
@@ -169,9 +347,24 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
+<h2 id="exact-likelihood-for-ar2">Exact likelihood for AR2<a class="anchor" aria-label="anchor" href="#exact-likelihood-for-ar2"></a>
 </h2>
-<p>Autocovariance function for an AR(p)</p>
+<p>The likelihood is therefore:</p>
+</div>
+<div class="section level2 unnumbered">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<div id="refs" class="references">
+<div id="ref-beach_maximum_1978">
+<p>Beach, Charles M., and James G. MacKinnon. 1978a. “A Maximum Likelihood Procedure for Regression with Autocorrelated Errors.” <em>Econometrica</em> 46 (1): 51. <a href="https://doi.org/10.2307/1913644" class="external-link">https://doi.org/10.2307/1913644</a>.</p>
+</div>
+<div id="ref-beach_full_1978">
+<p>———. 1978b. “Full Maximum Likelihood Estimation of Second- Order Autoregressive Error Models.” <em>Journal of Econometrics</em> 7 (2): 187–98. <a href="https://doi.org/10.1016/0304-4076(78)90068-4" class="external-link">https://doi.org/10.1016/0304-4076(78)90068-4</a>.</p>
+</div>
+<div id="ref-hamilton_time_1994">
+<p>Hamilton, James D. 1994. <em>Time Series Analysis</em>. Princeton, N.J: Princeton University Press.</p>
+</div>
+</div>
 </div>
   </div>
 

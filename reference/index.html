@@ -37,9 +37,6 @@
   <ul class="dropdown-menu" role="menu"><li>
       <a href="../articles/background_work.html">Background</a>
     </li>
-    <li>
-      <a href="../articles/manuscript.html">A test for detecting trend in the presence of autocorrelation</a>
-    </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/andybeet/arfit/" class="external-link">
@@ -60,22 +57,42 @@
     </div>
 
     <table class="ref-index"><colgroup><col class="alias"><col class="title"></colgroup><tbody><tr><th colspan="2">
-          <h2 id="all-functions">All functions <a href="#all-functions" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p>
+          <h2 id="data-simulation">Data simulation <a href="#data-simulation" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>simulate from AR1 and AR2 models</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="est_beta_given_rho.html">est_beta_given_rho()</a></code> </p>
+          <p><code><a href="simulate_ar1.html">simulate_ar1()</a></code> </p>
         </td>
-        <td><p>Estimate beta conditional on known AR1 parameter</p></td>
+        <td><p>Simulate data from an linear process with AR1 error</p></td>
       </tr><tr><td>
-          <p><code><a href="example_cedar_rapids.html">example_cedar_rapids()</a></code> </p>
+          <p><code><a href="simulate_ar2.html">simulate_ar2()</a></code> </p>
         </td>
-        <td><p>Run test on example data set</p></td>
-      </tr><tr><td>
-          <p><code><a href="fit_ar1.html">fit_ar1()</a></code> </p>
+        <td><p>Simulate data from an linear process with AR2 error</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="simulation-study">Simulation study <a href="#simulation-study" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Functions used in simulation study</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="simulation_study_grid_ar1.html">simulation_study_grid_ar1()</a></code> </p>
         </td>
-        <td><p>Fit linear model with AR(1) error by GLS</p></td>
+        <td><p>Simulation study using grid search</p></td>
       </tr><tr><td>
+          <p><code><a href="simulation_study_grid_ar2.html">simulation_study_grid_ar2()</a></code> </p>
+        </td>
+        <td><p>Simulation study using optimization routine</p></td>
+      </tr><tr><td>
+          <p><code><a href="simulation_study_opt_ar1.html">simulation_study_opt_ar1()</a></code> </p>
+        </td>
+        <td><p>Simulation study using optimization routine</p></td>
+      </tr><tr><td>
+          <p><code><a href="simulation_study_opt_ar2.html">simulation_study_opt_ar2()</a></code> </p>
+        </td>
+        <td><p>Simulation study using optimization routine</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="likelihood-functions">Likelihood Functions <a href="#likelihood-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>AR1 and AR2 likelihoods</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="likelihood_ar1.html">likelihood_ar1()</a></code> </p>
         </td>
         <td><p>Evaluate the likelihood of linear model with errors from an AR order 1 process</p></td>
@@ -83,14 +100,54 @@
           <p><code><a href="likelihood_ar2.html">likelihood_ar2()</a></code> </p>
         </td>
         <td><p>Evaluates the likelihood of AR2</p></td>
-      </tr><tr><td>
-          <p><code><a href="simulate_ar1.html">simulate_ar1()</a></code> </p>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="estimation-functions">Estimation Functions <a href="#estimation-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Functions used in estimation</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="fit_ar1_grid.html">fit_ar1_grid()</a></code> </p>
         </td>
-        <td><p>Simulate data from an linear process with AR1 error</p></td>
+        <td><p>Fit linear model with AR(1) error by GLS</p></td>
       </tr><tr><td>
-          <p><code><a href="simulate_ar2.html">simulate_ar2()</a></code> </p>
+          <p><code><a href="fit_ar2_grid.html">fit_ar2_grid()</a></code> </p>
         </td>
-        <td><p>simulare AR2</p></td>
+        <td><p>Fit linear model with AR(1) error by GLS</p></td>
+      </tr><tr><td>
+          <p><code><a href="fit_ar1_opt.html">fit_ar1_opt()</a></code> </p>
+        </td>
+        <td><p>Fit linear model with trend using optimization routine</p></td>
+      </tr><tr><td>
+          <p><code><a href="fit_ar2_opt.html">fit_ar2_opt()</a></code> </p>
+        </td>
+        <td><p>Fit linear model with trend using optimization routine</p></td>
+      </tr><tr><td>
+          <p><code><a href="est_beta_given_rho.html">est_beta_given_rho()</a></code> </p>
+        </td>
+        <td><p>Estimate beta conditional on known AR1 parameter</p></td>
+      </tr><tr><td>
+          <p><code><a href="est_beta_given_rho2.html">est_beta_given_rho2()</a></code> </p>
+        </td>
+        <td><p>Estimate beta conditional on known AR1 parameter</p></td>
+      </tr><tr><td>
+          <p><code><a href="isStationary_ar2.html">isStationary_ar2()</a></code> </p>
+        </td>
+        <td><p>Determines stationarity of AR2</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="examples">Examples <a href="#examples" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Examples of utilizing the test</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="example_cedar_rapids.html">example_cedar_rapids()</a></code> </p>
+        </td>
+        <td><p>Run test on example data set</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="package-info">Package Info <a href="#package-info" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="arfit.html">arfit</a></code> </p>
+        </td>
+        <td><p>arfit: Test for a trend in presence of autocorrelation</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

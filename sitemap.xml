@@ -1,51 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://andybeet.github.io/arfit/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
+    <loc>https://andybeet.github.io/arfit/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/articles/arfit.html</loc>
+    <loc>https://andybeet.github.io/arfit/articles/arfit.html</loc>
   </url>
   <url>
-    <loc>/articles/background_work.html</loc>
+    <loc>https://andybeet.github.io/arfit/articles/background_work.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://andybeet.github.io/arfit/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/manuscript.html</loc>
+    <loc>https://andybeet.github.io/arfit/authors.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://andybeet.github.io/arfit/index.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/arfit.html</loc>
   </url>
   <url>
-    <loc>/reference/est_beta_given_rho.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/est_beta_given_rho.html</loc>
   </url>
   <url>
-    <loc>/reference/example_cedar_rapids.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/est_beta_given_rho2.html</loc>
   </url>
   <url>
-    <loc>/reference/fit_ar1.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/example_cedar_rapids.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/fit_ar1_grid.html</loc>
   </url>
   <url>
-    <loc>/reference/likelihood_ar1.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/fit_ar1_opt.html</loc>
   </url>
   <url>
-    <loc>/reference/likelihood_ar2.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/fit_ar2_grid.html</loc>
   </url>
   <url>
-    <loc>/reference/simulate_ar1.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/fit_ar2_opt.html</loc>
   </url>
   <url>
-    <loc>/reference/simulate_ar2.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/isStationary_ar2.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/likelihood_ar1.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/likelihood_ar2.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/simulate_ar1.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/simulate_ar2.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/simulation_study_grid_ar1.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/simulation_study_grid_ar2.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/simulation_study_opt_ar1.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/simulation_study_opt_ar2.html</loc>
   </url>
 </urlset>

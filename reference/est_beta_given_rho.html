@@ -37,9 +37,6 @@
   <ul class="dropdown-menu" role="menu"><li>
       <a href="../articles/background_work.html">Background</a>
     </li>
-    <li>
-      <a href="../articles/manuscript.html">A test for detecting trend in the presence of autocorrelation</a>
-    </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/andybeet/arfit/" class="external-link">
@@ -66,9 +63,18 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">est_beta_given_rho</span><span class="op">(</span><span class="va">xt</span>, <span class="va">yt</span>, <span class="va">rho</span>, <span class="va">hypothesis</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">est_beta_given_rho</span><span class="op">(</span><span class="va">xt</span>, <span class="va">yt</span>, <span class="va">rho</span><span class="op">)</span></code></pre></div>
     </div>
 
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>xt</dt>
+<dd><p>Numeric vector. Time series of time points (1, ..., n)</p></dd>
+<dt>yt</dt>
+<dd><p>Numeric vector. Time series of observations (length = n)</p></dd>
+<dt>rho</dt>
+<dd><p>Numeric scalar. AR1 parameter</p></dd>
+</dl></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
