@@ -21,4 +21,7 @@ Suggests:
     kableExtra
 VignetteBuilder: knitr
 Imports: 
-    bookdown
+    parallel,
+    bookdown,
+    doParallel,
+    foreach

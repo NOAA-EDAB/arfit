@@ -57,6 +57,8 @@ simulation_study_opt_ar1 <- function(outDir=here::here("out.txt"),
           null <- fit_ar1_opt(data,rho=rho,hypothesis="null")
           alt <- fit_ar1_opt(data,rho=rho,hypothesis="alt")
 
+          #saveRDS(list(null=null,alt=alt),file = "newopt.rds")
+
           LRstat[1] <- -2*(null$likelihood-alt$likelihood)
           # pvalue using chi square approximation
           pValChi2[isim] <- 1-pchisq(LRstat[1],1) # uses distributional theory
@@ -69,6 +71,10 @@ simulation_study_opt_ar1 <- function(outDir=here::here("out.txt"),
             # fit under null and alt
             nullBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="null")
             altBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="alt")
+            # if(iboot ==2){
+            #   saveRDS(list(null=nullBoot,alt=altBoot,data=bootdata),file = "newbootopt.rds")
+            # }
+
             # statisicic
             LRstat[iboot] <- -2*(nullBoot$likelihood-altBoot$likelihood)
           } # end bootstrap
