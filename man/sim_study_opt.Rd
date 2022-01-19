@@ -2,7 +2,7 @@
 % Please edit documentation in R/sim_study_opt.R
 \name{sim_study_opt}
 \alias{sim_study_opt}
-\title{Simulates n data sets and performs bootstrapping}
+\title{Simulation study using optimization routine, multiple cores}
 \usage{
 sim_study_opt(
   outDir = here::here("out.txt"),
@@ -11,7 +11,8 @@ sim_study_opt(
   sigmaVec = c(0.25, 0.5, 0.75),
   nTVec = c(10, 25, 50),
   nSims = 200,
-  nBootSims = 500
+  nBootSims = 500,
+  setSeed = NULL
 )
 }
 \arguments{
@@ -27,10 +28,13 @@ sim_study_opt(
 
 \item{nBootSims}{Numeric scalar. Number of bootstrap data sets}
 
+\item{setSeed}{Numeric scalar. Value of the seed for simulations. (Default = NULL, a random number between 1-e7 is selected)}
+
 \item{nVec}{Numeric vector. Values for the length of time series to simulate}
 }
 \description{
-Performs n tests
+Performs a simulation study to assess the performance of the test.
+Utilizes multiple cores to spread bootstrap samples over multiple cores
 }
 \details{
 For convenience the intercept, beta_0 is set to zero

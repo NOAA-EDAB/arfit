@@ -29,9 +29,9 @@ sim_single_opt <- function(beta = 0,
                        nSims = 200,
                        nBootSims = 500) {
 
-  nC <- parallel::detectCores()
-  cl <- parallel::makeCluster(nC)
-  doParallel::registerDoParallel(cl)
+  # nC <- parallel::detectCores()
+  # cl <- parallel::makeCluster(nC)
+  # doParallel::registerDoParallel(cl)
 
   # allocate memory to a bunch of vectors
   LRstat <- vector(mode="numeric",length=nBootSims) # likelihood ratio statistic
@@ -74,7 +74,7 @@ sim_single_opt <- function(beta = 0,
   pValue <- sum(pVal_boot <= 0.05)/nSims
   pvChi <- sum(pValChi2 <= 0.05) /nSims
 
-  parallel::stopCluster(cl)
+  #parallel::stopCluster(cl)
   return(list(pvChi=pvChi,pValue=pValue))
 
 }

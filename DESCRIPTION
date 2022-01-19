@@ -24,4 +24,5 @@ Imports:
     parallel,
     bookdown,
     doParallel,
-    foreach
+    foreach,
+    doRNG

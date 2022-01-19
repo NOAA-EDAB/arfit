@@ -1,6 +1,7 @@
-#' Simulates n data sets and performs bootstrapping
+#' Simulation study using optimization routine, multiple cores
 #'
-#' Performs n tests
+#' Performs a simulation study to assess the performance of the test.
+#' Utilizes multiple cores to spread bootstrap samples over multiple cores
 #'
 #' For convenience the intercept, beta_0 is set to zero
 #'
@@ -11,6 +12,7 @@
 #'@param nVec Numeric vector. Values for the length of time series to simulate
 #'@param nSims Numeric scalar. Number of time series to simulate
 #'@param nBootSims Numeric scalar. Number of bootstrap data sets
+#'@param setSeed Numeric scalar. Value of the seed for simulations. (Default = NULL, a random number between 1-e7 is selected)
 #'
 #'@examples
 #'\dontrun{
@@ -26,8 +28,18 @@ sim_study_opt <- function(outDir=here::here("out.txt"),
                           sigmaVec = c(0.25,0.5,.75),
                           nTVec =  c(10,25,50),
                           nSims = 200,
-                          nBootSims = 500) {
+                          nBootSims = 500,
+                          setSeed=NULL) {
 
+  if(is.null(set.seed)) {
+    setSeed <- sample(1e7,1)
+  }
+
+  nC <- parallel::detectCores()
+  cl <- parallel::makeCluster(nC-1)
+  doParallel::registerDoParallel(cl)
+  doRNG::registerDoRNG(seed = setSeed)
+  starttime <- Sys.time()
 
   vecHeader <- c("beta","rho","nT","sigma","pValueChi2","pvalueBoot")
 
@@ -36,29 +48,34 @@ sim_study_opt <- function(outDir=here::here("out.txt"),
   ic <- 0
   nn <- length(betaVec)*length(rhoVec)*length(sigmaVec)*length(nTVec)
 
-  return(nn)
   for (beta in betaVec) {
     for (rho in rhoVec) {
       for (nT in nTVec){
         for (sigma in sigmaVec) {
+          tictoc::tic()
           ic <- ic + 1
           message(paste0("Simulation ",ic," of ", nn))
 
           print(c(beta,rho,nT,sigma))
 
+          # bootstrap samples simulated in parallel
           sigStats <- sim_single_opt(beta,rho,sigma,nT,nSims,nBootSims)
 
           vec <- c(beta,rho,nT,sigma,sigStats$pvChi,sigStats$pValue)
           print(vec)
           write(vec,file=outDir,ncolumns=length(vec),append=TRUE)
+          tictoc::toc()
 
         } #sigma
       } #nT
     } #rho
   } #beta
+  endtime <- Sys.time()
+
+  message(paste0("Elapsed time = ",endtime-starttime))
 
 
-
+  parallel::stopCluster(cl)
 
 }
 
