@@ -13,6 +13,8 @@ reference:
   - simulation_study_grid_ar2
   - simulation_study_opt_ar1
   - simulation_study_opt_ar2
+  - sim_study_opt
+  - sim_single_opt
 - title: "Likelihood Functions"
   desc: "AR1 and AR2 likelihoods"
 - contents:
