@@ -31,7 +31,7 @@ sim_study_opt <- function(outDir=here::here("out.txt"),
                           nBootSims = 500,
                           setSeed=NULL) {
 
-  if(is.null(set.seed)) {
+  if(is.null(setSeed)) {
     setSeed <- sample(1e7,1)
   }
 
