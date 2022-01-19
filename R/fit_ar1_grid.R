@@ -26,6 +26,7 @@ fit_ar1_grid <- function(data,rhoVec=NULL,hypothesis) {
 
     if (like < minLike) {
       minLike <- like
+      maxLike <- -minLike
       # MLE for beta conditional on rho
       maxBeta <- est_beta_given_rho(xt,yt,rho)
       maxRho <- rho
@@ -38,6 +39,6 @@ fit_ar1_grid <- function(data,rhoVec=NULL,hypothesis) {
 
   }
 
-  return(list(betaEst=maxBeta,rhoEst=maxRho,sigmaEst=maxSigma,varBeta=varBeta,likelihood=-minLike))
+  return(list(betaEst=maxBeta,rhoEst=maxRho,sigmaEst=maxSigma,varBeta=varBeta,likelihood=maxLike))
 }
 
