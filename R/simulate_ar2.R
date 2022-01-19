@@ -32,9 +32,9 @@ simulate_ar2 <- function(alpha,beta=0,sigma,rhos,nT){
   yt <- vector(mode = "numeric",length=nT)
 
   # unconditional mean of process
-  meanAR2 <-  alpha/(1-rho1 -rho2)
+  meanAR2 <-  0
   # unconditional variance of the process
-  varAR2 <- ((1-rho1)*sigma^2)/((1+rho2)*(((1-rho2)^2)-rho1^2))
+  varAR2 <- ((1-rho2)*sigma^2)/((1+rho2)*(((1-rho2)^2)-rho1^2))
   zt[1] <- rnorm(1,mean=meanAR2,sd=sqrt(varAR2))
   zt[2] <- rnorm(1,mean=meanAR2,sd=sqrt(varAR2))
   for (it in 3:nT) {

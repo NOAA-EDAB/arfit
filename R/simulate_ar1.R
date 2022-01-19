@@ -20,11 +20,9 @@ simulate_ar1 <- function(alpha,beta=0,sigma,rho,n){
   xt <- c(1:n)
   # simulate AR - error process
   zt <- vector(mode = "numeric",length=n)
-  # unconditional mean of process
-  meanAR1 = alpha/(1-rho)
   # unconditional variance of the process
   varAR1 = (sigma^2)/(1-rho^2)
-  zt[1] <- rnorm(1,mean=meanAR1,sd=sqrt(varAR1))
+  zt[1] <- rnorm(1,mean=0,sd=sqrt(varAR1))
   for (it in 2:n) {
     zt[it] <- rho*zt[it-1]+rnorm(1,0,sigma)
   }
