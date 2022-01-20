@@ -34,11 +34,12 @@ sim_single_opt_ar1 <- function(beta = 0,
   # doParallel::registerDoParallel(cl)
 
   # allocate memory to a bunch of vectors
+  LR <- vector(mode="numeric",length=nBootSims-1) # likelihood ratio statistic
   pVal_boot <- vector(mode="numeric",length=nSims) # pvalue for bootstrap
   pValChi2 <- vector(mode="numeric",length=nSims) # pvalue for chi sq
 
   for (isim in 1:nSims) {
-    LRstat <- vector(mode="numeric",length=nBootSims) # likelihood ratio statistic
+
 
     # simulate data set
     data <- simulate_ar1(alpha=0,beta=beta,sigma,rho,nT)
@@ -49,7 +50,7 @@ sim_single_opt_ar1 <- function(beta = 0,
     # likelihood statistic
     LRstatObs <- -2*(null$likelihood-alt$likelihood)
     # pvalue using chi square approximation
-    pValChi2[isim] <- 1-pchisq(LRstat[1],1) # uses distributional theory
+    pValChi2[isim] <- 1-pchisq(LRstatObs,1) # uses distributional theory
 
 
 
@@ -61,7 +62,7 @@ sim_single_opt_ar1 <- function(beta = 0,
       nullBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="null")
       altBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="alt")
       # statisicic
-      LRstat[iboot] <- -2*(nullBoot$likelihood-altBoot$likelihood)
+      LR[iboot-1] <- -2*(nullBoot$likelihood-altBoot$likelihood)
     } # end bootstrap
 
 
