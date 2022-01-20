@@ -22,7 +22,7 @@
 #'@export
 
 
-sim_study_opt <- function(outDir=here::here("out.txt"),
+sim_study_opt_ar1 <- function(outDir=here::here("out.txt"),
                           betaVec = c(0,.12,.25,.5),
                           rhoVec = c(0, 0.25, 0.5,0.75, 0.95),
                           sigmaVec = c(0.25,0.5,.75),
@@ -59,7 +59,7 @@ sim_study_opt <- function(outDir=here::here("out.txt"),
           print(c(beta,rho,nT,sigma))
 
           # bootstrap samples simulated in parallel
-          sigStats <- sim_single_opt(beta,rho,sigma,nT,nSims,nBootSims)
+          sigStats <- sim_single_opt_ar1(beta,rho,sigma,nT,nSims,nBootSims)
 
           vec <- c(beta,rho,nT,sigma,sigStats$pvChi,sigStats$pValue)
           print(vec)

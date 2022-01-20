@@ -22,7 +22,7 @@
 #'@export
 
 
-sim_single_opt <- function(beta = 0,
+sim_single_opt_ar1 <- function(beta = 0,
                        rho = 0,
                        sigma = 0.25,
                        nT = 10,
@@ -34,12 +34,12 @@ sim_single_opt <- function(beta = 0,
   # doParallel::registerDoParallel(cl)
 
   # allocate memory to a bunch of vectors
-  LRstat <- vector(mode="numeric",length=nBootSims) # likelihood ratio statistic
   pVal_boot <- vector(mode="numeric",length=nSims) # pvalue for bootstrap
   pValChi2 <- vector(mode="numeric",length=nSims) # pvalue for chi sq
 
   for (isim in 1:nSims) {
-#    print(paste0("sample = ", isim," of ",nSims))
+    LRstat <- vector(mode="numeric",length=nBootSims) # likelihood ratio statistic
+
     # simulate data set
     data <- simulate_ar1(alpha=0,beta=beta,sigma,rho,nT)
     # fit under the null and alternative
@@ -51,19 +51,20 @@ sim_single_opt <- function(beta = 0,
     # pvalue using chi square approximation
     pValChi2[isim] <- 1-pchisq(LRstat[1],1) # uses distributional theory
 
+
+
     # bootstrapping in parallel
     bootStats <- foreach::foreach(iboot = 2:nBootSims,.combine='c') %dopar% {
-
-      # simulate under Null
+    # simulate under Null
       bootdata <- simulate_ar1(alpha=null$betaEst,beta=0,null$sigmaEst,null$rhoEst,nT)
-
       # fit under null and alt
       nullBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="null")
       altBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="alt")
-
       # statisicic
       LRstat[iboot] <- -2*(nullBoot$likelihood-altBoot$likelihood)
     } # end bootstrap
+
+
 
     # now we can calculate the p-value based on the bootstrapping
     LRstat <- c(LRstatObs,bootStats)
