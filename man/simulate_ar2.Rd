@@ -20,5 +20,4 @@ simulate_ar2(alpha, beta = 0, sigma, rhos, nT)
 \description{
 #' model=   y_t = a + b.t + z_t
 where z_t = rho1. z_t-1 + rho2. z_t-2 + e_t   (e_t ~ N(0,sigma^2))
-Uses unconditional mean and variance to simulate first two data points
 }
