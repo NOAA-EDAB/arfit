@@ -58,10 +58,16 @@
     <loc>https://andybeet.github.io/arfit/reference/likelihood_ar2.html</loc>
   </url>
   <url>
-    <loc>https://andybeet.github.io/arfit/reference/sim_single_opt.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/sim_single_opt_ar1.html</loc>
   </url>
   <url>
-    <loc>https://andybeet.github.io/arfit/reference/sim_study_opt.html</loc>
+    <loc>https://andybeet.github.io/arfit/reference/sim_single_opt_ar2.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/sim_study_opt_ar1.html</loc>
+  </url>
+  <url>
+    <loc>https://andybeet.github.io/arfit/reference/sim_study_opt_ar2.html</loc>
   </url>
   <url>
     <loc>https://andybeet.github.io/arfit/reference/simulate_ar1.html</loc>
