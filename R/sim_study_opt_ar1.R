@@ -38,6 +38,8 @@ sim_study_opt_ar1 <- function(outDir=here::here("out.txt"),
   nC <- parallel::detectCores()
   cl <- parallel::makeCluster(nC-1)
   doParallel::registerDoParallel(cl)
+  parallel::clusterCall(cl, function(x) .libPaths(x), .libPaths())
+
   doRNG::registerDoRNG(seed = setSeed)
   starttime <- Sys.time()
 
