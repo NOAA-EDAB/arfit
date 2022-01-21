@@ -55,7 +55,7 @@ sim_single_opt_ar1 <- function(beta = 0,
 
 
     # bootstrapping in parallel
-    bootStats <- foreach::foreach(iboot = 2:nBootSims,.combine='c') %dopar% {
+    bootStats <- foreach::foreach(iboot = 2:nBootSims,.combine='c',.packages="arfit") %dopar% {
     # simulate under Null
       bootdata <- simulate_ar1(alpha=null$betaEst,beta=0,null$sigmaEst,null$rhoEst,nT)
       # fit under null and alt
