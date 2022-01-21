@@ -14,6 +14,7 @@
 #'@param nSims Numeric scalar. Number of time series to simulate
 #'@param nBootSims Numeric scalar. Number of bootstrap data sets
 #'@param setSeed Numeric scalar. Value of the seed for simulations. (Default = NULL, a random number between 1-e7 is selected)
+#'@param nCores Numeric scalar. Specify the number of cores to utilize (Default = NULL, utilizes n-1 cores)
 #'
 #'@examples
 #'\dontrun{
@@ -31,15 +32,21 @@ sim_study_opt_ar2 <- function(outDir=here::here("out.txt"),
                           nTVec =  c(10,25,50),
                           nSims = 200,
                           nBootSims = 500,
-                          setSeed=NULL) {
+                          setSeed=NULL,
+                          nCores = NULL) {
 
   if(is.null(setSeed)) {
     setSeed <- sample(1e7,1)
   }
 
-  nC <- parallel::detectCores()
-  cl <- parallel::makeCluster(nC-1)
+  if (is.null(nCores)) {
+    nCores <- parallel::detectCores() - 1
+  }
+
+  cl <- parallel::makeCluster(nCores)
   doParallel::registerDoParallel(cl)
+  parallel::clusterCall(cl, function(x) .libPaths(x), .libPaths())
+
   doRNG::registerDoRNG(seed = setSeed)
   starttime <- Sys.time()
 
