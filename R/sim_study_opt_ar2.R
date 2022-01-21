@@ -39,8 +39,15 @@ sim_study_opt_ar2 <- function(outDir=here::here("out.txt"),
     setSeed <- sample(1e7,1)
   }
 
+  # total number of cores on machine
+  nMachineCores <- parallel::detectCores()
+
   if (is.null(nCores)) {
-    nCores <- parallel::detectCores() - 1
+    # use minimum of one core
+    nCores <- max(nMachineCores-1,1)
+  } else {
+    # don't allow more cores than available
+    nCores <- min(nMachineCores-1,nCores)
   }
 
   cl <- parallel::makeCluster(nCores)
@@ -88,9 +95,9 @@ sim_study_opt_ar2 <- function(outDir=here::here("out.txt"),
   endtime <- Sys.time()
 
   message(paste0("Elapsed time = ",endtime-starttime))
-
-
   parallel::stopCluster(cl)
+
+  message(paste0("Results are save in the file: ",outDir))
 
 }
 
