@@ -74,7 +74,8 @@ Utilizes multiple cores to spread bootstrap samples over multiple cores</p>
   nTVec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">25</span>, <span class="fl">50</span><span class="op">)</span>,
   nSims <span class="op">=</span> <span class="fl">200</span>,
   nBootSims <span class="op">=</span> <span class="fl">500</span>,
-  setSeed <span class="op">=</span> <span class="cn">NULL</span>
+  setSeed <span class="op">=</span> <span class="cn">NULL</span>,
+  nCores <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -96,6 +97,8 @@ Utilizes multiple cores to spread bootstrap samples over multiple cores</p>
 <dd><p>Numeric scalar. Number of bootstrap data sets</p></dd>
 <dt>setSeed</dt>
 <dd><p>Numeric scalar. Value of the seed for simulations. (Default = NULL, a random number between 1-e7 is selected)</p></dd>
+<dt>nCores</dt>
+<dd><p>Numeric scalar. Specify the number of cores to utilize (Default = NULL, utilizes n-1 cores)</p></dd>
 <dt>nVec</dt>
 <dd><p>Numeric vector. Values for the length of time series to simulate</p></dd>
 </dl></div>
