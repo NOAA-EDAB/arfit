@@ -1,0 +1,99 @@
+---
+title: "Short Term Trends for SOE inclusion"
+date: "7/5/2022"
+output: html_document
+---
+
+
+## Trend Comparison
+
+1) `geom_gls()` added into arfit package. 
+2) Code for making time filtered data `line 54`
+3) Code for adding draft lm into plot `line 75`
+4) To Do - replace plotting codes lines above with work from this package. 
+
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(ecodata)
+```
+
+```{r,warning=FALSE, message=FALSE, echo=FALSE,  code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-setup.R")}
+```
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, code = readLines("https://raw.githubusercontent.com/NOAA-EDAB/ecodata/master/chunk-scripts/human_dimensions_NE.Rmd-GIS-setup.R")}
+```
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+apex<-ecodata::hms_landings %>% 
+  dplyr::filter(stringr::str_detect(Var, "Revenue"), 
+                YEAR<2020) %>% 
+  separate(Var, c("Var", "trash"), sep = "_") %>% 
+  group_by(YEAR) %>% 
+  summarise(Value = sum(Value)) %>% 
+  rename( Time = YEAR) %>% 
+  mutate(Var = c("HMS Revenue"), 
+         Units = c("metric tons"), 
+         EPU = c("MAB"))
+#Filtering and aggregation step
+rev_agg <- ecodata::comdat %>% 
+  dplyr::filter(stringr::str_detect(Var, "Revenue"),
+         !stringr::str_detect(Var, "Apex|prop|Other|NEFMC"), #Remove proportions, "Other" category species, NEFMC managed species in MAB
+         EPU == "MAB",
+         Time >= 1986) %>% 
+  rbind(apex) %>% 
+  dplyr::mutate(Status = ifelse(str_detect(Var, "managed"), 
+                         "Managed","Total")) %>% #Create groups for aggregation
+  dplyr::group_by(Status, Time) %>% 
+  dplyr::summarise(Total = sum(Value)) %>% 
+  dplyr::group_by(Status) %>% 
+  dplyr::mutate(hline = mean(Total))
+
+series.col <- c("indianred","black")
+
+short_rev <- rev_agg %>% 
+  filter(Time %in% (2010:2021), 
+         Status == "Total")
+
+
+#Plotting
+ggplot2::ggplot(data = rev_agg) +
+  
+  #Highlight last ten years
+  ggplot2::annotate("rect", fill = shade.fill, alpha = shade.alpha,
+      xmin = x.shade.min , xmax = x.shade.max,
+      ymin = -Inf, ymax = Inf)+  
+  
+  #lines
+  arfit::geom_gls(aes(x = Time, y = Total,
+               group = Status),
+             alpha = trend.alpha, size = trend.size) +
+  ggplot2::geom_line(aes(x = Time, y = Total, color = Status), size = lwd) +
+  ggplot2::geom_point(aes(x = Time, y = Total, color = Status), size = 1.5) +
+  
+  ##########################################################################
+  ################## NEW TREND LINE ########################################
+
+  ggplot2::geom_smooth(data =short_rev, aes( x = Time, y = Total), method = "lm")+
+  
+  
+  ##########################################################################
+  
+  #axes
+  ggplot2::scale_y_continuous(labels = function(l){trans = l / 1000000})+
+  ggplot2::scale_x_continuous(breaks = seq(1985, 2015, by = 5), expand = c(0.01, 0.01)) +
+      scale_color_manual(values = series.col, aesthetics = "color")+
+  ggplot2::guides(color = FALSE) +
+  ggplot2::ggtitle("Total Commercial Revenue *No New Data") +
+  ggplot2::ylab(expression("Revenue (10"^6*"USD)")) +
+  ggplot2::geom_hline(aes(yintercept = hline,
+               color = Status),
+           size = hline.size,
+           alpha = hline.alpha,
+           linetype = hline.lty) +
+  ggplot2::xlab(element_blank())+
+  ecodata::theme_ts()+
+  ecodata::theme_title()
+
+```
+
