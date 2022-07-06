@@ -15,7 +15,7 @@ likelihood_ar1(rho, dataf, hypothesis = "null")
 under the null or alternative hypothesis. "null" fixes linear component, beta = 0.}
 }
 \value{
-
+likelihod value
 }
 \description{
 Evaluate the likelihood of linear model with errors from an AR order 1 process

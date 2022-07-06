@@ -9,7 +9,7 @@
 #'
 #'
 #'
-#' @return
+#' @return likelihod value
 #'
 #' @export
 

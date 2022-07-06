@@ -2,7 +2,9 @@
 
 export(est_beta_given_rho)
 export(est_beta_given_rho2)
+export(example)
 export(example_cedar_rapids)
+export(example_opt)
 export(fit_ar1_grid)
 export(fit_ar1_opt)
 export(fit_ar2_grid)
