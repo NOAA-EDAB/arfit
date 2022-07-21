@@ -7,6 +7,7 @@
 StatLM <- ggplot2::ggproto("StatLM",
                             ggplot2::Stat,
                             required_aes = c("x", "y"),
+                            extra_params = c("n", "na.rm"),
                             compute_group = function(data, scales, warn, n) {
 ######################### THESE NEED TO BE PARAMETERS #####################
                               #n <- 10

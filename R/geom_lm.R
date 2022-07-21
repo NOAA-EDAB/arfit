@@ -32,11 +32,11 @@
 #'   geom_lm(aes(x = x, y = y))
 
 geom_lm <- function(mapping = NULL, data = NULL, stat = "LM",
-                     position = "identity", na.rm = FALSE, show.legend = NA,
-                     inherit.aes = TRUE, warn = TRUE, n=10, ...) {
+                     position = "identity",show.legend = NA, na.rm = FALSE, 
+                     inherit.aes = TRUE, warn = TRUE, n=n, ...) {
   ggplot2::layer(
     geom = arfit:::GeomLM, mapping = mapping, data = data, stat = stat,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(na.rm = na.rm, warn = warn, n=n, ...)
+    params = list(n = n, na.rm = FALSE, ...)
   )
 }
