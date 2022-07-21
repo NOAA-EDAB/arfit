@@ -30,11 +30,11 @@ library(ecodata)
 apex<-ecodata::hms_landings %>% 
   dplyr::filter(stringr::str_detect(Var, "Revenue"), 
                 YEAR<2020) %>% 
-  separate(Var, c("Var", "trash"), sep = "_") %>% 
-  group_by(YEAR) %>% 
-  summarise(Value = sum(Value)) %>% 
-  rename( Time = YEAR) %>% 
-  mutate(Var = c("HMS Revenue"), 
+  tidyr::separate(Var, c("Var", "trash"), sep = "_") %>% 
+  dplyr::group_by(YEAR) %>% 
+  dplyr::summarise(Value = sum(Value)) %>% 
+  dplyr::rename( Time = YEAR) %>% 
+  dplyr::mutate(Var = c("HMS Revenue"), 
          Units = c("metric tons"), 
          EPU = c("MAB"))
 #Filtering and aggregation step
@@ -43,8 +43,8 @@ rev_agg <- ecodata::comdat %>%
          !stringr::str_detect(Var, "Apex|prop|Other|NEFMC"), #Remove proportions, "Other" category species, NEFMC managed species in MAB
          EPU == "MAB",
          Time >= 1986) %>% 
-  rbind(apex) %>% 
-  dplyr::mutate(Status = ifelse(str_detect(Var, "managed"), 
+  base::rbind(apex) %>% 
+  dplyr::mutate(Status = ifelse(stringr::str_detect(Var, "managed"), 
                          "Managed","Total")) %>% #Create groups for aggregation
   dplyr::group_by(Status, Time) %>% 
   dplyr::summarise(Total = sum(Value)) %>% 
@@ -54,7 +54,7 @@ rev_agg <- ecodata::comdat %>%
 series.col <- c("indianred","black")
 
 short_rev <- rev_agg %>% 
-  filter(Time %in% (2010:2021), 
+  dplyr::filter(Time %in% (2010:2021), 
          Status == "Total")
 
 
@@ -108,11 +108,11 @@ ggplot2::ggplot(data = rev_agg) +
 apex<-ecodata::hms_landings %>% 
   dplyr::filter(stringr::str_detect(Var, "Revenue"), 
                 YEAR<2020) %>% 
-  separate(Var, c("Var", "trash"), sep = "_") %>% 
-  group_by(YEAR) %>% 
-  summarise(Value = sum(Value)) %>% 
-  rename( Time = YEAR) %>% 
-  mutate(Var = c("HMS Revenue"), 
+  tidyr::separate(Var, c("Var", "trash"), sep = "_") %>% 
+  dplyr::group_by(YEAR) %>% 
+  dplyr::summarise(Value = sum(Value)) %>% 
+  dplyr::rename( Time = YEAR) %>% 
+  dplyr::mutate(Var = c("HMS Revenue"), 
          Units = c("metric tons"), 
          EPU = c("MAB"))
 #Filtering and aggregation step
@@ -121,7 +121,7 @@ rev_agg <- ecodata::comdat %>%
          !stringr::str_detect(Var, "Apex|prop|Other|NEFMC"), #Remove proportions, "Other" category species, NEFMC managed species in MAB
          EPU == "MAB",
          Time >= 1986) %>% 
-  rbind(apex) %>% 
+  base::rbind(apex) %>% 
   dplyr::mutate(Status = ifelse(str_detect(Var, "managed"), 
                          "Managed","Total")) %>% #Create groups for aggregation
   dplyr::group_by(Status, Time) %>% 
@@ -132,7 +132,7 @@ rev_agg <- ecodata::comdat %>%
 series.col <- c("indianred","black")
 
 short_rev <- rev_agg %>% 
-  filter(Time %in% (2010:2021))
+  dplyr::filter(Time %in% (2010:2021))
 
 
 #Plotting
