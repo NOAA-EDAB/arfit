@@ -2,6 +2,8 @@
 GeomLM <- ggplot2::ggproto("GeomLM",
                             ggplot2::Geom,
                             requird_aes = c("x", "y"),
+                           extra_params = c("n", "na.rm"),
+
 
                             default_aes = ggplot2::aes(size = 2, color = NA,fill = NA,
                                                        linetype = 2, alpha = 0.7),
