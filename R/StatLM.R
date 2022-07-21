@@ -69,7 +69,7 @@ StatLM <- ggplot2::ggproto("StatLM",
                               fittedData <- data.frame(x = newtime,
                                                    y = predy)
 print(tibble::as_tibble(fittedData))
-                              return(fitedData)
+                              return(fittedData)
 
                             }
 )
