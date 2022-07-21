@@ -54,12 +54,13 @@ StatLM <- ggplot2::ggproto("StatLM",
                               # pick out model. Either null (no trend) or alternative (trend)
                               if (linear_ar1$pValue <= pValThreshold) { # Trend detected
                                 coefs <- linear_ar1$alt$betaEst
-                                xMat <- as.matrix(cbind(rep(1,n),data$x)) # design matrix
+                                xMat <- as.matrix(cbind(rep(1,n),dataUse$x)) # design matrix
 
                               } else { # no trend
                                 coefs <- linear_ar1$null$betaEst
                                 xMat <- as.matrix(cbind(rep(1,n))) # design matrix
-}
+                              }
+
                                 # predict
 
                                 predy <- xMat %*% coefs
@@ -67,7 +68,7 @@ StatLM <- ggplot2::ggproto("StatLM",
                                 newtime <- seq(xmin, xmax, length.out=n)
                                 fittedData <- data.frame(x = newtime,
                                                      y = predy)
-  #
+
                                 return(fittedData)
                               #}
 
