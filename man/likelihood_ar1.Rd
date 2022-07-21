@@ -14,9 +14,6 @@ likelihood_ar1(rho, dataf, hypothesis = "null")
 \item{hypothesis}{Character string. "null" or "alt" determines whether to evaluate
 under the null or alternative hypothesis. "null" fixes linear component, beta = 0.}
 }
-\value{
-
-}
 \description{
 Evaluate the likelihood of linear model with errors from an AR order 1 process
 }

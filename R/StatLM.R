@@ -7,9 +7,9 @@
 StatLM <- ggplot2::ggproto("StatLM",
                             ggplot2::Stat,
                             required_aes = c("x", "y"),
-                            compute_group = function(data, scales, warn, n) {
+                            compute_group = function(data, scales, warn) {
 ######################### THESE NEED TO BE PARAMETERS #####################
-                              #n <- 10
+                              n <- 10
                               pValThreshold <- 0.05
                               nBootSamples <- 499
 ###########################################################################
