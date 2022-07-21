@@ -21,7 +21,7 @@ fit_real_data <- function(dataSet,nBootSims=499) {
   LRstat <- vector(mode="numeric",length=nBootSims+1)
   # LR stat for data
   LRstat[1] <- -2*(null$likelihood-alt$likelihood)
-  print(paste0("LR stat = ",LRstat[1]))
+  #print(paste0("LR stat = ",LRstat[1]))
   # pvalue using chi square approximation
   pValChi2 <- 1-pchisq(LRstat[1],1) # uses distributional theory
 

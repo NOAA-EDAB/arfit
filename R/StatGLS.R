@@ -122,7 +122,6 @@ StatGLS <- ggplot2::ggproto("StatGLS",
                                                                  se.fit = TRUE) #Get BLUE
                                 data <- data.frame(x = data$x,
                                                    y = lm_pred$fit)
-
                                 return(data)
                               }
                             }

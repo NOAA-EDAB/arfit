@@ -13,6 +13,7 @@ geom_lm(
   show.legend = NA,
   inherit.aes = TRUE,
   warn = TRUE,
+  n = 10,
   ...
 )
 }
