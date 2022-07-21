@@ -12,7 +12,7 @@ StatLM <- ggplot2::ggproto("StatLM",
                             compute_group = function(data, scales, warn, n) {
 
 ######################### THESE NEED TO BE PARAMETERS #####################
-                              n <- 10
+                              #n <- 10
                               pValThreshold <- 0.05
                               nBootSamples <- 499
 ###########################################################################
