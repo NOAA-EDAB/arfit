@@ -2,7 +2,7 @@
 GeomLM <- ggplot2::ggproto("GeomLM",
                             ggplot2::Geom,
                             requird_aes = c("x", "y"),
-                           extra_params = c("n", "na.rm"),
+                            extra_params = c("n", "na.rm", "pValThreshold", "nBootSamples"),
 
 
                             default_aes = ggplot2::aes(size = 2, color = NA,fill = NA,

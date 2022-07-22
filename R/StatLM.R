@@ -8,13 +8,13 @@ StatLM <- ggplot2::ggproto("StatLM",
                             ggplot2::Stat,
                             required_aes = c("x", "y"),
 
-                            extra_params = c("n", "na.rm"),
-                            compute_group = function(data, scales, warn, n) {
+                            extra_params = c("n", "pValThreshold", "nBootSamples", "na.rm"),
+                            compute_group = function(data, scales, warn, n, pValThreshold,  nBootSamples) {
 
 ######################### THESE NEED TO BE PARAMETERS #####################
                               #n <- 10
-                              pValThreshold <- 0.05
-                              nBootSamples <- 499
+                              #pValThreshold <- 0.05
+                              #nBootSamples <- 499
 ###########################################################################
                               `%>%` <- magrittr::`%>%`
                               dataUse <- data %>%
@@ -56,10 +56,10 @@ StatLM <- ggplot2::ggproto("StatLM",
                                 coefs <- linear_ar1$alt$betaEst
                                 xMat <- as.matrix(cbind(rep(1,n),dataUse$x)) # design matrix
 
-                              } else { # no trend
-                                coefs <- linear_ar1$null$betaEst
-                                xMat <- as.matrix(cbind(rep(1,n))) # design matrix
-                              }
+                              # } else { # no trend
+                              #   coefs <- linear_ar1$null$betaEst
+                              #   xMat <- as.matrix(cbind(rep(1,n))) # design matrix
+                              # }
 
                                 # predict
 
@@ -70,7 +70,7 @@ StatLM <- ggplot2::ggproto("StatLM",
                                                      y = predy)
 
                                 return(fittedData)
-                              #}
+                              }
 
                             }
 )

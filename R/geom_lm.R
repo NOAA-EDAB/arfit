@@ -33,11 +33,13 @@
 
 geom_lm <- function(mapping = NULL, data = NULL, stat = "LM",
                      position = "identity",show.legend = NA, na.rm = FALSE,
-                     inherit.aes = TRUE, warn = TRUE, n=n, ...) {
+                     inherit.aes = TRUE, warn = TRUE, n= 10, nBootSamples = 499, 
+                     pValThreshold = 0.05, ...) {
   ggplot2::layer(
     geom = arfit:::GeomLM, mapping = mapping, data = data, stat = stat,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(n = n, na.rm = FALSE, ...)
+    params = list(n = n, na.rm = FALSE,nBootSamples = nBootSamples, 
+                  pValThreshold = pValThreshold, ...)
 
   )
 }
