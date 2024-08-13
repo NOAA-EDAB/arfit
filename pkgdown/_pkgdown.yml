@@ -1,5 +1,8 @@
 url: https://andybeet.github.io/arfit/
 
+template:
+  bootstrap: 5
+
 reference:
 - title: "Data simulation"
   desc: "simulate from AR1 and AR2 models"
