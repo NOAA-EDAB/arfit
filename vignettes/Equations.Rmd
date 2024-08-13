@@ -1,0 +1,92 @@
+---
+title: "Equations"
+output:
+  bookdown::html_document2:
+    number_sections: no
+  bookdown::pdf_book:
+    number_sections: false
+    toc: false
+    latex_engine: xelatex
+    extra_dependencies: 
+      amsmath: null
+vignette: >
+  %\VignetteIndexEntry{Equations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE,echo=F}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo =F,message=F}
+library(arfit)
+```
+
+
+\begin{equation}
+  Y_t = \beta_0 + \beta_1 t + \epsilon_t  (\#eq:one)
+\end{equation}
+
+---
+
+\begin{equation}
+
+\mathrm{L}\left( \underline{\theta}; \underline{y} \right )= \prod^n_{t=2} p\left(Y_t = y_t | Y_{t-1}=y_{t-1}\right)  p\left(Y_1=y_1 \right) (\#eq:two)
+\end{equation}
+
+---
+
+\begin{align}
+logL\left( \underline{\theta}; \underline{y} \right ) = & -\frac{n}{2}log2\pi - nlog\sigma + \frac{1}{2}log(1-\phi^2) \notag \\
+& -\frac{1}{2\sigma^2}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) -t\beta_1 + \phi(t-1)\beta_1)^2 \right) (\#eq:three)
+\end{align}
+
+---
+
+\begin{equation}
+\hat\sigma^2 = \frac{1}{n}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) - t\beta_1 + \phi(t-1)\beta_1)^2 \right) (\#eq:four)
+\end{equation}
+
+---
+
+\begin{align}
+logL\left( \underline{\beta}, \phi; \underline{y} \right ) &= const. + \frac{1}{2}log(1-\phi^2) \notag \\
+&-\frac{n}{2}log\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2)-t\beta_1 + \phi(t-1)\beta_1)^2 \right) \\ 
+
+&= const. + \frac{1}{2}log(1-\phi^2) \notag \\
+&-\frac{n}{2}log\left( (1-\phi^2)(y_1-X_1\underline{\beta})^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-X_t\underline{\beta} + \phi X_{t-1}\underline{\beta})^2 \right) (\#eq:five)
+\end{align}
+
+---
+
+\begin{align}
+logL\left( \underline{\beta}, \underline{\phi},\sigma; \underline{y} \right ) &= -\frac{n}{2}log(2\pi) -\frac{n}{2}log(\sigma^2) +\frac{1}{2}log \left|V_p^{-1} \right|
+\\
+&-\frac{1 }{2 \sigma^2} (\underline{y_p}-\underline{\mu_p})^T V_p^{-1}(\underline{y_p}-\underline{\mu_p}) \\
+
+&- \frac{1}{2\sigma^2}\sum^n_{t=p+1} (y_t - c - \phi_1y_{t-1} - ... - \phi_p y_{t-p})^2 \\ (\#eq:six)
+
+\end{align}
+
+
+where
+
+$\left|V_p^{-1} \right|$ is determinant of inverted matrix $V_p$,
+
+$\sigma^2V_p$ = variance-covariance matrix of order p,
+
+$\underline{\mu_p} = X_p\underline{\beta}$, and
+
+$X_p$ is the $p_{th}$ row of the design matrix corresponding to time t = p
+
+$c$ = function of fitted terms $X_t\underline{\beta}$
+
+
+
+
+
+
