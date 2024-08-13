@@ -43,8 +43,8 @@ library(arfit)
 
 \begin{align}
 \tag{3}
-logL\left( \underline{\theta}; \underline{y} \right ) = & -\frac{n}{2}log2\pi - nlog\sigma + \frac{1}{2}log(1-\phi^2) \notag \\
-& -\frac{1}{2\sigma^2}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) -t\beta_1 + \phi(t-1)\beta_1)^2 \right)  
+logL\left( \underline{\theta}; \underline{y} \right ) = & -\frac{n}{2}log2\pi - nlog\sigma + \frac{1}{2}log(1-\phi^2) \\
+&-\frac{1}{2\sigma^2}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) -t\beta_1 + \phi(t-1)\beta_1)^2 \right)  
 \end{align}
 
 ---
@@ -61,7 +61,7 @@ logL\left( \underline{\theta}; \underline{y} \right ) = & -\frac{n}{2}log2\pi - 
 logL\left( \underline{\beta}, \phi; \underline{y} \right ) &= const. + \frac{1}{2}log(1-\phi^2) \notag \\
 &-\frac{n}{2}log\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2)-t\beta_1 + \phi(t-1)\beta_1)^2 \right) \\ 
 
-&= const. + \frac{1}{2}log(1-\phi^2) \notag \\
+&= const. + \frac{1}{2}log(1-\phi^2) \\
 &-\frac{n}{2}log\left( (1-\phi^2)(y_1-X_1\underline{\beta})^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-X_t\underline{\beta} + \phi X_{t-1}\underline{\beta})^2 \right) 
 \end{align}
 
