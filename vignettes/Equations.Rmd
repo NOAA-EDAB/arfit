@@ -1,14 +1,8 @@
 ---
 title: "Equations"
-output:
-  bookdown::html_document2:
-    number_sections: no
-  bookdown::pdf_book:
-    number_sections: false
-    toc: false
-    latex_engine: xelatex
-    extra_dependencies: 
-      amsmath: null
+output: html_document
+bibliography: bibliography/artrend.bib
+link-citations: yes
 ---
 
 ```{r, include = FALSE,echo=F}
