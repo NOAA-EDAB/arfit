@@ -28,7 +28,8 @@ library(arfit)
 
 
 \begin{equation}
-  Y_t = \beta_0 + \beta_1 t + \epsilon_t  (\#eq:one)
+\tag{1}
+  Y_t = \beta_0 + \beta_1 t + \epsilon_t  
 \end{equation}
 
 ---
