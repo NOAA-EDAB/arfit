@@ -17,6 +17,4 @@
 #'To learn more about using \code{arfit}, start with the vignette: \code{browseVignettes(package="arfit")} or click the index below
 #'
 #'
-#' @docType package
-#' @name arfit
-NULL
+"_PACKAGE"
