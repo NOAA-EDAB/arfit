@@ -27,29 +27,30 @@ library(arfit)
 ```
 
 
-\begin{equation}
+\begin{align}
 \tag{1}
   Y_t = \beta_0 + \beta_1 t + \epsilon_t  
-\end{equation}
+\end{align}
 
 ---
 
-\begin{equation}
-
-\mathrm{L}\left( \underline{\theta}; \underline{y} \right )= \prod^n_{t=2} p\left(Y_t = y_t | Y_{t-1}=y_{t-1}\right)  p\left(Y_1=y_1 \right) (\#eq:two)
+\begin{align}
+\tag{2}
+\mathrm{L}\left( \underline{\theta}; \underline{y} \right )= \prod^n_{t=2} p\left(Y_t = y_t | Y_{t-1}=y_{t-1}\right)  p\left(Y_1=y_1 \right) 
 \end{equation}
 
 ---
 
 \begin{align}
+\tag{3}
 logL\left( \underline{\theta}; \underline{y} \right ) = & -\frac{n}{2}log2\pi - nlog\sigma + \frac{1}{2}log(1-\phi^2) \notag \\
-& -\frac{1}{2\sigma^2}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) -t\beta_1 + \phi(t-1)\beta_1)^2 \right) (\#eq:three)
+& -\frac{1}{2\sigma^2}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) -t\beta_1 + \phi(t-1)\beta_1)^2 \right)  
 \end{align}
 
 ---
 
 \begin{equation}
-\hat\sigma^2 = \frac{1}{n}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) - t\beta_1 + \phi(t-1)\beta_1)^2 \right) (\#eq:four)
+\hat\sigma^2 = \frac{1}{n}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) - t\beta_1 + \phi(t-1)\beta_1)^2 \right) 
 \end{equation}
 
 ---
@@ -59,7 +60,7 @@ logL\left( \underline{\beta}, \phi; \underline{y} \right ) &= const. + \frac{1}{
 &-\frac{n}{2}log\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2)-t\beta_1 + \phi(t-1)\beta_1)^2 \right) \\ 
 
 &= const. + \frac{1}{2}log(1-\phi^2) \notag \\
-&-\frac{n}{2}log\left( (1-\phi^2)(y_1-X_1\underline{\beta})^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-X_t\underline{\beta} + \phi X_{t-1}\underline{\beta})^2 \right) (\#eq:five)
+&-\frac{n}{2}log\left( (1-\phi^2)(y_1-X_1\underline{\beta})^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-X_t\underline{\beta} + \phi X_{t-1}\underline{\beta})^2 \right) 
 \end{align}
 
 ---
@@ -69,7 +70,7 @@ logL\left( \underline{\beta}, \underline{\phi},\sigma; \underline{y} \right ) &=
 \\
 &-\frac{1 }{2 \sigma^2} (\underline{y_p}-\underline{\mu_p})^T V_p^{-1}(\underline{y_p}-\underline{\mu_p}) \\
 
-&- \frac{1}{2\sigma^2}\sum^n_{t=p+1} (y_t - c - \phi_1y_{t-1} - ... - \phi_p y_{t-p})^2 \\ (\#eq:six)
+&- \frac{1}{2\sigma^2}\sum^n_{t=p+1} (y_t - c - \phi_1y_{t-1} - ... - \phi_p y_{t-p})^2 
 
 \end{align}
 
