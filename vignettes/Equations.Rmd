@@ -9,10 +9,6 @@ output:
     latex_engine: xelatex
     extra_dependencies: 
       amsmath: null
-vignette: >
-  %\VignetteIndexEntry{Equations}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE,echo=F}
@@ -58,7 +54,7 @@ logL\left( \underline{\theta}; \underline{y} \right ) = & -\frac{n}{2}log2\pi - 
 
 \begin{align}
 \tag{5}
-logL\left( \underline{\beta}, \phi; \underline{y} \right ) &= const. + \frac{1}{2}log(1-\phi^2) \notag \\
+logL\left( \underline{\beta}, \phi; \underline{y} \right ) &= const. + \frac{1}{2}log(1-\phi^2) \\
 &-\frac{n}{2}log\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2)-t\beta_1 + \phi(t-1)\beta_1)^2 \right) \\ 
 
 &= const. + \frac{1}{2}log(1-\phi^2) \\
