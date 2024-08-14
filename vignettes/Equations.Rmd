@@ -1,13 +1,16 @@
 ---
 title: "Equations"
-output: bookdown::html_document2
+output: html_document
+bibliography: bibliography/artrend.bib
 link-citations: yes
-pkgdown:
-  as_is: true
-vignette: >
-  %\VignetteIndexEntry{foo}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+#output: bookdown::html_document2
+#link-citations: yes
+#pkgdown:
+#  as_is: true
+#vignette: >
+#  %\VignetteIndexEntry{Equations}
+#  %\VignetteEngine{knitr::rmarkdown}
+#  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE,echo=F}
