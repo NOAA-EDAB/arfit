@@ -52,6 +52,8 @@
 </nav><div class="container template-article">
 
 
+
+
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
@@ -64,51 +66,60 @@
 
     
     
-<p><span class="math display">\[\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>Y</mi><mi>t</mi></msub><mo>=</mo><msub><mi>β</mi><mn>0</mn></msub><mo>+</mo><msub><mi>β</mi><mn>1</mn></msub><mi>t</mi><mo>+</mo><msub><mi>ϵ</mi><mi>t</mi></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \tag{1}
   Y_t = \beta_0 + \beta_1 t + \epsilon_t  
-\end{align}\]</span></p>
+\end{align}</annotation></semantics></math></p>
 <hr>
-<p><span class="math display">\[\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi mathvariant="normal">L</mi><mrow><mo stretchy="true" form="prefix">(</mo><munder><mi>θ</mi><mo accent="true">_</mo></munder><mo>;</mo><munder><mi>y</mi><mo accent="true">_</mo></munder><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∏</mo><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow><mi>n</mi></munderover><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Y</mi><mi>t</mi></msub><mo>=</mo><msub><mi>y</mi><mi>t</mi></msub><mo stretchy="false" form="prefix">|</mo><msub><mi>Y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>Y</mi><mn>1</mn></msub><mo>=</mo><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \tag{2}
-\mathrm{L}\left( \underline{\theta}; \underline{y} \right )= \prod^n_{t=2} p\left(Y_t = y_t | Y_{t-1}=y_{t-1}\right)  p\left(Y_1=y_1 \right)
-\end{align}\]</span></p>
+\mathrm{L}\left( \underline{\theta}; \underline{y} \right )= \prod^n_{t=2} p\left(Y_t = y_t | Y_{t-1}=y_{t-1}\right)  p\left(Y_1=y_1 \right) 
+\end{align}</annotation></semantics></math></p>
 <hr>
-<p><span class="math display">\[\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>l</mi><mi>o</mi><mi>g</mi><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><munder><mi>θ</mi><mo accent="true">_</mo></munder><mo>;</mo><munder><mi>y</mi><mo accent="true">_</mo></munder><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mo>−</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mn>2</mn><mi>π</mi><mo>−</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>σ</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mn>1</mn></msub><mo>−</mo><msub><mi>β</mi><mn>0</mn></msub><mo>−</mo><msub><mi>β</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow><mi>n</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>t</mi></msub><mo>−</mo><mi>ϕ</mi><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>β</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>t</mi><msub><mi>β</mi><mn>1</mn></msub><mo>+</mo><mi>ϕ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>β</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \tag{3}
 logL\left( \underline{\theta}; \underline{y} \right ) = &amp; -\frac{n}{2}log2\pi - nlog\sigma + \frac{1}{2}log(1-\phi^2) \\
 &amp;-\frac{1}{2\sigma^2}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) -t\beta_1 + \phi(t-1)\beta_1)^2 \right)  
-\end{align}\]</span></p>
+\end{align}</annotation></semantics></math></p>
 <hr>
-<p><span class="math display">\[\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msup><mover><mi>σ</mi><mo accent="true">̂</mo></mover><mn>2</mn></msup><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mn>1</mn></msub><mo>−</mo><msub><mi>β</mi><mn>0</mn></msub><mo>−</mo><msub><mi>β</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow><mi>n</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>t</mi></msub><mo>−</mo><mi>ϕ</mi><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>β</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>t</mi><msub><mi>β</mi><mn>1</mn></msub><mo>+</mo><mi>ϕ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>β</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \tag{4}
-\hat\sigma^2 = \frac{1}{n}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) - t\beta_1 + \phi(t-1)\beta_1)^2 \right)
-\end{align}\]</span></p>
+\hat\sigma^2 = \frac{1}{n}\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2) - t\beta_1 + \phi(t-1)\beta_1)^2 \right) 
+\end{align}</annotation></semantics></math></p>
 <hr>
-<p><span class="math display">\[\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>l</mi><mi>o</mi><mi>g</mi><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><munder><mi>β</mi><mo accent="true">_</mo></munder><mo>,</mo><mi>ϕ</mi><mo>;</mo><munder><mi>y</mi><mo accent="true">_</mo></munder><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mi>c</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>t</mi><mi>.</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>−</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mn>1</mn></msub><mo>−</mo><msub><mi>β</mi><mn>0</mn></msub><mo>−</mo><msub><mi>β</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow><mi>n</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>t</mi></msub><mo>−</mo><mi>ϕ</mi><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>β</mi><mn>0</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>t</mi><msub><mi>β</mi><mn>1</mn></msub><mo>+</mo><mi>ϕ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>β</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mi>c</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>t</mi><mi>.</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>−</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><msup><mi>ϕ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mn>1</mn></msub><mo>−</mo><msub><mi>X</mi><mn>1</mn></msub><munder><mi>β</mi><mo accent="true">_</mo></munder><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>2</mn></mrow><mi>n</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>t</mi></msub><mo>−</mo><mi>ϕ</mi><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>X</mi><mi>t</mi></msub><munder><mi>β</mi><mo accent="true">_</mo></munder><mo>+</mo><mi>ϕ</mi><msub><mi>X</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><munder><mi>β</mi><mo accent="true">_</mo></munder><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \tag{5}
 logL\left( \underline{\beta}, \phi; \underline{y} \right ) &amp;= const. + \frac{1}{2}log(1-\phi^2) \\
-&amp;-\frac{n}{2}log\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2)-t\beta_1 + \phi(t-1)\beta_1)^2 \right) \\
+&amp;-\frac{n}{2}log\left( (1-\phi^2)(y_1-\beta_0-\beta_1)^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-\beta_0(1-\phi^2)-t\beta_1 + \phi(t-1)\beta_1)^2 \right) \\ 
 
 &amp;= const. + \frac{1}{2}log(1-\phi^2) \\
-&amp;-\frac{n}{2}log\left( (1-\phi^2)(y_1-X_1\underline{\beta})^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-X_t\underline{\beta} + \phi X_{t-1}\underline{\beta})^2 \right)
-\end{align}\]</span></p>
+&amp;-\frac{n}{2}log\left( (1-\phi^2)(y_1-X_1\underline{\beta})^2 + \sum^n_{t=2}(y_t - \phi y_{t-1}-X_t\underline{\beta} + \phi X_{t-1}\underline{\beta})^2 \right) 
+\end{align}</annotation></semantics></math></p>
 <hr>
-<p><span class="math display">\[\begin{align}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>l</mi><mi>o</mi><mi>g</mi><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><munder><mi>β</mi><mo accent="true">_</mo></munder><mo>,</mo><munder><mi>ϕ</mi><mo accent="true">_</mo></munder><mo>,</mo><mi>σ</mi><mo>;</mo><munder><mi>y</mi><mo accent="true">_</mo></munder><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mo>−</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>π</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>σ</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">|</mo><msubsup><mi>V</mi><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo stretchy="true" form="postfix">|</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><munder><msub><mi>y</mi><mi>p</mi></msub><mo accent="true">_</mo></munder><mo>−</mo><munder><msub><mi>μ</mi><mi>p</mi></msub><mo accent="true">_</mo></munder><mo stretchy="true" form="postfix">)</mo></mrow><mi>T</mi></msup><msubsup><mi>V</mi><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><munder><msub><mi>y</mi><mi>p</mi></msub><mo accent="true">_</mo></munder><mo>−</mo><munder><msub><mi>μ</mi><mi>p</mi></msub><mo accent="true">_</mo></munder><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo>−</mo><mfrac><mn>1</mn><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mi>p</mi><mo>+</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>y</mi><mi>t</mi></msub><mo>−</mo><mi>c</mi><mo>−</mo><msub><mi>ϕ</mi><mn>1</mn></msub><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>−</mo><msub><mi>ϕ</mi><mi>p</mi></msub><msub><mi>y</mi><mrow><mi>t</mi><mo>−</mo><mi>p</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align}
 \tag{6}
 logL\left( \underline{\beta}, \underline{\phi},\sigma; \underline{y} \right ) &amp;= -\frac{n}{2}log(2\pi) -\frac{n}{2}log(\sigma^2) +\frac{1}{2}log \left|V_p^{-1} \right|
 \\
 &amp;-\frac{1 }{2 \sigma^2} (\underline{y_p}-\underline{\mu_p})^T V_p^{-1}(\underline{y_p}-\underline{\mu_p}) \\
 
-&amp;- \frac{1}{2\sigma^2}\sum^n_{t=p+1} (y_t - c - \phi_1y_{t-1} - ... - \phi_p y_{t-p})^2
+&amp;- \frac{1}{2\sigma^2}\sum^n_{t=p+1} (y_t - c - \phi_1y_{t-1} - ... - \phi_p y_{t-p})^2 
 
-\end{align}\]</span></p>
+\end{align}</annotation></semantics></math></p>
 <p>where</p>
-<p><span class="math inline">\(\left|V_p^{-1} \right|\)</span> is determinant of inverted matrix <span class="math inline">\(V_p\)</span>,</p>
-<p><span class="math inline">\(\sigma^2V_p\)</span> = variance-covariance matrix of order p,</p>
-<p><span class="math inline">\(\underline{\mu_p} = X_p\underline{\beta}\)</span>, and</p>
-<p><span class="math inline">\(X_p\)</span> is the <span class="math inline">\(p_{th}\)</span> row of the design matrix corresponding to time t = p</p>
-<p><span class="math inline">\(c\)</span> = function of fitted terms <span class="math inline">\(X_t\underline{\beta}\)</span></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><msubsup><mi>V</mi><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">\left|V_p^{-1} \right|</annotation></semantics></math>
+is determinant of inverted matrix
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mi>p</mi></msub><annotation encoding="application/x-tex">V_p</annotation></semantics></math>,</p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup><msub><mi>V</mi><mi>p</mi></msub></mrow><annotation encoding="application/x-tex">\sigma^2V_p</annotation></semantics></math>
+= variance-covariance matrix of order p,</p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><msub><mi>μ</mi><mi>p</mi></msub><mo accent="true">_</mo></munder><mo>=</mo><msub><mi>X</mi><mi>p</mi></msub><munder><mi>β</mi><mo accent="true">_</mo></munder></mrow><annotation encoding="application/x-tex">\underline{\mu_p} = X_p\underline{\beta}</annotation></semantics></math>,
+and</p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mi>p</mi></msub><annotation encoding="application/x-tex">X_p</annotation></semantics></math>
+is the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mrow><mi>t</mi><mi>h</mi></mrow></msub><annotation encoding="application/x-tex">p_{th}</annotation></semantics></math>
+row of the design matrix corresponding to time t = p</p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+= function of fitted terms
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mi>t</mi></msub><munder><mi>β</mi><mo accent="true">_</mo></munder></mrow><annotation encoding="application/x-tex">X_t\underline{\beta}</annotation></semantics></math></p>
   </main>
 </div>
 
