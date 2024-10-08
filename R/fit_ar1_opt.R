@@ -16,8 +16,6 @@ fit_ar1_opt <- function(data,rho,hypothesis) {
   }
   yt <- data$y
 
-  #data <- remove_missing_data(data)
-
   outList <- optim(par=rho,fn=likelihood_ar1,gr=NULL,data,hypothesis,method="L-BFGS-B",lower=-.99,upper=.99)
 
   maxRho <- outList$par
