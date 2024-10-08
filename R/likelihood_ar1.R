@@ -20,6 +20,7 @@ likelihood_ar1 <- function(rho,dataf,hypothesis="null") {
 
   x <- dataf$x
   y <- dataf$y
+
   if (tolower(hypothesis) == "null"){
     x1 <- x[1]
     # Design matrix (2:nT)
@@ -37,6 +38,19 @@ likelihood_ar1 <- function(rho,dataf,hypothesis="null") {
   # response
   yt <- as.vector(y[2:nT] )
   ytm1 <- as.vector(y[1:(nT-1)])
+
+
+  # identify missing values
+  indexOfMissingyt <- which(!is.na(yt))
+  indexOfMissingytm1 <- which(!is.na(ytm1))
+
+  # adjust for missing values
+  yt <- yt[!is.na(yt)]
+  ytm1 <- ytm1[!is.na(ytm1)]
+  xt <- as.matrix(xt[indexOfMissingyt,])
+  xtm1 <- as.matrix(xtm1[indexOfMissingytm1,])
+
+  #remove_missing_data()
 
   # MLE for beta conditional on rho
   beta <- est_beta_given_rho(rbind(x1,xt),c(y1,yt),rho)
