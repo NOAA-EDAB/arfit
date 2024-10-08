@@ -8,8 +8,8 @@
 #'\item Evaluates likelihood
 #'\item Fits likelihood
 #'\item Estimates MLE for model
-#'\item Example provides
-#'\item Tools for su=imulation study
+#'\item Example provided
+#'\item Tools for simulation study
 #'}
 #'
 #'@section References:
