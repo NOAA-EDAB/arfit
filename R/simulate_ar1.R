@@ -10,11 +10,12 @@
 #'@param rho Numeric scalar. Auto regressive parameter
 #'@param sigma Numeric scalar. Standard deviation of error term
 #'@param n Numeric scalar. Length of time series
+#'@param missingValues Numeric vector. Indices of y values for which there is missing data
 #'
 #'
 #' @export
 
-simulate_ar1 <- function(alpha,beta=0,sigma,rho,n){
+simulate_ar1 <- function(alpha,beta=0,sigma,rho,n, missingValues=NULL){
   #
   #
   xt <- c(1:n)
@@ -29,6 +30,15 @@ simulate_ar1 <- function(alpha,beta=0,sigma,rho,n){
 
   # simulate y
   yt <- rep(alpha,n) + xt*beta + zt
+
+  if (!is.null(missingValues)) {
+    # indices of y = NA
+    yt[missingValues] <- NA
+  }
+
+
   data <- data.frame(x=xt,y=yt)
+
+
   return(data)
 }

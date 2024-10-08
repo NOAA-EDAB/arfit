@@ -4,7 +4,7 @@
 \alias{simulate_ar1}
 \title{Simulate data from an linear process with AR1 error}
 \usage{
-simulate_ar1(alpha, beta = 0, sigma, rho, n)
+simulate_ar1(alpha, beta = 0, sigma, rho, n, missingValues = NULL)
 }
 \arguments{
 \item{alpha}{Numeric scalar. Intercept}
@@ -16,6 +16,8 @@ simulate_ar1(alpha, beta = 0, sigma, rho, n)
 \item{rho}{Numeric scalar. Auto regressive parameter}
 
 \item{n}{Numeric scalar. Length of time series}
+
+\item{missingValues}{Numeric vector. Indices of y values for which there is missing data}
 }
 \description{
 model=   y_t = a + b\emph{t + z_t
