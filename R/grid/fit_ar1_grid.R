@@ -3,7 +3,7 @@
 #'
 #'
 #'
-#' @export
+#' @noRd
 
 fit_ar1_grid <- function(data,rhoVec=NULL,hypothesis) {
 

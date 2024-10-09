@@ -21,16 +21,16 @@
 #'nTVec = 10, nSims = 200, nBootSims = 500)
 #'}
 #'
-#'@export
+#'@noRd
 
 simulation_study_grid_ar1 <- function(outDir=here::here("out.txt"),
-                             betaVec = c(.12,.25,.5),
-                             rhoVec = c(0, 0.25, 0.5,0.75, 0.95),
-                             sigmaVec = c(0.25,0.5,.75),
-                             nTVec =  c(10),
-                             nSims = 200,
-                             nBootSims = 500,
-                             rhoSearch=NULL) {
+                                      betaVec = c(.12,.25,.5),
+                                      rhoVec = c(0, 0.25, 0.5,0.75, 0.95),
+                                      sigmaVec = c(0.25,0.5,.75),
+                                      nTVec =  c(10),
+                                      nSims = 200,
+                                      nBootSims = 500,
+                                      rhoSearch=NULL) {
   #[.004,.051,.147] and phi = [0,0.433,0.8] with sigma = .735?
 
 
