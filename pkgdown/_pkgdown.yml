@@ -4,37 +4,20 @@ template:
   bootstrap: 5
 
 reference:
-- title: "Data simulation"
-  desc: "simulate from AR1 and AR2 models"
-- contents:
-  - simulate_ar1
-  - simulate_ar2
 - title: "Simulation study"
   desc: "Functions used in simulation study"
 - contents:
-  - simulation_study_grid_ar1
-  - simulation_study_grid_ar2
-  - simulation_study_opt_ar1
-  - simulation_study_opt_ar2
-  - sim_study_opt_ar1
-  - sim_single_opt_ar1
-  - sim_study_opt_ar2
-  - sim_single_opt_ar2
+  - starts_with("sim")
 - title: "Likelihood Functions"
-  desc: "AR1 and AR2 likelihoods"
+  desc: "AR1 likelihood"
 - contents:
   - likelihood_ar1
-  - likelihood_ar2
 - title: "Estimation Functions"
   desc: "Functions used in estimation"
 - contents:
-  - fit_ar1_grid
-  - fit_ar2_grid
-  - fit_ar1_opt
-  - fit_ar2_opt
-  - est_beta_given_rho
-  - est_beta_given_rho2
-  - isStationary_ar2
+  - starts_with("fit")
+  - starts_with("est")
+  - check_data_validation
 - title: "Examples"
   desc: "Examples of utilizing the test"
 - contents:
@@ -42,6 +25,6 @@ reference:
 - title: "Package Info"
   desc: ""
 - contents:
-  - arfit
+  - arfit-package
 
 
