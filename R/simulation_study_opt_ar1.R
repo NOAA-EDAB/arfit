@@ -1,5 +1,6 @@
 #' Simulation study using optimization routine
 #'
+#' Uses single Core.
 #' Performs a simulation study to assess the performance of the test.
 #'
 #' For convenience the intercept, beta_0 is set to zero

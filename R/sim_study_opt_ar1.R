@@ -14,6 +14,8 @@
 #'@param nBootSims Numeric scalar. Number of bootstrap data sets
 #'@param setSeed Numeric scalar. Value of the seed for simulations. (Default = NULL, a random number between 1-e7 is selected)
 #'@param nCores Numeric scalar. Specify the number of cores to utilize (Default = NULL, utilizes n-1 cores)
+#'@param missing Boolean. Whether to simulate with missing data (Default = F).
+#'If T then a single missing value is added at random to the response
 #'
 #'@examples
 #'\dontrun{
@@ -31,7 +33,8 @@ sim_study_opt_ar1 <- function(outDir=here::here("out.txt"),
                           nSims = 200,
                           nBootSims = 500,
                           setSeed=NULL,
-                          nCores = NULL) {
+                          nCores = NULL,
+                          missing = F) {
 
   # set seed to random number
   if(is.null(setSeed)) {
@@ -73,7 +76,7 @@ sim_study_opt_ar1 <- function(outDir=here::here("out.txt"),
           print(c(beta,rho,nT,sigma))
 
           # bootstrap samples simulated in parallel
-          sigStats <- sim_single_opt_ar1(beta,rho,sigma,nT,nSims,nBootSims)
+          sigStats <- sim_single_opt_ar1(beta,rho,sigma,nT,nSims,nBootSims,missing)
 
           vec <- c(beta,rho,nT,sigma,sigStats$pvChi,sigStats$pValue)
           print(vec)
@@ -89,7 +92,7 @@ sim_study_opt_ar1 <- function(outDir=here::here("out.txt"),
   message(paste0("Elapsed time = ",endtime-starttime))
   parallel::stopCluster(cl)
 
-  message(paste0("Results are save in the file: ",outDir))
+  message(paste0("Results are saved in the file: ",outDir))
 
 }
 
