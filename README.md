@@ -1,7 +1,7 @@
 # arfit
 
   <!-- badges: start -->
-  [![gh-pages](https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml)
+[![gh-pages](https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml)
 [![gitleaks](https://github.com/andybeet/arfit/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/andybeet/arfit/actions/workflows/gitleaks.yml)
   <!-- badges: end -->
 
