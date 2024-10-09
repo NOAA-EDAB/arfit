@@ -51,6 +51,12 @@ sim_single_opt_ar1 <- function(beta = 0,
 
     # simulate data set
     data <- simulate_ar1(alpha=0,beta=beta,sigma,rho,nT,missingValues = missingValuePosition)
+
+    # check data for missing values, clean and return location
+    dataValidation <- check_data_validation(data)
+    data <- dataValidation$dataSet
+    missingValues <- dataValidation$missingValues
+
     # fit under the null and alternative
     null <- fit_ar1_opt(data,rho=rho,hypothesis="null")
     alt <- fit_ar1_opt(data,rho=rho,hypothesis="alt")
@@ -66,6 +72,12 @@ sim_single_opt_ar1 <- function(beta = 0,
     bootStats <- foreach::foreach(iboot = 2:nBootSims,.combine='c',.packages="arfit") %dopar% {
     # simulate under Null
       bootdata <- simulate_ar1(alpha=null$betaEst,beta=0,null$sigmaEst,null$rhoEst,nT,missingValues = missingValuePosition)
+
+      # check data for missing values, clean and return location
+      dataValidation <- check_data_validation(bootdata)
+      bootdata <- dataValidation$dataSet
+      missingValues <- dataValidation$missingValues
+
       # fit under null and alt
       nullBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="null")
       altBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="alt")
