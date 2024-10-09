@@ -13,7 +13,8 @@ sim_study_opt_ar1(
   nSims = 200,
   nBootSims = 500,
   setSeed = NULL,
-  nCores = NULL
+  nCores = NULL,
+  missing = F
 )
 }
 \arguments{
@@ -32,6 +33,9 @@ sim_study_opt_ar1(
 \item{setSeed}{Numeric scalar. Value of the seed for simulations. (Default = NULL, a random number between 1-e7 is selected)}
 
 \item{nCores}{Numeric scalar. Specify the number of cores to utilize (Default = NULL, utilizes n-1 cores)}
+
+\item{missing}{Boolean. Whether to simulate with missing data (Default = F).
+If T then a single missing value is added at random to the response}
 
 \item{nVec}{Numeric vector. Values for the length of time series to simulate}
 }

@@ -30,6 +30,7 @@ simulation_study_opt_ar1(
 \item{nVec}{Numeric vector. Values for the length of time series to simulate}
 }
 \description{
+Uses single Core.
 Performs a simulation study to assess the performance of the test.
 }
 \details{

@@ -10,6 +10,8 @@
 #'@param nT Numeric.  Values for the length of time series to simulate
 #'@param nSims Numeric.  Number of time series to simulate
 #'@param nBootSims Numeric.  Number of bootstrap data sets
+#'@param missing Boolean. Whether to simulate with missing data (Default = F).
+#'If T then a single missing value is added at random to the response
 #'
 #'@examples
 #'\dontrun{
@@ -19,15 +21,16 @@
 #'
 #'@importFrom foreach %dopar%
 #'
-#'@export
+#'@noRd
 
 
 sim_single_opt_ar1 <- function(beta = 0,
-                       rho = 0,
-                       sigma = 0.25,
-                       nT = 10,
-                       nSims = 200,
-                       nBootSims = 500) {
+                               rho = 0,
+                               sigma = 0.25,
+                               nT = 10,
+                               nSims = 200,
+                               nBootSims = 500,
+                               missing = F) {
 
   # nC <- parallel::detectCores()
   # cl <- parallel::makeCluster(nC)
@@ -40,9 +43,14 @@ sim_single_opt_ar1 <- function(beta = 0,
 
   for (isim in 1:nSims) {
 
+    if (missing) {
+      missingValuePosition = sample(1:nT,1)
+    } else {
+      missingValuePosition = NULL
+    }
 
     # simulate data set
-    data <- simulate_ar1(alpha=0,beta=beta,sigma,rho,nT)
+    data <- simulate_ar1(alpha=0,beta=beta,sigma,rho,nT,missingValues = missingValuePosition)
     # fit under the null and alternative
     null <- fit_ar1_opt(data,rho=rho,hypothesis="null")
     alt <- fit_ar1_opt(data,rho=rho,hypothesis="alt")
@@ -57,7 +65,7 @@ sim_single_opt_ar1 <- function(beta = 0,
     # bootstrapping in parallel
     bootStats <- foreach::foreach(iboot = 2:nBootSims,.combine='c',.packages="arfit") %dopar% {
     # simulate under Null
-      bootdata <- simulate_ar1(alpha=null$betaEst,beta=0,null$sigmaEst,null$rhoEst,nT)
+      bootdata <- simulate_ar1(alpha=null$betaEst,beta=0,null$sigmaEst,null$rhoEst,nT,missingValues = missingValuePosition)
       # fit under null and alt
       nullBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="null")
       altBoot <- fit_ar1_opt(bootdata,rho=null$rhoEst,hypothesis="alt")
