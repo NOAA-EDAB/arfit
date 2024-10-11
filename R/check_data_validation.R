@@ -17,7 +17,8 @@ check_data_validation <- function(dataSet) {
   # check for equally spaced time series
     spacing <- diff(dataSet$x)
   if(!all(spacing == spacing[1])){
-    stop("Time (x field) is not equally spaced. You can not apply this test")
+    stop("Time (x field) is not equally spaced. You can not apply this test.
+         You will need to explicitly add the missing Time value(s) using NA for the response(s)")
   } else {
     # maybe make x = 1:n?
   }
