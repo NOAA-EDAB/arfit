@@ -126,12 +126,14 @@ Following the same method as for AR(1) errors.
 
 Set p = 2,
 
+$$
 \begin{matrix} V_2^{-1} = 
 \end{matrix}
 \begin{bmatrix}
 (1-\phi_2^2) & -(\phi_1 + \phi_1\phi_2) \\
 -(\phi_1 + \phi_1\phi_2) & (1-\phi_2^2)  \\
 \end{bmatrix}
+$$
 
 $\left|V_2^{-1}\right| = (1+\phi_2^2)\left[(1-\phi_2)^2 -\phi_1^2 \right]$
 
@@ -216,13 +218,14 @@ and
 
 The likelihood now has the form of that found in @beach_full_1978
 
+$$
 \begin{align}
 logL\left( \underline{\beta}, \underline{\phi}; \underline{y} \right) &= const. +log(1+\phi_2) + \frac{1}{2}log(1-\phi_1-\phi_2)+\frac{1}{2}log(1+\phi_1-\phi_2)
 \\
 &-\frac{n}{2}log\left[ (y_1 - X_1\underline{\beta})^2(1-\phi_2^2)-2(y_1-X_1\underline{\beta})(y_2-X_2\underline{\beta})\phi_1(1 + \phi_2)+(y_2 -X_2\underline{\beta})^2(1-\phi_2^2) \\
 + \sum^n_{t=3} (y_t - X_t\underline{\beta} - \phi_1 (y_{t-1} -X_{t-1}\underline{\beta}) - \phi_2 (y_{t-2} -X_{t-2}\underline{\beta}))^2\right]\\
 \end{align}
-
+$$
 
 #### Maximization of the likelihood
 
