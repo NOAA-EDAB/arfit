@@ -2,10 +2,22 @@
 % Please edit documentation in R/check_data_validation.R
 \name{check_data_validation}
 \alias{check_data_validation}
-\title{Checks data set for misspecification}
+\title{Checks data set for issues}
 \usage{
 check_data_validation(dataSet)
 }
+\arguments{
+\item{dataSet}{Data frame. Passed internally}
+}
+\value{
+A list
+\item{dataSet}{The "cleaned" version of the data set}
+\item{missingValues}{Numeric vector. The location of NAs}
+}
 \description{
-Check column names, missing data, consecutive equally spaced time units
+Check column names, missing data, equally spaced time units
+If NAs are found at the start or the end of the time series they are removed
+since this wont affect the fitting, it will just use fewer data points.
+If NAs are present in the middle of the time series, the location is returned
+and is used in the fitting procedure
 }

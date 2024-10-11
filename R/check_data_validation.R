@@ -1,12 +1,22 @@
-#' Checks data set for misspecification
+#' Checks data set for issues
 #'
-#' Check column names, missing data, consecutive equally spaced time units
+#' Check column names, missing data, equally spaced time units
+#' If NAs are found at the start or the end of the time series they are removed
+#' since this wont affect the fitting, it will just use fewer data points.
+#' If NAs are present in the middle of the time series, the location is returned
+#' and is used in the fitting procedure
 #'
+#' @param dataSet Data frame. Passed internally
 #'
+#' @return A list
+#' \item{dataSet}{The "cleaned" version of the data set}
+#' \item{missingValues}{Numeric vector. The location of NAs}
+#'
+#' @export
 
 check_data_validation <- function(dataSet) {
 
-  # x and yd names
+  # x and y names
   if (!all(c("x","y") %in% names(dataSet))) {
     stop("Please specify which columns are x and y. Two of the columns need to have names x and y")
   } else {
@@ -20,7 +30,7 @@ check_data_validation <- function(dataSet) {
     stop("Time (x field) is not equally spaced. You can not apply this test.
          You will need to explicitly add the missing Time value(s) using NA for the response(s)")
   } else {
-    # maybe make x = 1:n?
+    # We could "fix" the time series and add NAs
   }
 
 

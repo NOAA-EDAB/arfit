@@ -13,9 +13,11 @@
 *.txt
 
 # folders
-old
-references
-Sean
+data-raw/oldstuff
+data-raw/testing
+data-raw/Sean
+data-raw/Rold
+output
+for_paper
 docs
-Rold
 inst/doc
