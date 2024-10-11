@@ -1,10 +1,10 @@
 Package: arfit
-Title: Fits full AR1 model
+Title: Fits linear model in preesence of AR1 errors
 Version: 0.0.0.9000
 Authors@R: 
     person("Andy", "Beet", , "andrew.beet@noaa.gov", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8270-7090"))
-Description: Allows fitting of Autoregressive model of order 1
+Description: Allows fitting of a linear model under the assumption of autoregressive order 1 errors. Significance is tested using a parametric bootstrap. 
 License: file LICENSE
 url: https://github.com/andybeet/arfit
 BugReports: https://github.com/andybeet/arfit/issues
