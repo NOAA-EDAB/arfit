@@ -1,11 +1,16 @@
 #' Run test on real data set
 #'
-#' Supply data
+#' Performs a parametric bootstrap to test the significance of a linear trend in time under
+#' the assumption of autoregressive order 1 error.
 #'
-#' @param dataSet Data frame. Two columns (x, y)
+#' @param dataSet Data frame.
+#' Two of the fields must be named x (time, equally spaced), and y (response variable)
 #' @param nBootSims Numeric scalar. Number of bootstrap samples to perform
 #' @param printFig Boolean. Print data an fit in figure window (Default = F)
 #'
+#' @section: ecodata
+#'
+#'This function is used in ecodata::geom_lm()
 #'
 #'@export
 

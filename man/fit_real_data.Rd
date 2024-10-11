@@ -7,12 +7,20 @@
 fit_real_data(dataSet, nBootSims = 499, printFig = F)
 }
 \arguments{
-\item{dataSet}{Data frame. Two columns (x, y)}
+\item{dataSet}{Data frame.
+Two of the fields must be named x (time, equally spaced), and y (response variable)}
 
 \item{nBootSims}{Numeric scalar. Number of bootstrap samples to perform}
 
 \item{printFig}{Boolean. Print data an fit in figure window (Default = F)}
 }
 \description{
-Supply data
+Performs a parametric bootstrap to test the significance of a linear trend in time under
+the assumption of autoregressive order 1 error.
 }
+\section{}{
+ ecodata
+
+This function is used in ecodata::geom_lm()
+}
+
