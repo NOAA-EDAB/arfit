@@ -39,7 +39,7 @@ fit_real_data <- function(dataSet,nBootSims=499,printFig=F) {
     # simulate under Null
     bootdata <- simulate_ar1(alpha=null$betaEst,beta=0,null$sigmaEst,null$rhoEst,nT,missingValues = missingValues)
 
-    dataValidation <- check_data_validation(dataSet)
+    dataValidation <- check_data_validation(bootdata)
     bootdata <- dataValidation$dataSet
 
     # fit under null and alt
