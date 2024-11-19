@@ -15,11 +15,16 @@ check_data_validation <- function(dataSet) {
   }
 
   # check for equally spaced time series
-    spacing <- diff(dataSet$x)
+  spacing <- diff(dataSet$x)
   if(!all(spacing == spacing[1])){
-    stop("Time (x field) is not equally spaced. You can not apply this test.
-         You will need to explicitly add the missing Time value(s) using NA for the response(s)")
+    # Create continuous time series and add NAs
+    x <- data.frame(x = seq(from=min(dataSet$x), to=max(dataSet$x),by = min(spacing)))
+    dataSet <- x |>
+      dplyr::left_join(dataSet, by = "x")
+
+    warning("Time (x field) is not equally spaced. The missing Time value(s) were added using NA for the response(s)")
   } else {
+    # All equally spaced
     # maybe make x = 1:n?
   }
 
