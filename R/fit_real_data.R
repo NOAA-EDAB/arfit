@@ -60,7 +60,8 @@ fit_real_data <- function(dataSet,nBootSims=499,printFig=F) {
     plot(dataSet$x,dataSet$y,type="l",xlab="Year",ylab="Response",
          cex.lab=2.5,cex.axis=2,lwd=2)
     lines(dataSet$x,rep(null$betaEst,nT),col="black",lty=2,lwd=2)
-    lines(dataSet$x,alt$betaEst[1]+alt$betaEst[2]*c(1:nT),col="black",lty=3,lwd=2)
+  #  lines(dataSet$x,alt$betaEst[1]+alt$betaEst[2]*c(1:nT),col="black",lty=3,lwd=2)
+    lines(dataSet$x,alt$betaEst[1]+alt$betaEst[2]*dataSet$x,col="black",lty=3,lwd=2)
   }
 
 
