@@ -65,5 +65,5 @@ fit_real_data <- function(dataSet,nBootSims=499,printFig=F) {
   }
 
 
-  return(list(null=null, alt=alt,pValue=pVal_boot))
+  return(list(null=null, alt=alt,pValue=pVal_boot,data=dataSet))
 }
