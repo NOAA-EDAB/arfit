@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Fits linear model in preesence of AR1 errors • arfit</title>
+<title>Fits linear model in presence of AR1 errors • arfit</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Fits linear model in preesence of AR1 errors">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Fits linear model in presence of AR1 errors">
 <meta name="description" content="Allows fitting of a linear model under the assumption of autoregressive order 1 errors. Significance is tested using a parametric bootstrap.">
 <meta property="og:description" content="Allows fitting of a linear model under the assumption of autoregressive order 1 errors. Significance is tested using a parametric bootstrap.">
 </head>
@@ -56,7 +56,25 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="arfit">arfit<a class="anchor" aria-label="anchor" href="#arfit"></a>
 </h1></div>
-<p><!-- badges: start --> <a href="https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml" class="external-link"><img src="https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml/badge.svg" alt="gh-pages"></a> <a href="https://github.com/andybeet/arfit/actions/workflows/gitleaks.yml" class="external-link"><img src="https://github.com/andybeet/arfit/actions/workflows/gitleaks.yml/badge.svg" alt="gitleaks"></a> <!-- badges: end --></p>
+<!-- badges: start -->
+
+<p>The goal of arfit is to …</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of <code>arfit</code> from <a href="https://github.com/andybeet/arfit" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andybeet/arfit"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>This is a basic example which shows you how to solve a common problem:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">arfit</span><span class="op">)</span></span>
+<span><span class="co">## basic example code</span></span></code></pre></div>
+</div>
 <div class="section level2">
 <h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
 </h2>
@@ -107,7 +125,13 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml" class="external-link"><img src="https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml/badge.svg" alt="gh-pages"></a></li>
+<li><a href="https://github.com/andybeet/arfit/actions/workflows/gitleaks.yml" class="external-link"><img src="https://github.com/andybeet/arfit/actions/workflows/gitleaks.yml/badge.svg" alt="gitleaks"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
