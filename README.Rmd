@@ -1,20 +1,30 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # arfit
 
 <!-- badges: start -->
-
 [![gh-pages](https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/andybeet/arfit/actions/workflows/pkgdown.yaml)
 [![gitleaks](https://github.com/andybeet/arfit/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/andybeet/arfit/actions/workflows/gitleaks.yml)
 <!-- badges: end -->
 
-The goal of arfit is to …
+The goal of arfit is to ...
 
 ## Installation
 
-You can install the development version of `arfit` from
-[GitHub](https://github.com/andybeet/arfit) with:
+You can install the development version of `arfit` from [GitHub](https://github.com/andybeet/arfit) with:
 
 ``` r
 # install.packages("devtools")
@@ -25,7 +35,7 @@ devtools::install_github("andybeet/arfit")
 
 This is a basic example which shows you how to solve a common problem:
 
-``` r
+```{r example}
 library(arfit)
 ## basic example code
 ```
@@ -51,3 +61,4 @@ endorsement, recommendation or favoring by the Department of Commerce.
 The Department of Commerce seal and logo, or the seal and logo of a DOC
 bureau, shall not be used in any manner to imply endorsement of any
 commercial product or activity by DOC or the United States Government.*
+

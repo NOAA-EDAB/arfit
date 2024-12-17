@@ -1,5 +1,5 @@
 Package: arfit
-Title: Fits linear model in preesence of AR1 errors
+Title: Fits linear model in presence of AR1 errors
 Version: 0.0.0.9000
 Authors@R: 
     person("Andy", "Beet", , "andrew.beet@noaa.gov", role = c("aut", "cre"),
