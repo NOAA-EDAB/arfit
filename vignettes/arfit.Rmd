@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(arfit)
 ```
 
-An example is bundled with the package. The example uses mean riverflow discharge data from USGS station #05464500 Cedar River at Cedar Rapids, IA. (For full details see @Beet_2022)
+An example is bundled with the package. The example uses mean riverflow discharge data from USGS station #05464500 Cedar River at Cedar Rapids, IA. (For full details see @Beet_inprep)
 
 The null model is fit:
 
