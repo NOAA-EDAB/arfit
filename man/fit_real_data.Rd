@@ -14,6 +14,14 @@ Two of the fields must be named x (time, equally spaced), and y (response variab
 
 \item{printFig}{Boolean. Print data an fit in figure window (Default = F)}
 }
+\value{
+A list containing:
+\item{null}{Fitted model under the null hypothesis (no trend)}
+\item{alt}{Fitted model under the alternative hypothesis (with trend)}
+\item{pValue}{p-value from the bootstrap test}
+\item{pValChi2}{p-value from the chi-squared approximation}
+\item{data}{The input data set}
+}
 \description{
 Performs a parametric bootstrap to test the significance of a linear trend in time under
 the assumption of autoregressive order 1 error.
